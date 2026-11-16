@@ -1,1837 +1,1393 @@
 /**
  * ============================================================================
- * MODULE: For Loop Mastery (Comprehensive 60-Scenario Edition)
+ * MODULE 1: FOR LOOP MASTERY (Sri Lankan Scenario & ICD/iCET Q201-Q250 Edition)
  * ============================================================================
- * 6 Progressive Stages • 60 Real-Life Scenarios (10 per stage) • Full Java Code Practice
+ * 7 Progressive Stages • 41 Real-Life Scenarios • 6 In-Depth Lessons
  * ============================================================================
  */
 
 export const forLoopModule = {
-  id: 'for-loop',
-  title: 'For Loop Mastery',
-  icon: 'Repeat',
-  badge: 'Real-Life Edition',
-  description: 'Master loop logic by coding 60 practical scenarios across 6 unlocked stages: from roll calls, elevators, and piggy banks to ATM ciphers and prime sentinels.',
-  totalChallenges: 60,
-
-  stages: [
-    { id: 1, title: 'Stage 1: Basic Counting', description: 'Count forwards and backwards in roll calls, countdowns, elevators, and battery meters.', minChallengeId: 1, maxChallengeId: 10 },
-    { id: 2, title: 'Stage 2: Skipping & Steps', description: 'Step by custom amounts (i += 2, i += 5, i -= 3, i -= 5) for house numbers, highway markers, and alarm clocks.', minChallengeId: 11, maxChallengeId: 20 },
-    { id: 3, title: 'Stage 3: Accumulating Totals', description: 'Master the accumulator bucket pattern for piggy banks, bill receipts, step goals, and averages.', minChallengeId: 21, maxChallengeId: 30 },
-    { id: 4, title: 'Stage 4: Loops with Decisions (for + if)', description: 'Filter and react inside loops: cricket overs, pass/fail grading, inventory alerts, and FizzBuzz.', minChallengeId: 31, maxChallengeId: 40 },
-    { id: 5, title: 'Stage 5: Patterns & Tables', description: 'Nested loops and index algorithms: star stairs, inverted pyramids, chess boards, and word reversals.', minChallengeId: 41, maxChallengeId: 50 },
-    { id: 6, title: 'Stage 6: Mini Problem Solving', description: 'Real algorithmic challenges: factorials, powers of 2/3, population compounding, and prime testing.', minChallengeId: 51, maxChallengeId: 60 },
-  ],
-
-  // ==========================================================================
-  // LESSONS (Concept reference in Learn tab)
-  // ==========================================================================
-  lessons: [
+  "id": "for-loop",
+  "title": "For Loop Mastery",
+  "icon": "Repeat",
+  "description": "Master fixed repetition, custom steps, loop traps, list formatting with \\b\\b, and accumulator algorithms.",
+  "badge": "Module 1",
+  "totalChallenges": 41,
+  "stages": [
     {
-      id: 'lesson-1',
-      title: 'What is a Loop & Why We Use It',
-      duration: '3 min read',
-      summary: 'Why repeating code manually is slow and error-prone.',
-      content: `
-### Why Loops Exist
-Imagine you run a supermarket. A customer buys 50 items. Would you write:
-\`\`\`java
-System.out.println("Processing item 1");
-System.out.println("Processing item 2");
-// ... 50 times?!
-\`\`\`
-No! You write **one loop** of 3 lines:
-\`\`\`java
-for (int i = 1; i <= 50; i++) {
-    System.out.println("Processing item " + i);
-}
-\`\`\`
-Loops let you write instructions once and tell the computer to repeat them as many times as needed.
-      `
+      "id": 1,
+      "title": "Stage 1: Why Loops? (Repetition)",
+      "description": "Understand why we avoid copy-pasting code: school welcomes, alarm clocks, cooking rice, and cricket overs.",
+      "minChallengeId": 1,
+      "maxChallengeId": 5
     },
     {
-      id: 'lesson-2',
-      title: 'Anatomy of a For Loop',
-      duration: '4 min read',
-      summary: 'The 3 gears that make every for-loop spin.',
-      content: `
-\`\`\`
-for ( INITIALIZATION ; CONDITION ; UPDATE ) {
-    // LOOP BODY (Code that runs each round)
-}
-\`\`\`
-1. **Initialization (\`int i = 1\`):** Sets starting value. Runs only ONCE at the start.
-2. **Condition (\`i <= 10\`):** Gatekeeper. Checked BEFORE every round. If true -> run body. If false -> exit loop.
-3. **Update (\`i++\`):** Changes the counter at the end of each round (e.g. \`i++\`, \`i--\`, \`i += 5\`).
-      `
+      "id": 2,
+      "title": "Stage 2: Start, End & Steps",
+      "description": "Master initialization, bounds, and step updates (i++, i+=2, i+=5, i--) with Concept Labs.",
+      "minChallengeId": 6,
+      "maxChallengeId": 12
     },
     {
-      id: 'lesson-3',
-      title: 'Step-by-Step Execution Order',
-      duration: '3 min read',
-      summary: 'Watch how Java moves through each iteration.',
-      content: `
-For \`for (int i = 1; i <= 3; i++) { System.out.println(i); }\`:
-1. Start: \`i = 1\`.
-2. Check: \`1 <= 3\`? True. Print \`1\`.
-3. Update: \`i++\` -> \`i = 2\`.
-4. Check: \`2 <= 3\`? True. Print \`2\`.
-5. Update: \`i++\` -> \`i = 3\`.
-6. Check: \`3 <= 3\`? True. Print \`3\`.
-7. Update: \`i++\` -> \`i = 4\`.
-8. Check: \`4 <= 3\`? False! Stop loop!
-      `
+      "id": 3,
+      "title": "Stage 3: Loop Traps (Understand the Rules)",
+      "description": "Spot missing updates, opposite directions, variable scope rules, and byte overflow traps.",
+      "minChallengeId": 13,
+      "maxChallengeId": 18
     },
     {
-      id: 'lesson-4',
-      title: 'The Accumulator ("Bucket") Pattern',
-      duration: '4 min read',
-      summary: 'How to calculate running totals, counts, and sums.',
-      content: `
-To calculate a total:
-1. Create a variable (bucket) **BEFORE** the loop: \`int total = 0;\`
-2. Inside the loop, add to it: \`total += amount;\`
-3. **CRITICAL:** Print the bucket **AFTER** the loop finishes!
-      `
+      "id": 4,
+      "title": "Stage 4: Formatting Output",
+      "description": "Single line printing, list brackets [1, 2, ... N], backspace deletion, and swapping bounds.",
+      "minChallengeId": 19,
+      "maxChallengeId": 24
     },
     {
-      id: 'lesson-5',
-      title: 'Common Beginner Mistakes to Avoid',
-      duration: '3 min read',
-      summary: 'Semicolons, off-by-one errors, and infinite loops.',
-      content: `
-- 🚫 **Accidental Semicolon:** Never put \`;\` after \`for(...);\`. It terminates the loop immediately!
-- ⚠️ **Off-By-One:** \`i < 10\` stops at 9. Use \`i <= 10\` to include 10.
-- ♾️ **Wrong Update:** If you write \`i++\` in a countdown (\`for (int i=10; i>=1; i++)\`), \`i\` grows forever!
-      `
+      "id": 5,
+      "title": "Stage 5: Accumulating (Sum, Product, Count)",
+      "description": "The accumulator bucket pattern: piggy banks, 1+2+...+N equations, factorials, and powers.",
+      "minChallengeId": 25,
+      "maxChallengeId": 30
+    },
+    {
+      "id": 6,
+      "title": "Stage 6: Taking Input Inside a Loop",
+      "description": "Reading numbers with Scanner in loops: totals, prompts, maximum/minimum mark finders, and shop bills.",
+      "minChallengeId": 31,
+      "maxChallengeId": 35
+    },
+    {
+      "id": 7,
+      "title": "Stage 7: Loops + Decisions & Boss",
+      "description": "Combining for + if: cricket balls, FizzBuzz, odd filters, vowel counts, interest compounding, and ATM statement.",
+      "minChallengeId": 36,
+      "maxChallengeId": 41
     }
   ],
-
-  // ==========================================================================
-  // 60 SCENARIO CHALLENGES
-  // ==========================================================================
-  challenges: [
-    // ------------------------------------------------------------------------
-    // STAGE 1: BASIC COUNTING (Challenges 1 to 10)
-    // ------------------------------------------------------------------------
+  "lessons": [
     {
-      id: 1,
-      stageId: 1,
-      isBoss: false,
-      title: 'Classroom Roll Call',
-      scenario: 'You are a teacher taking attendance in the morning. Your class has 20 students numbered 1 to 20. You need to call each student number one by one.',
-      task: 'Write a for loop that prints "Student 1" up to "Student 20", each on a new line.',
-      sampleOutput: `Student 1\nStudent 2\n...\nStudent 20`,
-      expectedOutput: Array.from({ length: 20 }, (_, i) => `Student ${i + 1}`).join('\n'),
-      thinkFirst: [
-        '1. Start counting with a variable: int i = 1;',
-        '2. Continue until the 20th student: i <= 20;',
-        '3. Increase the student number by 1 each time: i++;',
-        '4. Inside the loop: print "Student " + i;'
-      ],
-      syntaxReminder: `for (int i = 1; i <= 20; i++) {\n    System.out.println("Student " + i);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Student 1" through "Student 20"\n        \n    }\n}`,
-      hints: [
-        'Initialize your loop with: for (int i = 1; i <= 20; i++)',
-        'Inside the loop, use string concatenation: System.out.println("Student " + i);',
-        'Make sure to use <= 20 so student 20 is not skipped!'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 20; i++) {\n            System.out.println("Student " + i);\n        }\n    }\n}`,
-      explanation: [
-        'int i = 1; initializes student roll counter at 1.',
-        'i <= 20; ensures the roll call runs for all 20 students.',
-        'i++; increments student number by 1 after each call.',
-        'System.out.println("Student " + i); outputs the line.'
-      ],
-      xpReward: 30
+      "id": "lesson-1",
+      "title": "What is a Loop & Why We Use It",
+      "duration": "3 min read",
+      "summary": "Why repeating code manually is slow and error-prone.",
+      "content": "\n### Why Loops Exist\nImagine you run a supermarket. A customer buys 50 items. Would you write:\n```java\nSystem.out.println(\"Processing item 1\");\nSystem.out.println(\"Processing item 2\");\n// ... 50 times?!\n```\nNo! You write **one loop** of 3 lines:\n```java\nfor (int i = 1; i <= 50; i++) {\n    System.out.println(\"Processing item \" + i);\n}\n```\nLoops let you write instructions once and tell the computer to repeat them as many times as needed.\n      "
     },
-
     {
-      id: 2,
-      stageId: 1,
-      isBoss: false,
-      title: 'Rocket Launch Countdown',
-      scenario: 'You are the flight director at NASA mission control. The countdown clock must count backwards from 10 to 1 second, and once reaching zero, trigger "Liftoff!".',
-      task: 'Write a loop that prints numbers from 10 down to 1 on separate lines, followed by "Liftoff!" after the loop finishes.',
-      sampleOutput: `10\n9\n...\n1\nLiftoff!`,
-      expectedOutput: `10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nLiftoff!`,
-      thinkFirst: [
-        '1. Start counting from the top: int i = 10;',
-        '2. Keep looping while i is greater than or equal to 1: i >= 1;',
-        '3. Count DOWN by 1 each round: i--;',
-        '4. AFTER the loop finishes, print "Liftoff!" outside the loop.'
-      ],
-      syntaxReminder: `for (int i = 10; i >= 1; i--) {\n    System.out.println(i);\n}\nSystem.out.println("Liftoff!");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Countdown from 10 to 1, then print "Liftoff!"\n        \n    }\n}`,
-      hints: [
-        'Start at 10 and decrease: for (int i = 10; i >= 1; i--)',
-        'Inside the loop, print i: System.out.println(i);',
-        'Place System.out.println("Liftoff!"); outside the curly braces {}.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 10; i >= 1; i--) {\n            System.out.println(i);\n        }\n        System.out.println("Liftoff!");\n    }\n}`,
-      explanation: [
-        'int i = 10; starts the countdown at 10.',
-        'i >= 1; keeps counting until 1.',
-        'i--; decreases the counter by 1 in each round.',
-        'System.out.println("Liftoff!"); runs only after the loop completes.'
-      ],
-      xpReward: 30
+      "id": "lesson-2",
+      "title": "Anatomy of a For Loop",
+      "duration": "4 min read",
+      "summary": "The 3 gears that make every for-loop spin.",
+      "content": "\n```\nfor ( INITIALIZATION ; CONDITION ; UPDATE ) {\n    // LOOP BODY (Code that runs each round)\n}\n```\n1. **Initialization (`int i = 1`):** Sets starting value. Runs only ONCE at the start.\n2. **Condition (`i <= 10`):** Gatekeeper. Checked BEFORE every round. If true -> run body. If false -> exit loop.\n3. **Update (`i++`):** Changes the counter at the end of each round (e.g. `i++`, `i--`, `i += 5`).\n      "
     },
-
     {
-      id: 3,
-      stageId: 1,
-      isBoss: false,
-      title: 'Fence Painting',
-      scenario: 'You are painting a wooden fence with 8 planks. To track your progress, you want your console to announce each plank as you paint it.',
-      task: 'Write a loop that prints "Painting plank 1" up to "Painting plank 8".',
-      sampleOutput: `Painting plank 1\nPainting plank 2\n...\nPainting plank 8`,
-      expectedOutput: Array.from({ length: 8 }, (_, i) => `Painting plank ${i + 1}`).join('\n'),
-      thinkFirst: [
-        '1. Start at plank 1: int plank = 1;',
-        '2. Stop when plank 8 is finished: plank <= 8;',
-        '3. Advance by 1 plank: plank++;',
-        '4. Print: "Painting plank " + plank;'
-      ],
-      syntaxReminder: `for (int plank = 1; plank <= 8; plank++) {\n    System.out.println("Painting plank " + plank);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Painting plank 1" up to "Painting plank 8"\n        \n    }\n}`,
-      hints: [
-        'Loop from 1 to 8: for (int i = 1; i <= 8; i++)',
-        'Print: System.out.println("Painting plank " + i);',
-        'Ensure exact capitalization: "Painting plank "'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 8; i++) {\n            System.out.println("Painting plank " + i);\n        }\n    }\n}`,
-      explanation: [
-        'Counter i represents each fence plank from 1 to 8.',
-        'Each iteration prints the message with the current plank number.'
-      ],
-      xpReward: 30
+      "id": "lesson-3",
+      "title": "Step-by-Step Execution Order",
+      "duration": "3 min read",
+      "summary": "Watch how Java moves through each iteration.",
+      "content": "\nFor `for (int i = 1; i <= 3; i++) { System.out.println(i); }`:\n1. Start: `i = 1`.\n2. Check: `1 <= 3`? True. Print `1`.\n3. Update: `i++` -> `i = 2`.\n4. Check: `2 <= 3`? True. Print `2`.\n5. Update: `i++` -> `i = 3`.\n6. Check: `3 <= 3`? True. Print `3`.\n7. Update: `i++` -> `i = 4`.\n8. Check: `4 <= 3`? False! Stop loop!\n      "
     },
-
     {
-      id: 4,
-      stageId: 1,
-      isBoss: false,
-      title: 'City Bus Stops',
-      scenario: 'You are programming the automated announcement screen on Route 42. The bus travels through 15 stops along the main street.',
-      task: 'Print "Stop 1", "Stop 2", ..., up to "Stop 15", each on its own line.',
-      sampleOutput: `Stop 1\nStop 2\n...\nStop 15`,
-      expectedOutput: Array.from({ length: 15 }, (_, i) => `Stop ${i + 1}`).join('\n'),
-      thinkFirst: [
-        '1. Start at Stop 1: int stop = 1;',
-        '2. Continue until Stop 15: stop <= 15;',
-        '3. Step by 1: stop++;',
-        '4. Print: "Stop " + stop;'
-      ],
-      syntaxReminder: `for (int stop = 1; stop <= 15; stop++) {\n    System.out.println("Stop " + stop);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Announce "Stop 1" to "Stop 15"\n        \n    }\n}`,
-      hints: [
-        'Header: for (int i = 1; i <= 15; i++)',
-        'Print: System.out.println("Stop " + i);',
-        'Spacing matters: "Stop " has a space before the closing quote.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 15; i++) {\n            System.out.println("Stop " + i);\n        }\n    }\n}`,
-      explanation: [
-        'Loops 15 times from 1 to 15.',
-        'Prints the stop announcement each round.'
-      ],
-      xpReward: 30
+      "id": "lesson-4",
+      "title": "The Accumulator (\"Bucket\") Pattern",
+      "duration": "4 min read",
+      "summary": "How to calculate running totals, counts, and sums.",
+      "content": "\nTo calculate a total:\n1. Create a variable (bucket) **BEFORE** the loop: `int total = 0;`\n2. Inside the loop, add to it: `total += amount;`\n3. **CRITICAL:** Print the bucket **AFTER** the loop finishes!\n      "
     },
-
     {
-      id: 5,
-      stageId: 1,
-      isBoss: false,
-      title: 'Elevator Floor Display',
-      scenario: 'You are writing the digital screen display for an elevator in a 10-story department store. As the elevator ascends, it displays the floor number.',
-      task: 'Print "Elevator at Floor 1" through "Elevator at Floor 10", each on its own line.',
-      sampleOutput: `Elevator at Floor 1\nElevator at Floor 2\n...\nElevator at Floor 10`,
-      expectedOutput: Array.from({ length: 10 }, (_, i) => `Elevator at Floor ${i + 1}`).join('\n'),
-      thinkFirst: [
-        '1. Start at Floor 1: int floor = 1;',
-        '2. Stop at Floor 10: floor <= 10;',
-        '3. Ascend 1 floor at a time: floor++;',
-        '4. Print: "Elevator at Floor " + floor;'
-      ],
-      syntaxReminder: `for (int floor = 1; floor <= 10; floor++) {\n    System.out.println("Elevator at Floor " + floor);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Elevator at Floor 1" up to "Elevator at Floor 10"\n        \n    }\n}`,
-      hints: [
-        'Loop 1 to 10: for (int floor = 1; floor <= 10; floor++)',
-        'Print: System.out.println("Elevator at Floor " + floor);'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int floor = 1; floor <= 10; floor++) {\n            System.out.println("Elevator at Floor " + floor);\n        }\n    }\n}`,
-      explanation: [
-        'Runs for floors 1 through 10, displaying current floor.'
-      ],
-      xpReward: 30
+      "id": "lesson-5",
+      "title": "Common Beginner Mistakes to Avoid",
+      "duration": "3 min read",
+      "summary": "Semicolons, off-by-one errors, and infinite loops.",
+      "content": "\n- 🚫 **Accidental Semicolon:** Never put `;` after `for(...);`. It terminates the loop immediately!\n- ⚠️ **Off-By-One:** `i < 10` stops at 9. Use `i <= 10` to include 10.\n- ♾️ **Wrong Update:** If you write `i++` in a countdown (`for (int i=10; i>=1; i++)`), `i` grows forever!\n      "
     },
-
     {
-      id: 6,
-      stageId: 1,
-      isBoss: false,
-      title: 'Book Reading Progress',
-      scenario: 'You are tracking your daily reading habit. You set a goal to read 5 chapters today and want a confirmation logged after finishing each one.',
-      task: 'Print "Finished reading chapter 1" up to "Finished reading chapter 5".',
-      sampleOutput: `Finished reading chapter 1\nFinished reading chapter 2\nFinished reading chapter 3\nFinished reading chapter 4\nFinished reading chapter 5`,
-      expectedOutput: `Finished reading chapter 1\nFinished reading chapter 2\nFinished reading chapter 3\nFinished reading chapter 4\nFinished reading chapter 5`,
-      thinkFirst: [
-        '1. Loop counter from 1 to 5;',
-        '2. Print: "Finished reading chapter " + i;'
+      "id": "for-lesson-3",
+      "title": "Formatting Lists with \\b\\b (Ref: Q228-Q234)",
+      "duration": "3 min read",
+      "summary": "How to print clean lists [1, 2, 3] without trailing commas.",
+      "content": "\nWhen printing numbers inside a loop, printing `i + \", \"` leaves an ugly extra comma at the end: `[1, 2, 3, ]`.\nTo remove it cleanly as shown in class:\n\n```java\nSystem.out.print(\"[\");\nfor (int i = 1; i <= 3; i++) {\n    System.out.print(i + \", \");\n}\nSystem.out.print(\"\\b\\b]\"); // \\b backspaces over the last comma & space!\n```\nOutput: `[1, 2, 3]`\n      "
+    }
+  ],
+  "challenges": [
+    {
+      "id": 1,
+      "stageId": 1,
+      "isBoss": false,
+      "title": "School Morning Welcome (Ref: Q201-Q202)",
+      "scenario": "It is the first day of the school term in Colombo. The principal wants the digital banner to display \"Welcome to the school!\" exactly 10 times to greet arriving students.",
+      "task": "Using a for loop starting at int i = 1 up to 10, print \"Welcome to the school!\" on 10 separate lines.",
+      "sampleOutput": "Welcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!",
+      "expectedOutput": "Welcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!\nWelcome to the school!",
+      "thinkFirst": [
+        "1. Start counter at 1: int i = 1;",
+        "2. Condition: i <= 10 (or int i = 0; i < 10);",
+        "3. Update: i++;",
+        "4. Inside body: System.out.println(\"Welcome to the school!\");"
       ],
-      syntaxReminder: `for (int i = 1; i <= 5; i++) {\n    System.out.println("Finished reading chapter " + i);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Finished reading chapter 1" to 5\n        \n    }\n}`,
-      hints: [
-        'Loop: for (int i = 1; i <= 5; i++)',
-        'Print string with i variable.'
+      "syntaxReminder": "for (int i = 1; i <= 10; i++) {\n    System.out.println(\"Welcome to the school!\");\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print \"Welcome to the school!\" 10 times using a for loop\n        \n    }\n}",
+      "hints": [
+        "Use: for (int i = 1; i <= 10; i++)",
+        "Inside loop: System.out.println(\"Welcome to the school!\");",
+        "Make sure spelling and punctuation match exactly!"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 5; i++) {\n            System.out.println("Finished reading chapter " + i);\n        }\n    }\n}`,
-      explanation: [
-        'Loops 5 times tracking chapter completion.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 10; i++) {\n            System.out.println(\"Welcome to the school!\");\n        }\n    }\n}",
+      "explanation": [
+        "The for loop initializes i to 1.",
+        "Runs for i = 1 through 10 (10 times total).",
+        "Demonstrates replacing 10 manual println lines with one concise loop!"
       ],
-      xpReward: 30
+      "xpReward": 30
     },
-
     {
-      id: 7,
-      stageId: 1,
-      isBoss: false,
-      title: 'Morning Pushup Tracker',
-      scenario: 'Your fitness app logs your pushups one by one during morning workout sets up to 8 pushups.',
-      task: 'Print "Pushup 1 completed" up to "Pushup 8 completed".',
-      sampleOutput: `Pushup 1 completed\nPushup 2 completed\n...\nPushup 8 completed`,
-      expectedOutput: Array.from({ length: 8 }, (_, i) => `Pushup ${i + 1} completed`).join('\n'),
-      thinkFirst: [
-        '1. Loop i from 1 to 8;',
-        '2. Print: "Pushup " + i + " completed";'
+      "id": 2,
+      "stageId": 1,
+      "isBoss": false,
+      "title": "Alarm Clock Wakeup Call",
+      "scenario": "You have a school exam at 8:00 AM! Your phone alarm is set to ring 7 times to make sure you wake up on time.",
+      "task": "Using a for loop, print \"Wake up!\" exactly 7 times on separate lines.",
+      "sampleOutput": "Wake up!\nWake up!\nWake up!\nWake up!\nWake up!\nWake up!\nWake up!",
+      "expectedOutput": "Wake up!\nWake up!\nWake up!\nWake up!\nWake up!\nWake up!\nWake up!",
+      "thinkFirst": [
+        "1. Initialize i = 1;",
+        "2. Condition: i <= 7;",
+        "3. Step: i++;",
+        "4. Print \"Wake up!\" inside."
       ],
-      syntaxReminder: `for (int i = 1; i <= 8; i++) {\n    System.out.println("Pushup " + i + " completed");\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Pushup 1 completed" up to 8\n        \n    }\n}`,
-      hints: [
-        'Loop runs 8 times: for (int i = 1; i <= 8; i++)',
-        'Print with text: "Pushup " + i + " completed"'
+      "syntaxReminder": "for (int i = 1; i <= 7; i++) {\n    System.out.println(\"Wake up!\");\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print \"Wake up!\" 7 times\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Loop header: for (int i = 1; i <= 7; i++)",
+        "Statement: System.out.println(\"Wake up!\");"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 8; i++) {\n            System.out.println("Pushup " + i + " completed");\n        }\n    }\n}`,
-      explanation: [
-        'Iterates 1 through 8 displaying pushup completion.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 7; i++) {\n            System.out.println(\"Wake up!\");\n        }\n    }\n}",
+      "explanation": [
+        "Iterates 7 rounds (i = 1, 2, 3, 4, 5, 6, 7)."
       ],
-      xpReward: 30
+      "xpReward": 30
     },
-
     {
-      id: 8,
-      stageId: 1,
-      isBoss: false,
-      title: 'Phone Battery Charging',
-      scenario: 'You plug in your dead smartphone. The battery percentage indicator climbs from 1% up to 5%.',
-      task: 'Print "Battery: 1%" up to "Battery: 5%", each on a new line.',
-      sampleOutput: `Battery: 1%\nBattery: 2%\nBattery: 3%\nBattery: 4%\nBattery: 5%`,
-      expectedOutput: `Battery: 1%\nBattery: 2%\nBattery: 3%\nBattery: 4%\nBattery: 5%`,
-      thinkFirst: [
-        '1. Loop percent from 1 to 5;',
-        '2. Print: "Battery: " + percent + "%";'
+      "id": 3,
+      "stageId": 1,
+      "isBoss": false,
+      "title": "Cooking Rice: Code Before & After (Ref: Q203)",
+      "scenario": "In Sri Lankan kitchens, cooking rice follows a strict sequence: you turn on the stove (\"Start cooking\"), let it steam for 5 minutes (\"Cooking rice\"), and turn it off (\"End cooking\").",
+      "task": "Print \"Start cooking\" before the loop. Inside a loop that runs 5 times, print \"Cooking rice\". After the loop ends, print \"End cooking\".",
+      "sampleOutput": "Start cooking\nCooking rice\nCooking rice\nCooking rice\nCooking rice\nCooking rice\nEnd cooking",
+      "expectedOutput": "Start cooking\nCooking rice\nCooking rice\nCooking rice\nCooking rice\nCooking rice\nEnd cooking",
+      "thinkFirst": [
+        "1. Print \"Start cooking\" OUTSIDE and BEFORE the loop.",
+        "2. Write loop running 5 times: for (int i = 1; i <= 5; i++) { ... }",
+        "3. Inside loop: print \"Cooking rice\";",
+        "4. Print \"End cooking\" OUTSIDE and AFTER the loop."
       ],
-      syntaxReminder: `for (int p = 1; p <= 5; p++) {\n    System.out.println("Battery: " + p + "%");\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Battery: 1%" through "Battery: 5%"\n        \n    }\n}`,
-      hints: [
-        'Header: for (int p = 1; p <= 5; p++)',
-        'Print: System.out.println("Battery: " + p + "%");'
+      "syntaxReminder": "System.out.println(\"Start cooking\");\nfor (int i = 1; i <= 5; i++) {\n    System.out.println(\"Cooking rice\");\n}\nSystem.out.println(\"End cooking\");",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Code before loop, loop 5 times, code after loop\n        \n    }\n}",
+      "hints": [
+        "Place \"Start cooking\" before the for keyword.",
+        "The loop runs 5 times: for (int i = 1; i <= 5; i++)",
+        "Place \"End cooking\" after the closing brace } of the loop."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int p = 1; p <= 5; p++) {\n            System.out.println("Battery: " + p + "%");\n        }\n    }\n}`,
-      explanation: [
-        'Concatenates variable p with the % symbol.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        System.out.println(\"Start cooking\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(\"Cooking rice\");\n        }\n        System.out.println(\"End cooking\");\n    }\n}",
+      "explanation": [
+        "Shows execution order: code before runs once, loop body runs 5 times, code after runs once."
       ],
-      xpReward: 30
+      "xpReward": 30
     },
-
     {
-      id: 9,
-      stageId: 1,
-      isBoss: false,
-      title: 'Microwave Timer Countdown',
-      scenario: 'A microwave timer counts down the final 5 seconds before heating finishes, followed by a loud "BEEP!".',
-      task: 'Count down from 5 to 1, printing each number on a new line. Then print "BEEP!" after the loop.',
-      sampleOutput: `5\n4\n3\n2\n1\nBEEP!`,
-      expectedOutput: `5\n4\n3\n2\n1\nBEEP!`,
-      thinkFirst: [
-        '1. Start at 5: int sec = 5;',
-        '2. Condition: sec >= 1;',
-        '3. Decrement: sec--;',
-        '4. Outside loop: print "BEEP!";'
+      "id": 4,
+      "stageId": 1,
+      "isBoss": false,
+      "title": "Cricket Over: Multiple Statements (Ref: Q204)",
+      "scenario": "During an over in a Sri Lankan cricket match, for all 6 legal deliveries, two actions occur: the bowler bowls and the batsman plays.",
+      "task": "Using a for loop that repeats 6 times (1 over), print two lines inside every round: \"Ball bowled\" and \"Ball played\".",
+      "sampleOutput": "Ball bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played",
+      "expectedOutput": "Ball bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played\nBall bowled\nBall played",
+      "thinkFirst": [
+        "1. Loop for 6 balls: for (int i = 1; i <= 6; i++)",
+        "2. Open curly brace {",
+        "3. print \"Ball bowled\"; and print \"Ball played\";",
+        "4. Close curly brace }"
       ],
-      syntaxReminder: `for (int s = 5; s >= 1; s--) {\n    System.out.println(s);\n}\nSystem.out.println("BEEP!");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Countdown 5 to 1, then print "BEEP!"\n        \n    }\n}`,
-      hints: [
-        'Countdown loop: for (int s = 5; s >= 1; s--)',
-        'Print BEEP! after the loop curly brace.'
+      "syntaxReminder": "for (int i = 1; i <= 6; i++) {\n    System.out.println(\"Ball bowled\");\n    System.out.println(\"Ball played\");\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print both statements for 6 rounds\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Put both println statements inside the loop body curly braces { }.",
+        "Condition: i <= 6"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int s = 5; s >= 1; s--) {\n            System.out.println(s);\n        }\n        System.out.println("BEEP!");\n    }\n}`,
-      explanation: [
-        'Runs countdown 5 down to 1, then prints alert sound text.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 6; i++) {\n            System.out.println(\"Ball bowled\");\n            System.out.println(\"Ball played\");\n        }\n    }\n}",
+      "explanation": [
+        "A single loop can execute as many statements as needed inside its curly braces { } block."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 10,
-      stageId: 1,
-      isBoss: true,
-      title: '👑 Stage 1 Boss: Birthday Candles on Cake',
-      scenario: 'It is a child\'s 7th birthday! As the baker, you need to place candles on the cake. For each candle, print "Candle 1 on cake", "Candle 2 on cake", etc., and after placing all candles, print "Happy Birthday!".',
-      task: 'Loop from 1 to 7. Print "Candle " + i + " on cake". After the loop ends, print "Happy Birthday!".',
-      sampleOutput: `Candle 1 on cake\nCandle 2 on cake\n...\nCandle 7 on cake\nHappy Birthday!`,
-      expectedOutput: `Candle 1 on cake\nCandle 2 on cake\nCandle 3 on cake\nCandle 4 on cake\nCandle 5 on cake\nCandle 6 on cake\nCandle 7 on cake\nHappy Birthday!`,
-      thinkFirst: [
-        '1. Set your loop counter to start at 1: int i = 1;',
-        '2. Repeat while i <= 7;',
-        '3. Inside loop: print "Candle " + i + " on cake";',
-        '4. Outside and after loop: print "Happy Birthday!";'
+      "id": 5,
+      "stageId": 1,
+      "isBoss": true,
+      "title": "👑 Stage 1 Boss: Round Counter (Ref: Q205)",
+      "scenario": "In an arena championship, track the match rounds starting from index 0 up to 5.",
+      "task": "Using a for loop starting at int i = 0 while i < 6, print \"Round : \" followed by the value of i for each round.",
+      "sampleOutput": "Round : 0\nRound : 1\nRound : 2\nRound : 3\nRound : 4\nRound : 5",
+      "expectedOutput": "Round : 0\nRound : 1\nRound : 2\nRound : 3\nRound : 4\nRound : 5",
+      "thinkFirst": [
+        "1. Start at 0: int i = 0;",
+        "2. Condition: i < 6 (or i <= 5);",
+        "3. Inside loop: print \"Round : \" + i;"
       ],
-      syntaxReminder: `for (int i = 1; i <= 7; i++) {\n    System.out.println("Candle " + i + " on cake");\n}\nSystem.out.println("Happy Birthday!");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // STAGE 1 BOSS CHALLENGE:\n        // Place 7 candles on cake, then print "Happy Birthday!"\n        \n    }\n}`,
-      hints: [
-        'For loop runs from 1 to 7: for (int i = 1; i <= 7; i++)',
-        'Print inside: System.out.println("Candle " + i + " on cake");',
-        'Happy Birthday message must be placed AFTER the loop finishes!'
+      "syntaxReminder": "for (int i = 0; i < 6; i++) {\n    System.out.println(\"Round : \" + i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print \"Round : 0\" up to \"Round : 5\"\n        \n    }\n}",
+      "hints": [
+        "Start i at 0: for (int i = 0; i < 6; i++)",
+        "Notice the space around colon: \"Round : \" + i",
+        "Compare your output character by character with the sample output."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 7; i++) {\n            System.out.println("Candle " + i + " on cake");\n        }\n        System.out.println("Happy Birthday!");\n    }\n}`,
-      explanation: [
-        'Loop places candles 1 to 7 one by one.',
-        'Once all 7 are placed, the final celebration message prints.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0; i < 6; i++) {\n            System.out.println(\"Round : \" + i);\n        }\n    }\n}",
+      "explanation": [
+        "Variable i changes dynamically on every iteration (0, 1, 2, 3, 4, 5)."
       ],
-      xpReward: 45
+      "xpReward": 45
     },
-
-    // ------------------------------------------------------------------------
-    // STAGE 2: SKIPPING & STEPS (Challenges 11 to 20)
-    // ------------------------------------------------------------------------
     {
-      id: 11,
-      stageId: 2,
-      isBoss: false,
-      title: 'Even House Numbers',
-      scenario: 'A postal delivery worker only delivers letters to the even-numbered houses on Riverside Avenue today, from house 2 up to house 30.',
-      task: 'Write a loop that prints even numbers from 2 up to 30, stepping by 2 each time.',
-      sampleOutput: `2\n4\n6\n...\n30`,
-      expectedOutput: Array.from({ length: 15 }, (_, i) => `${(i + 1) * 2}`).join('\n'),
-      thinkFirst: [
-        '1. Start at house 2: int i = 2;',
-        '2. Stop at house 30: i <= 30;',
-        '3. Step by 2 houses instead of 1: i += 2;',
-        '4. Print i;'
+      "id": 6,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "Classroom Roll Call (1 to 20)",
+      "scenario": "A teacher at Ananda College conducts morning roll call for 20 students in Class 10-A.",
+      "task": "Using a for loop starting at 1 up to 20, print \"Student \" + i.",
+      "sampleOutput": "Student 1\nStudent 2\nStudent 3\nStudent 4\nStudent 5\nStudent 6\nStudent 7\nStudent 8\nStudent 9\nStudent 10\nStudent 11\nStudent 12\nStudent 13\nStudent 14\nStudent 15\nStudent 16\nStudent 17\nStudent 18\nStudent 19\nStudent 20",
+      "expectedOutput": "Student 1\nStudent 2\nStudent 3\nStudent 4\nStudent 5\nStudent 6\nStudent 7\nStudent 8\nStudent 9\nStudent 10\nStudent 11\nStudent 12\nStudent 13\nStudent 14\nStudent 15\nStudent 16\nStudent 17\nStudent 18\nStudent 19\nStudent 20",
+      "thinkFirst": [
+        "1. int i = 1;",
+        "2. while i <= 20;",
+        "3. i++;",
+        "4. System.out.println(\"Student \" + i);"
       ],
-      syntaxReminder: `for (int i = 2; i <= 30; i += 2) {\n    System.out.println(i);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print even numbers 2, 4, 6 ... up to 30\n        \n    }\n}`,
-      hints: [
-        'Start at 2: int i = 2;',
-        'Use the step increment: i += 2 (instead of i++)',
-        'Condition is: i <= 30'
+      "syntaxReminder": "for (int i = 1; i <= 20; i++) {\n    System.out.println(\"Student \" + i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print \"Student 1\" through \"Student 20\"\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Condition is i <= 20 (counting up from 1 to 20).",
+        "Include a space inside: \"Student \" + i"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 2; i <= 30; i += 2) {\n            System.out.println(i);\n        }\n    }\n}`,
-      explanation: [
-        'i += 2 increments i by 2 each round, skipping odd numbers cleanly.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 20; i++) {\n            System.out.println(\"Student \" + i);\n        }\n    }\n}",
+      "explanation": [
+        "i takes values 1, 2, ..., 20."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 12,
-      stageId: 2,
-      isBoss: false,
-      title: 'Express Highway Milestones',
-      scenario: 'You are driving on an express toll highway. Every 5 kilometers, there is a highway milestone marker from 5 km up to 50 km.',
-      task: 'Print milestones 5, 10, 15, ..., up to 50 in the format: "Mile marker: X km".',
-      sampleOutput: `Mile marker: 5 km\nMile marker: 10 km\n...\nMile marker: 50 km`,
-      expectedOutput: Array.from({ length: 10 }, (_, i) => `Mile marker: ${(i + 1) * 5} km`).join('\n'),
-      thinkFirst: [
-        '1. Start at 5: int km = 5;',
-        '2. Keep going until 50: km <= 50;',
-        '3. Add 5 km every round: km += 5;',
-        '4. Print: "Mile marker: " + km + " km";'
+      "id": 7,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "Bus Route 138: Stops 6 to 15 (Ref: Q207)",
+      "scenario": "The 138 bus from Pettah to Maharagama enters its express zone between Stop 6 and Stop 15. Announce each stop.",
+      "task": "Using a for loop starting at int i = 6 while i <= 15, print \"Stop : \" + i.",
+      "sampleOutput": "Stop : 6\nStop : 7\nStop : 8\nStop : 9\nStop : 10\nStop : 11\nStop : 12\nStop : 13\nStop : 14\nStop : 15",
+      "expectedOutput": "Stop : 6\nStop : 7\nStop : 8\nStop : 9\nStop : 10\nStop : 11\nStop : 12\nStop : 13\nStop : 14\nStop : 15",
+      "thinkFirst": [
+        "1. Start at 6: int i = 6;",
+        "2. End at 15: i <= 15;",
+        "3. Step: i++;",
+        "4. Print \"Stop : \" + i;"
       ],
-      syntaxReminder: `for (int km = 5; km <= 50; km += 5) {\n    System.out.println("Mile marker: " + km + " km");\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print milestones from 5 km to 50 km\n        \n    }\n}`,
-      hints: [
-        'Loop header: for (int km = 5; km <= 50; km += 5)',
-        'Print statement: System.out.println("Mile marker: " + km + " km");'
+      "syntaxReminder": "for (int i = 6; i <= 15; i++) {\n    System.out.println(\"Stop : \" + i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Start loop at 6 and run through 15\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Initialization: int i = 6;",
+        "Condition: i <= 15;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int km = 5; km <= 50; km += 5) {\n            System.out.println("Mile marker: " + km + " km");\n        }\n    }\n}`,
-      explanation: [
-        'Starts at 5, steps by +5 each iteration, and formats the output string.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 6; i <= 15; i++) {\n            System.out.println(\"Stop : \" + i);\n        }\n    }\n}",
+      "explanation": [
+        "Loops do not have to start at 0 or 1; you can start at any initial value like 6."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 13,
-      stageId: 2,
-      isBoss: false,
-      title: 'Odd Concert Tickets',
-      scenario: 'A music festival is raffling prize tickets to attendees holding odd ticket numbers between 1 and 21.',
-      task: 'Print odd ticket numbers from 1 up to 21 (1, 3, 5, ..., 21), each on a new line.',
-      sampleOutput: `1\n3\n5\n...\n21`,
-      expectedOutput: Array.from({ length: 11 }, (_, i) => `${i * 2 + 1}`).join('\n'),
-      thinkFirst: [
-        '1. Start at odd number 1: int ticket = 1;',
-        '2. Continue until ticket <= 21;',
-        '3. Add 2 each time to jump to next odd: ticket += 2;',
-        '4. Print ticket;'
+      "id": 8,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "Even House Numbers: Step by 2 (Ref: Q208)",
+      "scenario": "A postal deliverer delivers mail to even-numbered houses on Galle Road, from house 2 up to house 40.",
+      "task": "Using a for loop with step update i += 2, print even numbers from 2 to 40.",
+      "sampleOutput": "2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n22\n24\n26\n28\n30\n32\n34\n36\n38\n40",
+      "expectedOutput": "2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n22\n24\n26\n28\n30\n32\n34\n36\n38\n40",
+      "thinkFirst": [
+        "1. Start at 2: int i = 2;",
+        "2. Condition: i <= 40;",
+        "3. Step by 2: i += 2;",
+        "4. Print i;"
       ],
-      syntaxReminder: `for (int t = 1; t <= 21; t += 2) {\n    System.out.println(t);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print odd numbers 1, 3, 5 ... 21\n        \n    }\n}`,
-      hints: [
-        'Start at 1, condition <= 21, step by t += 2',
-        'Inside: System.out.println(t);'
+      "syntaxReminder": "for (int i = 2; i <= 40; i += 2) {\n    System.out.println(i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print 2, 4, 6 ... 40 using i += 2\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Use update expression: i += 2",
+        "Start with: int i = 2;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int t = 1; t <= 21; t += 2) {\n            System.out.println(t);\n        }\n    }\n}`,
-      explanation: [
-        'Starting at 1 and incrementing by 2 guarantees every visited number is odd.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 2; i <= 40; i += 2) {\n            System.out.println(i);\n        }\n    }\n}",
+      "explanation": [
+        "i += 2 increments i by 2 each round, skipping all odd numbers."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 14,
-      stageId: 2,
-      isBoss: false,
-      title: 'Countdown by 3s',
-      scenario: 'A fitness trainer has clients do intervals counting down by 3s from 30 seconds down to 3 seconds.',
-      task: 'Print numbers counting down from 30 to 3 by subtracting 3 each round (30, 27, 24, ..., 3).',
-      sampleOutput: `30\n27\n24\n...\n3`,
-      expectedOutput: `30\n27\n24\n21\n18\n15\n12\n9\n6\n3`,
-      thinkFirst: [
-        '1. Start at high value 30: int sec = 30;',
-        '2. Condition checks if >= 3: sec >= 3;',
-        '3. Decrease by 3 each time: sec -= 3;',
-        '4. Print sec;'
+      "id": 9,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "5 Times Table Steps (Step 5)",
+      "scenario": "A student practices multiplication multiples of 5, from 5 up to 100.",
+      "task": "Using a for loop starting at 5 up to 100 with step i += 5, print each multiple.",
+      "sampleOutput": "5\n10\n15\n20\n25\n30\n35\n40\n45\n50\n55\n60\n65\n70\n75\n80\n85\n90\n95\n100",
+      "expectedOutput": "5\n10\n15\n20\n25\n30\n35\n40\n45\n50\n55\n60\n65\n70\n75\n80\n85\n90\n95\n100",
+      "thinkFirst": [
+        "1. int i = 5;",
+        "2. i <= 100;",
+        "3. i += 5;",
+        "4. print i;"
       ],
-      syntaxReminder: `for (int sec = 30; sec >= 3; sec -= 3) {\n    System.out.println(sec);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Countdown from 30 down to 3, stepping by -3\n        \n    }\n}`,
-      hints: [
-        'Start at 30: int i = 30;',
-        'Keep running while i >= 3;',
-        'Decrease by 3: i -= 3;'
+      "syntaxReminder": "for (int i = 5; i <= 100; i += 5) {\n    System.out.println(i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print multiples of 5 from 5 to 100\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Update expression: i += 5",
+        "Condition: i <= 100"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 30; i >= 3; i -= 3) {\n            System.out.println(i);\n        }\n    }\n}`,
-      explanation: [
-        'Decrements by 3 every iteration until reaching 3.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 5; i <= 100; i += 5) {\n            System.out.println(i);\n        }\n    }\n}",
+      "explanation": [
+        "Increments by 5 on every iteration."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 15,
-      stageId: 2,
-      isBoss: false,
-      title: 'Decades in History',
-      scenario: 'A museum timeline exhibits major historical events by decades from year 1900 up to year 1950.',
-      task: 'Print "Decade: 1900" up to "Decade: 1950", stepping by 10 years each time.',
-      sampleOutput: `Decade: 1900\nDecade: 1910\nDecade: 1920\nDecade: 1930\nDecade: 1940\nDecade: 1950`,
-      expectedOutput: `Decade: 1900\nDecade: 1910\nDecade: 1920\nDecade: 1930\nDecade: 1940\nDecade: 1950`,
-      thinkFirst: [
-        '1. Start at 1900: int yr = 1900;',
-        '2. Stop at 1950: yr <= 1950;',
-        '3. Step by 10: yr += 10;',
-        '4. Print "Decade: " + yr;'
+      "id": 10,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "Rocket Launch Countdown (10 to 1)",
+      "scenario": "A satellite launch station in Hambantota conducts a final 10-second countdown before liftoff.",
+      "task": "Using a for loop counting down from 10 to 1 (using i--), print each number, followed by \"Liftoff!\" after the loop.",
+      "sampleOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nLiftoff!",
+      "expectedOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nLiftoff!",
+      "thinkFirst": [
+        "1. Start at top: int i = 10;",
+        "2. Count down while i >= 1;",
+        "3. Decrement: i--;",
+        "4. Outside loop: print \"Liftoff!\";"
       ],
-      syntaxReminder: `for (int yr = 1900; yr <= 1950; yr += 10) {\n    System.out.println("Decade: " + yr);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print decades from 1900 to 1950 stepping by 10\n        \n    }\n}`,
-      hints: [
-        'Use yr += 10 in update step.',
-        'Starts at 1900 and finishes at 1950.'
+      "syntaxReminder": "for (int i = 10; i >= 1; i--) {\n    System.out.println(i);\n}\nSystem.out.println(\"Liftoff!\");",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Countdown 10 down to 1, then print \"Liftoff!\"\n        \n    }\n}",
+      "hints": [
+        "Condition: i >= 1",
+        "Update: i--",
+        "Print \"Liftoff!\" after the loop curly brace."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int yr = 1900; yr <= 1950; yr += 10) {\n            System.out.println("Decade: " + yr);\n        }\n    }\n}`,
-      explanation: [
-        'Advances decade counter by 10 each time.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 10; i >= 1; i--) {\n            System.out.println(i);\n        }\n        System.out.println(\"Liftoff!\");\n    }\n}",
+      "explanation": [
+        "Decrement operator i-- decreases i by 1 each round until i reaches 0."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 16,
-      stageId: 2,
-      isBoss: false,
-      title: 'VIP Cinema Seats by 4s',
-      scenario: 'A luxury cinema hall numbers its VIP recliner seats by multiples of 4 from seat 4 up to seat 20.',
-      task: 'Print "Seat 4", "Seat 8", "Seat 12", "Seat 16", "Seat 20", each on its own line.',
-      sampleOutput: `Seat 4\nSeat 8\nSeat 12\nSeat 16\nSeat 20`,
-      expectedOutput: `Seat 4\nSeat 8\nSeat 12\nSeat 16\nSeat 20`,
-      thinkFirst: [
-        '1. Start at 4: int seat = 4;',
-        '2. Stop at 20: seat <= 20;',
-        '3. Step by 4: seat += 4;',
-        '4. Print "Seat " + seat;'
+      "id": 11,
+      "stageId": 2,
+      "isBoss": false,
+      "title": "The Ghost Loop (Ref: Q209)",
+      "scenario": "In class (Q209), Niroth sir showed a loop where the start value already breaks the condition: for (int i = 10; i < 10; i++). Demonstrate that code before and after runs, but the loop body executes 0 times.",
+      "task": "Print \"Start\", write a loop for (int i = 10; i < 10; i++) that prints \"Inside\", and print \"End\" after.",
+      "sampleOutput": "Start\nEnd",
+      "expectedOutput": "Start\nEnd",
+      "thinkFirst": [
+        "1. System.out.println(\"Start\");",
+        "2. for (int i = 10; i < 10; i++) { System.out.println(\"Inside\"); }",
+        "3. System.out.println(\"End\");"
       ],
-      syntaxReminder: `for (int seat = 4; seat <= 20; seat += 4) {\n    System.out.println("Seat " + seat);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print VIP seats from 4 up to 20 stepping by 4\n        \n    }\n}`,
-      hints: [
-        'for (int seat = 4; seat <= 20; seat += 4)',
-        'Inside: System.out.println("Seat " + seat);'
+      "syntaxReminder": "System.out.println(\"Start\");\nfor (int i = 10; i < 10; i++) {\n    System.out.println(\"Inside\");\n}\nSystem.out.println(\"End\");",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Demonstrate loop that executes 0 times\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "The condition 10 < 10 is false immediately on round 1.",
+        "\"Inside\" never prints!"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int seat = 4; seat <= 20; seat += 4) {\n            System.out.println("Seat " + seat);\n        }\n    }\n}`,
-      explanation: [
-        'Steps by 4 to print the 5 VIP seat identifiers.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        System.out.println(\"Start\");\n        for (int i = 10; i < 10; i++) {\n            System.out.println(\"Inside\");\n        }\n        System.out.println(\"End\");\n    }\n}",
+      "explanation": [
+        "Because 10 < 10 is false at the very start, the loop body executes 0 times."
       ],
-      xpReward: 35
+      "xpReward": 30
     },
-
     {
-      id: 17,
-      stageId: 2,
-      isBoss: false,
-      title: 'Jump Rope Milestones by 10s',
-      scenario: 'During rope jumping practice, your smart trainer calls out milestone jumps every 10 jumps from 10 up to 60 jumps.',
-      task: 'Print "10 jumps", "20 jumps", ..., up to "60 jumps".',
-      sampleOutput: `10 jumps\n20 jumps\n30 jumps\n40 jumps\n50 jumps\n60 jumps`,
-      expectedOutput: `10 jumps\n20 jumps\n30 jumps\n40 jumps\n50 jumps\n60 jumps`,
-      thinkFirst: [
-        '1. Loop i from 10 to 60 stepping by 10: i += 10;',
-        '2. Print i + " jumps";'
+      "id": 12,
+      "stageId": 2,
+      "isBoss": true,
+      "type": "concept-lab",
+      "title": "🧪 Concept Lab Boss: Output Prediction",
+      "scenario": "Test your understanding of loop execution order! Inspect the code snippet below and predict what prints.",
+      "task": "What will be printed to the console? Type your exact prediction in the input box.",
+      "labCode": "for (int i = 2; i <= 6; i += 2) {\n    System.out.print(i + \" \");\n}",
+      "labAnswer": "2 4 6",
+      "sampleOutput": "2 4 6",
+      "expectedOutput": "2 4 6",
+      "thinkFirst": [
+        "Round 1: i = 2, print \"2 \"",
+        "Round 2: i = 4, print \"4 \"",
+        "Round 3: i = 6, print \"6 \"",
+        "Round 4: i = 8 -> 8 <= 6 is false. Loop ends!"
       ],
-      syntaxReminder: `for (int i = 10; i <= 60; i += 10) {\n    System.out.println(i + " jumps");\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print milestones from 10 jumps up to 60 jumps\n        \n    }\n}`,
-      hints: [
-        'Loop starts at 10, condition i <= 60, update i += 10',
-        'Print: i + " jumps"'
+      "syntaxReminder": "Type the exact output separated by single spaces: 2 4 6",
+      "starterCode": "2 4 6",
+      "hints": [
+        "i starts at 2 and steps by 2.",
+        "Values printed: 2, 4, 6.",
+        "Compare your output character by character with the sample output."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 10; i <= 60; i += 10) {\n            System.out.println(i + " jumps");\n        }\n    }\n}`,
-      explanation: [
-        'Logs jumps every 10 repetitions.'
+      "modelSolution": "2 4 6",
+      "explanation": [
+        "The loop runs for i = 2, 4, 6 and prints them on the same line with spaces."
       ],
-      xpReward: 35
+      "xpReward": 45
     },
-
     {
-      id: 18,
-      stageId: 2,
-      isBoss: false,
-      title: 'Pedestrian Traffic Light Countdown',
-      scenario: 'A crosswalk traffic timer displays remaining green light seconds in 5-second intervals from 15 down to 0.',
-      task: 'Print "15 sec", "10 sec", "5 sec", "0 sec", each on its own line.',
-      sampleOutput: `15 sec\n10 sec\n5 sec\n0 sec`,
-      expectedOutput: `15 sec\n10 sec\n5 sec\n0 sec`,
-      thinkFirst: [
-        '1. Start at 15: int s = 15;',
-        '2. Stop at 0: s >= 0;',
-        '3. Subtract 5 each time: s -= 5;',
-        '4. Print s + " sec";'
+      "id": 13,
+      "stageId": 3,
+      "isBoss": false,
+      "title": "The Missing Update Trap (Ref: Q210)",
+      "scenario": "In class Q210, a programmer forgot the update statement in the header: for(int i = 0; i < 5; ). Fix this loop by putting i++ inside the body so it prints 0 to 4 without looping infinitely.",
+      "task": "Initialize int i = 0 in the for header without an update. Inside the body, print i and then increment i++. Print 0 to 4.",
+      "sampleOutput": "0\n1\n2\n3\n4",
+      "expectedOutput": "0\n1\n2\n3\n4",
+      "thinkFirst": [
+        "1. for (int i = 0; i < 5; ) {",
+        "2.     System.out.println(i);",
+        "3.     i++; // update placed inside body!",
+        "4. }"
       ],
-      syntaxReminder: `for (int s = 15; s >= 0; s -= 5) {\n    System.out.println(s + " sec");\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Countdown by 5s from 15 sec down to 0 sec\n        \n    }\n}`,
-      hints: [
-        'Condition must allow 0: s >= 0;',
-        'Update step: s -= 5;'
+      "syntaxReminder": "for (int i = 0; i < 5; ) {\n    System.out.println(i);\n    i++;\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // FIX THIS CODE:\n        // Add i++ inside the body so the loop does not run forever!\n        for (int i = 0; i < 5; ) {\n            System.out.println(i);\n            \n        }\n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Put i++; on the line after System.out.println(i);",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int s = 15; s >= 0; s -= 5) {\n            System.out.println(s + " sec");\n        }\n    }\n}`,
-      explanation: [
-        'Decreases by 5 until reaching zero.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0; i < 5; ) {\n            System.out.println(i);\n            i++;\n        }\n    }\n}",
+      "explanation": [
+        "If the 3rd section of a for loop is omitted, the variable must be updated inside the body."
       ],
-      xpReward: 35
+      "xpReward": 35
     },
-
     {
-      id: 19,
-      stageId: 2,
-      isBoss: false,
-      title: 'Swimming Pool Laps by 2s',
-      scenario: 'A swimmer only logs their split times after every round of 2 laps (2, 4, 6, 8, 10).',
-      task: 'Print "Lap 2", "Lap 4", "Lap 6", "Lap 8", "Lap 10", each on its own line.',
-      sampleOutput: `Lap 2\nLap 4\nLap 6\nLap 8\nLap 10`,
-      expectedOutput: `Lap 2\nLap 4\nLap 6\nLap 8\nLap 10`,
-      thinkFirst: [
-        '1. Loop lap = 2; lap <= 10; lap += 2;',
-        '2. Print: "Lap " + lap;'
+      "id": 14,
+      "stageId": 3,
+      "isBoss": false,
+      "title": "Wrong Direction Trap (Ref: Q212)",
+      "scenario": "A student wanted to count up from 0 to 4, but accidentally wrote i-- instead of i++: for(int i=0; i<5; i--). Because i keeps getting smaller (-1, -2, -3...), it is always < 5 and never stops! Fix the update to i++.",
+      "task": "Correct the loop so it increments i++ and prints 0, 1, 2, 3, 4.",
+      "sampleOutput": "0\n1\n2\n3\n4",
+      "expectedOutput": "0\n1\n2\n3\n4",
+      "thinkFirst": [
+        "1. Change i-- to i++ in the header."
       ],
-      syntaxReminder: `for (int lap = 2; lap <= 10; lap += 2) {\n    System.out.println("Lap " + lap);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print "Lap 2" through "Lap 10" by 2s\n        \n    }\n}`,
-      hints: [
-        'Start at 2, end at 10, step by lap += 2',
-        'Print: System.out.println("Lap " + lap);'
+      "syntaxReminder": "for (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // FIX THE WRONG DIRECTION:\n        for (int i = 0; i < 5; i--) {\n            System.out.println(i);\n        }\n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Change i-- to i++ in for (int i = 0; i < 5; i++)",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int lap = 2; lap <= 10; lap += 2) {\n            System.out.println("Lap " + lap);\n        }\n    }\n}`,
-      explanation: [
-        'Increments lap counter by 2 to log every pair of completed laps.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0; i < 5; i++) {\n            System.out.println(i);\n        }\n    }\n}",
+      "explanation": [
+        "Counting upwards requires i++; decrementing causes an infinite loop when condition is i < 5."
       ],
-      xpReward: 35
+      "xpReward": 35
     },
-
     {
-      id: 20,
-      stageId: 2,
-      isBoss: true,
-      title: '👑 Stage 2 Boss: Snooze Alarm Clock',
-      scenario: 'You are programming a smart alarm clock. When the snooze button is activated, the alarm chime should ring every 15 minutes from minute 0 up to minute 60.',
-      task: 'Print "Chime at minute " + m for minutes 0, 15, 30, 45, 60. Then print "Wake up!" after the loop.',
-      sampleOutput: `Chime at minute 0\nChime at minute 15\nChime at minute 30\nChime at minute 45\nChime at minute 60\nWake up!`,
-      expectedOutput: `Chime at minute 0\nChime at minute 15\nChime at minute 30\nChime at minute 45\nChime at minute 60\nWake up!`,
-      thinkFirst: [
-        '1. Start at minute 0: int m = 0;',
-        '2. Run while m <= 60;',
-        '3. Step by 15: m += 15;',
-        '4. Print "Chime at minute " + m inside loop;',
-        '5. Print "Wake up!" outside loop;'
+      "id": 15,
+      "stageId": 3,
+      "isBoss": false,
+      "title": "Empty Condition & Break (Ref: Q211)",
+      "scenario": "In Java, an omitted condition defaults to true: for(int i=0; ; i++). To avoid an infinite loop, use an if condition and break to exit when i reaches 5.",
+      "task": "Using for (int i = 0; ; i++), print i. Inside the loop, if i == 4, break out. Prints 0, 1, 2, 3, 4.",
+      "sampleOutput": "0\n1\n2\n3\n4",
+      "expectedOutput": "0\n1\n2\n3\n4",
+      "thinkFirst": [
+        "1. for (int i = 0; ; i++) {",
+        "2.     System.out.println(i);",
+        "3.     if (i == 4) break;",
+        "4. }"
       ],
-      syntaxReminder: `for (int m = 0; m <= 60; m += 15) {\n    System.out.println("Chime at minute " + m);\n}\nSystem.out.println("Wake up!");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // STAGE 2 BOSS CHALLENGE:\n        // Chime every 15 minutes from 0 to 60, then "Wake up!"\n        \n    }\n}`,
-      hints: [
-        'Start at 0: for (int m = 0; m <= 60; m += 15)',
-        'Print chime line inside loop.',
-        'Print "Wake up!" outside after loop.'
+      "syntaxReminder": "for (int i = 0; ; i++) {\n    System.out.println(i);\n    if (i == 4) break;\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Loop with empty condition and break after printing 4\n        \n    }\n}",
+      "hints": [
+        "Use: for (int i = 0; ; i++)",
+        "Inside: System.out.println(i);",
+        "Check: if (i == 4) break;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int m = 0; m <= 60; m += 15) {\n            System.out.println("Chime at minute " + m);\n        }\n        System.out.println("Wake up!");\n    }\n}`,
-      explanation: [
-        'm starts at 0 and adds 15 each round (0, 15, 30, 45, 60).',
-        'After the 60-minute cycle, the final wake-up message sounds.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0; ; i++) {\n            System.out.println(i);\n            if (i == 4) break;\n        }\n    }\n}",
+      "explanation": [
+        "break immediately exits the loop even when no condition was written in the header."
       ],
-      xpReward: 50
+      "xpReward": 35
     },
-
-    // ------------------------------------------------------------------------
-    // STAGE 3: ACCUMULATING TOTALS (Challenges 21 to 30)
-    // ------------------------------------------------------------------------
     {
-      id: 21,
-      stageId: 3,
-      isBoss: false,
-      title: 'Daily Piggy Bank Savings',
-      scenario: 'You decide to build a daily savings habit! Every day for 30 days, you deposit exactly Rs. 10 into your piggy bank.',
-      task: 'Using a loop from day 1 to 30, accumulate Rs. 10 each day into a savings variable. At the end, print "Total Savings: Rs. " + total.',
-      sampleOutput: `Total Savings: Rs. 300`,
-      expectedOutput: `Total Savings: Rs. 300`,
-      thinkFirst: [
-        '1. Create accumulator bucket BEFORE loop: int total = 0;',
-        '2. Loop days 1 to 30: for (int day = 1; day <= 30; day++)',
-        '3. In each round, add 10: total += 10;',
-        '4. AFTER loop ends, print: "Total Savings: Rs. " + total;'
+      "id": 16,
+      "stageId": 3,
+      "isBoss": false,
+      "title": "Two Variables in Loop Header (Ref: Q220-Q221)",
+      "scenario": "In class Q221, Niroth sir demonstrated controlling two variables in one header: for(int i=0, j=10; i<j; i++, j--). Two runners start at opposite ends of a 10m track and meet in the middle.",
+      "task": "Using for (int i = 0, j = 10; i < j; i++, j--), print i + \" \" + j on each round.",
+      "sampleOutput": "0 10\n1 9\n2 8\n3 7\n4 6",
+      "expectedOutput": "0 10\n1 9\n2 8\n3 7\n4 6",
+      "thinkFirst": [
+        "1. Header: for (int i = 0, j = 10; i < j; i++, j--)",
+        "2. Inside: System.out.println(i + \" \" + j);"
       ],
-      syntaxReminder: `int total = 0;\nfor (int day = 1; day <= 30; day++) {\n    total += 10;\n}\nSystem.out.println("Total Savings: Rs. " + total);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Accumulate Rs. 10 for 30 days, then print total savings\n        \n    }\n}`,
-      hints: [
-        'Declare int total = 0; before the loop.',
-        'Inside loop write: total += 10;',
-        'Print outside: System.out.println("Total Savings: Rs. " + total);'
+      "syntaxReminder": "for (int i = 0, j = 10; i < j; i++, j--) {\n    System.out.println(i + \" \" + j);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Two variables moving towards each other\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Declare both variables with comma: int i = 0, j = 10;",
+        "Update both variables with comma: i++, j--"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int total = 0;\n        for (int day = 1; day <= 30; day++) {\n            total += 10;\n        }\n        System.out.println("Total Savings: Rs. " + total);\n    }\n}`,
-      explanation: [
-        'total begins at 0.',
-        '30 iterations adding 10 each time results in 300.',
-        'Printed only once after loop finishes.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0, j = 10; i < j; i++, j--) {\n            System.out.println(i + \" \" + j);\n        }\n    }\n}",
+      "explanation": [
+        "Java allows multiple initializations and multiple updates separated by commas in a for header."
       ],
-      xpReward: 40
+      "xpReward": 35
     },
-
     {
-      id: 22,
-      stageId: 3,
-      isBoss: false,
-      title: 'Marks Total: Sum 1 to 100',
-      scenario: 'A mathematician named Gauss once stunned his teacher by adding all integers from 1 to 100 in seconds. Now let\'s have Java do it!',
-      task: 'Calculate the sum of all numbers from 1 to 100 using a loop, and print "Sum: " + sum.',
-      sampleOutput: `Sum: 5050`,
-      expectedOutput: `Sum: 5050`,
-      thinkFirst: [
-        '1. Bucket: int sum = 0;',
-        '2. Loop: for (int i = 1; i <= 100; i++)',
-        '3. Accumulate: sum += i;',
-        '4. Print: "Sum: " + sum;'
+      "id": 17,
+      "stageId": 3,
+      "isBoss": false,
+      "type": "concept-lab",
+      "title": "🧪 Concept Lab: Variable Scope (Ref: Q214 vs Q215)",
+      "scenario": "In Q214, trying to print i outside the loop gave a compilation error: \"cannot find symbol variable i\". Why? Because i was declared inside the loop header and died when the loop ended! Declare i before the loop to fix it.",
+      "task": "Declare int i = 0 BEFORE the loop: int i = 0; for (; i < 3; i++) { System.out.println(i); } and print \"Final: \" + i outside.",
+      "sampleOutput": "0\n1\n2\nFinal: 3",
+      "expectedOutput": "0\n1\n2\nFinal: 3",
+      "thinkFirst": [
+        "1. int i = 0; // declared outside!",
+        "2. for (; i < 3; i++) { System.out.println(i); }",
+        "3. System.out.println(\"Final: \" + i);"
       ],
-      syntaxReminder: `int sum = 0;\nfor (int i = 1; i <= 100; i++) {\n    sum += i;\n}\nSystem.out.println("Sum: " + sum);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Sum numbers 1 to 100 and print "Sum: 5050"\n        \n    }\n}`,
-      hints: [
-        'Initialize sum to 0 before the loop.',
-        'Inside the loop: sum += i;',
-        'Print outside the loop braces.'
+      "syntaxReminder": "int i = 0;\nfor (; i < 3; i++) {\n    System.out.println(i);\n}\nSystem.out.println(\"Final: \" + i);",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // FIX SCOPE:\n        // Declare i before the loop so it survives after the loop\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Put int i = 0; before the for loop.",
+        "Notice the empty first section in for (; i < 3; i++)"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        for (int i = 1; i <= 100; i++) {\n            sum += i;\n        }\n        System.out.println("Sum: " + sum);\n    }\n}`,
-      explanation: [
-        'sum accumulates 1 + 2 + 3 + ... + 100 = 5050.',
-        'Result printed after loop completes.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        int i = 0;\n        for (; i < 3; i++) {\n            System.out.println(i);\n        }\n        System.out.println(\"Final: \" + i);\n    }\n}",
+      "explanation": [
+        "Declaring i before the loop allows its value (3) to be accessed after the loop finishes."
       ],
-      xpReward: 40
+      "xpReward": 40
     },
-
     {
-      id: 23,
-      stageId: 3,
-      isBoss: false,
-      title: 'Cashier Running Bill',
-      scenario: 'You are writing the billing software for a grocery store cashier. A customer buys 4 items, each costing Rs. 120. The register must display the updated running bill after scanning each item.',
-      task: 'Loop 4 times. Add 120 to bill each time and print "Item " + i + " running total: Rs. " + bill.',
-      sampleOutput: `Item 1 running total: Rs. 120\nItem 2 running total: Rs. 240\nItem 3 running total: Rs. 360\nItem 4 running total: Rs. 480`,
-      expectedOutput: `Item 1 running total: Rs. 120\nItem 2 running total: Rs. 240\nItem 3 running total: Rs. 360\nItem 4 running total: Rs. 480`,
-      thinkFirst: [
-        '1. Bucket: int bill = 0;',
-        '2. Loop 4 items: for (int i = 1; i <= 4; i++)',
-        '3. Add price: bill += 120;',
-        '4. Print INSIDE the loop so customer sees each step!'
+      "id": 18,
+      "stageId": 3,
+      "isBoss": true,
+      "type": "concept-lab",
+      "title": "🧪 Concept Lab Boss: Byte Overflow Trap (Ref: Q213)",
+      "scenario": "In class Q213: for (byte i = 0; i < 10; i--). A byte in Java only holds -128 to 127. When i decreases past -128, what does it wrap around to? Type the positive number it wraps to.",
+      "task": "When byte underflows past -128, what maximum positive number does it wrap around to? (Type the integer number)",
+      "labCode": "byte b = -128;\nb--; // What is b now?",
+      "labAnswer": "127",
+      "sampleOutput": "127",
+      "expectedOutput": "127",
+      "thinkFirst": [
+        "In 2s-complement 8-bit binary, -128 - 1 = +127."
       ],
-      syntaxReminder: `int bill = 0;\nfor (int i = 1; i <= 4; i++) {\n    bill += 120;\n    System.out.println("Item " + i + " running total: Rs. " + bill);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print running bill after each of the 4 items\n        \n    }\n}`,
-      hints: [
-        'Notice that here, we print INSIDE the loop because it is a RUNNING total!',
-        'bill starts at 0, adds 120 each round.'
+      "syntaxReminder": "Type the number: 127",
+      "starterCode": "127",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "A Java byte range is -128 to 127.",
+        "Answer is 127."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int bill = 0;\n        for (int i = 1; i <= 4; i++) {\n            bill += 120;\n            System.out.println("Item " + i + " running total: Rs. " + bill);\n        }\n    }\n}`,
-      explanation: [
-        'Because the receipt prints after each item, print statement is inside the loop body.'
+      "modelSolution": "127",
+      "explanation": [
+        "Because byte wraps from -128 back to +127, for(byte i=0; i<10; i--) never ends!"
       ],
-      xpReward: 40
+      "xpReward": 45
     },
-
     {
-      id: 24,
-      stageId: 3,
-      isBoss: false,
-      title: 'Weekly Step Goal Tracker',
-      scenario: 'You wear a fitness band. For each of the 7 days of the week, you walked 1000 steps. Calculate your total weekly step count.',
-      task: 'Loop through days 1 to 7, adding 1000 steps each day into totalSteps. Print "Total Steps: " + totalSteps.',
-      sampleOutput: `Total Steps: 7000`,
-      expectedOutput: `Total Steps: 7000`,
-      thinkFirst: [
-        '1. Bucket: int totalSteps = 0;',
-        '2. Loop 1 to 7: for (int d = 1; d <= 7; d++)',
-        '3. Add: totalSteps += 1000;',
-        '4. Print outside: "Total Steps: " + totalSteps;'
+      "id": 19,
+      "stageId": 4,
+      "isBoss": false,
+      "title": "Print on One Line (Ref: Q225-Q226)",
+      "scenario": "In Q226, Niroth sir showed the difference between println (new line) and print (same line). Print numbers 0 to 9 on a single line separated by spaces.",
+      "task": "Using System.out.print(i + \" \"), print numbers 0 through 9 on one single line.",
+      "sampleOutput": "0 1 2 3 4 5 6 7 8 9",
+      "expectedOutput": "0 1 2 3 4 5 6 7 8 9",
+      "thinkFirst": [
+        "1. for (int i = 0; i < 10; i++)",
+        "2. Use System.out.print (NOT println): System.out.print(i + (i < 9 ? \" \" : \"\"));"
       ],
-      syntaxReminder: `int totalSteps = 0;\nfor (int d = 1; d <= 7; d++) {\n    totalSteps += 1000;\n}\nSystem.out.println("Total Steps: " + totalSteps);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Accumulate 1000 steps for 7 days, print total\n        \n    }\n}`,
-      hints: [
-        'Declare totalSteps = 0 before the loop.',
-        'Add 1000 in each of the 7 iterations.',
-        'Print after loop.'
+      "syntaxReminder": "for (int i = 0; i < 10; i++) {\n    System.out.print(i + (i < 9 ? \" \" : \"\"));\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print 0 to 9 on one line separated by spaces\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Use System.out.print instead of System.out.println",
+        "Add a space after each number"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int totalSteps = 0;\n        for (int d = 1; d <= 7; d++) {\n            totalSteps += 1000;\n        }\n        System.out.println("Total Steps: " + totalSteps);\n    }\n}`,
-      explanation: [
-        'Accumulates 7 * 1000 = 7000 steps.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 0; i < 10; i++) {\n            System.out.print(i + (i < 9 ? \" \" : \"\"));\n        }\n    }\n}",
+      "explanation": [
+        "System.out.print leaves the cursor on the same line."
       ],
-      xpReward: 40
+      "xpReward": 35
     },
-
     {
-      id: 25,
-      stageId: 3,
-      isBoss: false,
-      title: 'Lucky Sevens Counter',
-      scenario: 'You are testing a lottery ticket number generator. You need to count how many numbers between 1 and 100 are divisible by 7.',
-      task: 'Loop from 1 to 100. If a number is divisible by 7 (i % 7 == 0), increment a counter. Print "Count: " + count at the end.',
-      sampleOutput: `Count: 14`,
-      expectedOutput: `Count: 14`,
-      thinkFirst: [
-        '1. Counter bucket: int count = 0;',
-        '2. Loop 1 to 100: for (int i = 1; i <= 100; i++)',
-        '3. If divisible by 7: if (i % 7 == 0) { count++; }',
-        '4. Print outside: "Count: " + count;'
+      "id": 20,
+      "stageId": 4,
+      "isBoss": false,
+      "title": "List Formatting with \\b\\b (Ref: Q229-Q230)",
+      "scenario": "Format numbers 1 to 10 inside square brackets without a trailing comma: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]. Use the backspace technique taught in class Q230.",
+      "task": "Print \"[\", loop from 1 to 10 printing (i + \", \"), then print \"\\b\\b]\" to erase the last comma.",
+      "sampleOutput": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+      "expectedOutput": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+      "thinkFirst": [
+        "1. System.out.print(\"[\");",
+        "2. for (int i = 1; i <= 10; i++) { System.out.print(i + \", \"); }",
+        "3. System.out.print(\"\\b\\b]\");"
       ],
-      syntaxReminder: `int count = 0;\nfor (int i = 1; i <= 100; i++) {\n    if (i % 7 == 0) count++;\n}\nSystem.out.println("Count: " + count);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Count numbers between 1 and 100 divisible by 7\n        \n    }\n}`,
-      hints: [
-        'Check divisibility using modulo: i % 7 == 0',
-        'Increment: count++',
-        'Print after loop: System.out.println("Count: " + count);'
+      "syntaxReminder": "System.out.print(\"[\");\nfor (int i = 1; i <= 10; i++) {\n    System.out.print(i + \", \");\n}\nSystem.out.print(\"\\b\\b]\");",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Print [1, 2, 3, ... 10] using \\b\\b]\n        \n    }\n}",
+      "hints": [
+        "Start with: System.out.print(\"[\");",
+        "Loop: for (int i = 1; i <= 10; i++) System.out.print(i + \", \");",
+        "Finish with: System.out.print(\"\\b\\b]\");"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int count = 0;\n        for (int i = 1; i <= 100; i++) {\n            if (i % 7 == 0) {\n                count++;\n            }\n        }\n        System.out.println("Count: " + count);\n    }\n}`,
-      explanation: [
-        'Tests all 100 numbers; exactly 14 of them are multiples of 7 (7, 14, 21 ... 98).'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        System.out.print(\"[\");\n        for (int i = 1; i <= 10; i++) {\n            System.out.print(i + \", \");\n        }\n        System.out.print(\"\\b\\b]\");\n    }\n}",
+      "explanation": [
+        "\\b\\b deletes the extra comma and space before closing with ]."
       ],
-      xpReward: 40
+      "xpReward": 35
     },
-
     {
-      id: 26,
-      stageId: 3,
-      isBoss: false,
-      title: 'Sum of Even Numbers up to 10',
-      scenario: 'In an elementary algebra class, students are asked to calculate the total sum of even numbers from 2 up to 10 (2 + 4 + 6 + 8 + 10).',
-      task: 'Using a loop stepping by +2, calculate the sum of 2, 4, 6, 8, 10 and print "Even Sum: " + sum.',
-      sampleOutput: `Even Sum: 30`,
-      expectedOutput: `Even Sum: 30`,
-      thinkFirst: [
-        '1. int sum = 0;',
-        '2. Loop: for (int i = 2; i <= 10; i += 2)',
-        '3. sum += i;',
-        '4. Print "Even Sum: " + sum;'
+      "id": 21,
+      "stageId": 4,
+      "isBoss": false,
+      "title": "Reverse List Formatting (Ref: Q231-Q232)",
+      "scenario": "Print numbers 10 down to 1 inside brackets: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].",
+      "task": "Using System.out.print and the \\b\\b technique, print reverse list [10, 9, ... 1].",
+      "sampleOutput": "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+      "expectedOutput": "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+      "thinkFirst": [
+        "1. System.out.print(\"[\");",
+        "2. for (int i = 10; i >= 1; i--) System.out.print(i + \", \");",
+        "3. System.out.print(\"\\b\\b]\");"
       ],
-      syntaxReminder: `int sum = 0;\nfor (int i = 2; i <= 10; i += 2) {\n    sum += i;\n}\nSystem.out.println("Even Sum: " + sum);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Sum even numbers 2 to 10, print "Even Sum: 30"\n        \n    }\n}`,
-      hints: [
-        'Start at 2, step by i += 2 up to 10',
-        'Accumulate into sum',
-        'Print after loop'
+      "syntaxReminder": "System.out.print(\"[\");\nfor (int i = 10; i >= 1; i--) {\n    System.out.print(i + \", \");\n}\nSystem.out.print(\"\\b\\b]\");",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Reverse list [10, 9, ... 1]\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Loop counts down: for (int i = 10; i >= 1; i--)",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        for (int i = 2; i <= 10; i += 2) {\n            sum += i;\n        }\n        System.out.println("Even Sum: " + sum);\n    }\n}`,
-      explanation: [
-        '2 + 4 + 6 + 8 + 10 = 30.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        System.out.print(\"[\");\n        for (int i = 10; i >= 1; i--) {\n            System.out.print(i + \", \");\n        }\n        System.out.print(\"\\b\\b]\");\n    }\n}",
+      "explanation": [
+        "Countdown from 10 down to 1."
       ],
-      xpReward: 40
+      "xpReward": 35
     },
-
     {
-      id: 27,
-      stageId: 3,
-      isBoss: false,
-      title: 'Sum of Odd Numbers up to 9',
-      scenario: 'A mathematician is verifying that the sum of the first N odd numbers equals N squared (1 + 3 + 5 + 7 + 9 = 25).',
-      task: 'Loop through odd numbers 1, 3, 5, 7, 9, sum them, and print "Odd Sum: " + sum.',
-      sampleOutput: `Odd Sum: 25`,
-      expectedOutput: `Odd Sum: 25`,
-      thinkFirst: [
-        '1. int sum = 0;',
-        '2. Loop: for (int i = 1; i <= 9; i += 2)',
-        '3. sum += i;',
-        '4. Print "Odd Sum: " + sum;'
+      "id": 22,
+      "stageId": 4,
+      "isBoss": false,
+      "title": "User Enters N: Print List (Ref: Q233-Q234)",
+      "scenario": "A user inputs an integer N via Scanner (e.g. 7). Print list [1, 2, 3, 4, 5, 6, 7].",
+      "task": "Read int num = input.nextInt(). Print [1, 2, ... num] using a for loop and \\b\\b].",
+      "sampleInput": "7",
+      "sampleOutput": "[1, 2, 3, 4, 5, 6, 7]",
+      "expectedOutput": "[1, 2, 3, 4, 5, 6, 7]",
+      "testCases": [
+        {
+          "input": "7",
+          "expectedOutput": "[1, 2, 3, 4, 5, 6, 7]"
+        },
+        {
+          "input": "4",
+          "expectedOutput": "[1, 2, 3, 4]"
+        }
       ],
-      syntaxReminder: `int sum = 0;\nfor (int i = 1; i <= 9; i += 2) {\n    sum += i;\n}\nSystem.out.println("Odd Sum: " + sum);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Sum odd numbers 1 to 9, print "Odd Sum: 25"\n        \n    }\n}`,
-      hints: [
-        'Start at 1, step by i += 2',
-        'Add each to sum'
+      "thinkFirst": [
+        "1. Scanner input = new Scanner(System.in);",
+        "2. int num = input.nextInt();",
+        "3. System.out.print(\"[\");",
+        "4. for (int i = 1; i <= num; i++) System.out.print(i + \", \");",
+        "5. System.out.print(\"\\b\\b]\");"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        for (int i = 1; i <= 9; i += 2) {\n            sum += i;\n        }\n        System.out.println("Odd Sum: " + sum);\n    }\n}`,
-      explanation: [
-        '1 + 3 + 5 + 7 + 9 = 25.'
+      "syntaxReminder": "Scanner input = new Scanner(System.in);\nint num = input.nextInt();\nSystem.out.print(\"[\");\nfor (int i = 1; i <= num; i++) {\n    System.out.print(i + \", \");\n}\nSystem.out.print(\"\\b\\b]\");",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        // Read num and print [1, 2, ... num]\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Read number: int num = input.nextInt();",
+        "Loop condition: i <= num;"
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        System.out.print(\"[\");\n        for (int i = 1; i <= num; i++) {\n            System.out.print(i + \", \");\n        }\n        System.out.print(\"\\b\\b]\");\n    }\n}",
+      "explanation": [
+        "Dynamically loops up to the user-entered limit num."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 28,
-      stageId: 3,
-      isBoss: false,
-      title: 'Bakery Donut Boxes',
-      scenario: 'A bakery packs donuts into boxes of 12. A catering order requests 5 full boxes. Calculate total donuts packed.',
-      task: 'Loop 5 times (boxes 1 to 5), adding 12 donuts each time to totalDonuts. Print "Total Donuts: " + totalDonuts.',
-      sampleOutput: `Total Donuts: 60`,
-      expectedOutput: `Total Donuts: 60`,
-      thinkFirst: [
-        '1. int totalDonuts = 0;',
-        '2. Loop: for (int b = 1; b <= 5; b++)',
-        '3. totalDonuts += 12;',
-        '4. Print "Total Donuts: " + totalDonuts;'
+      "id": 23,
+      "stageId": 4,
+      "isBoss": false,
+      "title": "Reverse Countdown with Empty Check (Ref: Q235-Q236)",
+      "scenario": "The user enters N. If N > 0, print [N, N-1, ... 1]. If N <= 0, print [empty].",
+      "task": "Read int num. If num <= 0 print \"[empty]\". Else print [num, num-1, ... 1].",
+      "sampleInput": "5",
+      "sampleOutput": "[5, 4, 3, 2, 1]",
+      "expectedOutput": "[5, 4, 3, 2, 1]",
+      "testCases": [
+        {
+          "input": "5",
+          "expectedOutput": "[5, 4, 3, 2, 1]"
+        },
+        {
+          "input": "0",
+          "expectedOutput": "[empty]"
+        }
       ],
-      syntaxReminder: `int totalDonuts = 0;\nfor (int b = 1; b <= 5; b++) {\n    totalDonuts += 12;\n}\nSystem.out.println("Total Donuts: " + totalDonuts);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Add 12 donuts for 5 boxes, print total\n        \n    }\n}`,
-      hints: [
-        'Initialize totalDonuts = 0',
-        'Add 12 inside loop',
-        'Print after loop'
+      "thinkFirst": [
+        "1. if (num <= 0) System.out.println(\"[empty]\");",
+        "2. else loop from num down to 1."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int totalDonuts = 0;\n        for (int b = 1; b <= 5; b++) {\n            totalDonuts += 12;\n        }\n        System.out.println("Total Donuts: " + totalDonuts);\n    }\n}`,
-      explanation: [
-        '5 iterations adding 12 yields 60 donuts.'
+      "syntaxReminder": "if (num <= 0) {\n    System.out.println(\"[empty]\");\n} else {\n    System.out.print(\"[\");\n    for (int i = num; i >= 1; i--) System.out.print(i + \", \");\n    System.out.print(\"\\b\\b]\");\n}",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Handle N <= 0 with if (num <= 0)",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        if (num <= 0) {\n            System.out.println(\"[empty]\");\n        } else {\n            System.out.print(\"[\");\n            for (int i = num; i >= 1; i--) {\n                System.out.print(i + \", \");\n            }\n            System.out.print(\"\\b\\b]\");\n        }\n    }\n}",
+      "explanation": [
+        "Handles boundary conditions gracefully when N is non-positive."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 29,
-      stageId: 3,
-      isBoss: false,
-      title: 'Gas Station Fuel Meter',
-      scenario: 'You are fueling a motorcycle with 3 liters of petrol at Rs. 350 per liter. The fuel pump meter displays the cost after each liter pumped.',
-      task: 'Loop 3 times (liters 1 to 3). Add 350 to cost each time and print liter count and running cost.',
-      sampleOutput: `1 Liter: Rs. 350\n2 Liters: Rs. 700\n3 Liters: Rs. 1050`,
-      expectedOutput: `1 Liter: Rs. 350\n2 Liters: Rs. 700\n3 Liters: Rs. 1050`,
-      thinkFirst: [
-        '1. int cost = 0;',
-        '2. Loop: for (int lit = 1; lit <= 3; lit++)',
-        '3. cost += 350;',
-        '4. Print format: lit + (lit == 1 ? " Liter: Rs. " : " Liters: Rs. ") + cost;'
+      "id": 24,
+      "stageId": 4,
+      "isBoss": true,
+      "title": "👑 Stage 4 Boss: Bounds Swapper (Ref: Q237-Q238)",
+      "scenario": "In class Q238, the user enters lower bound and upper bound. If lower > upper (e.g. 5 and 2), swap them so lower becomes 2 and upper becomes 5, then print [2, 3, 4, 5].",
+      "task": "Read lower and upper bound. If lower > upper, swap them using a temp variable. Print [lower, ... upper].",
+      "sampleInput": "5 2",
+      "sampleOutput": "[2, 3, 4, 5]",
+      "expectedOutput": "[2, 3, 4, 5]",
+      "testCases": [
+        {
+          "input": "5 2",
+          "expectedOutput": "[2, 3, 4, 5]"
+        },
+        {
+          "input": "2 6",
+          "expectedOutput": "[2, 3, 4, 5, 6]"
+        }
       ],
-      syntaxReminder: `int cost = 0;\nfor (int lit = 1; lit <= 3; lit++) {\n    cost += 350;\n    System.out.println(lit + (lit == 1 ? " Liter: Rs. " : " Liters: Rs. ") + cost);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print running fuel cost for 1, 2, and 3 liters\n        \n    }\n}`,
-      hints: [
-        'Notice: 1 uses "Liter", while 2 and 3 use "Liters".',
-        'Use an if/else or ternary inside the loop.'
+      "thinkFirst": [
+        "1. int lower = input.nextInt(); int upper = input.nextInt();",
+        "2. if (lower > upper) { int temp = lower; lower = upper; upper = temp; }",
+        "3. Loop from lower to upper."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int cost = 0;\n        for (int lit = 1; lit <= 3; lit++) {\n            cost += 350;\n            if (lit == 1) {\n                System.out.println(lit + " Liter: Rs. " + cost);\n            } else {\n                System.out.println(lit + " Liters: Rs. " + cost);\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Handles pluralization and running fuel meter accumulation.'
+      "syntaxReminder": "if (lower > upper) {\n    int temp = lower;\n    lower = upper;\n    upper = temp;\n}\nSystem.out.print(\"[\");\nfor (int i = lower; i <= upper; i++) System.out.print(i + \", \");\nSystem.out.print(\"\\b\\b]\");",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        // Read lower & upper, swap if lower > upper, print list\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Use swap logic: int temp = lower; lower = upper; upper = temp;",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int lower = input.nextInt();\n        int upper = input.nextInt();\n        if (lower > upper) {\n            int temp = lower;\n            lower = upper;\n            upper = temp;\n        }\n        System.out.print(\"[\");\n        for (int i = lower; i <= upper; i++) {\n            System.out.print(i + \", \");\n        }\n        System.out.print(\"\\b\\b]\");\n    }\n}",
+      "explanation": [
+        "Classic variable swapping algorithm combined with for loop list traversal."
+      ],
+      "xpReward": 45
     },
-
     {
-      id: 30,
-      stageId: 3,
-      isBoss: true,
-      title: '👑 Stage 3 Boss: Grade Average Calculator',
-      scenario: 'You are calculating the overall class performance. Find the average of the test scores for the first 10 students (numbers 1 to 10).',
-      task: 'Sum the numbers 1 through 10. Then compute the average as double (sum / 10.0) and print "Average: " + avg.',
-      sampleOutput: `Average: 5.5`,
-      expectedOutput: `Average: 5.5`,
-      thinkFirst: [
-        '1. Sum bucket: int sum = 0;',
-        '2. Loop 1 to 10: sum += i;',
-        '3. Calculate average as floating-point: double avg = sum / 10.0;',
-        '4. Print: "Average: " + avg;'
+      "id": 25,
+      "stageId": 5,
+      "isBoss": false,
+      "title": "Sri Lankan Piggy Bank (Till)",
+      "scenario": "You save money in your Till for 10 days: Rs. 10 on Day 1, Rs. 20 on Day 2, ..., Rs. 100 on Day 10. Print the total savings.",
+      "task": "Using a loop from day 1 to 10 with savings (day * 10), accumulate the total into int total = 0 and print \"Total savings: Rs. \" + total.",
+      "sampleOutput": "Total savings: Rs. 550",
+      "expectedOutput": "Total savings: Rs. 550",
+      "thinkFirst": [
+        "1. int total = 0; // accumulator",
+        "2. for (int day = 1; day <= 10; day++) { total += day * 10; }",
+        "3. print \"Total savings: Rs. \" + total;"
       ],
-      syntaxReminder: `int sum = 0;\nfor (int i = 1; i <= 10; i++) {\n    sum += i;\n}\ndouble avg = sum / 10.0;\nSystem.out.println("Average: " + avg);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // STAGE 3 BOSS CHALLENGE:\n        // Sum 1 to 10, divide by 10.0, print "Average: 5.5"\n        \n    }\n}`,
-      hints: [
-        'Sum 1 to 10 equals 55.',
-        'Divide by 10.0 (with decimal point) to avoid integer division truncation!',
-        'Print: System.out.println("Average: " + avg);'
+      "syntaxReminder": "int total = 0;\nfor (int day = 1; day <= 10; day++) {\n    total += day * 10;\n}\nSystem.out.println(\"Total savings: Rs. \" + total);",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Accumulate 10 days savings and print total\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Each day adds: day * 10",
+        "Initialize total outside the loop before it starts!"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        for (int i = 1; i <= 10; i++) {\n            sum += i;\n        }\n        double avg = sum / 10.0;\n        System.out.println("Average: " + avg);\n    }\n}`,
-      explanation: [
-        'sum = 55. 55 / 10.0 evaluates to 5.5.',
-        'Correctly prints Average: 5.5.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        int total = 0;\n        for (int day = 1; day <= 10; day++) {\n            total += day * 10;\n        }\n        System.out.println(\"Total savings: Rs. \" + total);\n    }\n}",
+      "explanation": [
+        "Accumulator pattern: total keeps adding each day’s savings."
       ],
-      xpReward: 50
+      "xpReward": 35
     },
-
-    // ------------------------------------------------------------------------
-    // STAGE 4: LOOPS WITH DECISIONS (for + if) (Challenges 31 to 40)
-    // ------------------------------------------------------------------------
     {
-      id: 31,
-      stageId: 4,
-      isBoss: false,
-      title: 'Cricket Over Thriller',
-      scenario: 'A cricket over consists of 6 deliveries (balls 1 to 6). On the final 6th ball, the batsman hits an unforgettable maximum over long-on!',
-      task: 'Loop through balls 1 to 6. For balls 1 to 5, print "Ball " + i. On ball 6, print "Ball 6 - SIX!".',
-      sampleOutput: `Ball 1\nBall 2\nBall 3\nBall 4\nBall 5\nBall 6 - SIX!`,
-      expectedOutput: `Ball 1\nBall 2\nBall 3\nBall 4\nBall 5\nBall 6 - SIX!`,
-      thinkFirst: [
-        '1. Loop ball from 1 to 6.',
-        '2. If ball == 6, print "Ball 6 - SIX!".',
-        '3. Else, print "Ball " + ball.'
+      "id": 26,
+      "stageId": 5,
+      "isBoss": false,
+      "title": "Sum Equation: 1 + 2 + ... + N = Total (Ref: Q239-Q242)",
+      "scenario": "In class Q240 & Q242, Niroth sir showed how to print the full addition equation: \"1 + 2 + 3 + 4 + 5 = 15\".",
+      "task": "Read N (e.g. 5). Loop from 1 to N, print \"i + \", accumulate the sum, and at the end print \"\\b\\b = \" + sum.",
+      "sampleInput": "5",
+      "sampleOutput": "1 + 2 + 3 + 4 + 5 = 15",
+      "expectedOutput": "1 + 2 + 3 + 4 + 5 = 15",
+      "testCases": [
+        {
+          "input": "5",
+          "expectedOutput": "1 + 2 + 3 + 4 + 5 = 15"
+        },
+        {
+          "input": "4",
+          "expectedOutput": "1 + 2 + 3 + 4 = 10"
+        }
       ],
-      syntaxReminder: `for (int b = 1; b <= 6; b++) {\n    if (b == 6) {\n        System.out.println("Ball 6 - SIX!");\n    } else {\n        System.out.println("Ball " + b);\n    }\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print Ball 1 to 5, and "Ball 6 - SIX!" on 6\n        \n    }\n}`,
-      hints: [
-        'Loop 1 to 6: for (int b = 1; b <= 6; b++)',
-        'Use if (b == 6) for special treatment of the last ball.',
-        'Use else for balls 1 through 5.'
+      "thinkFirst": [
+        "1. int sum = 0;",
+        "2. for (int i = 1; i <= num; i++) { System.out.print(i + \" + \"); sum += i; }",
+        "3. System.out.print(\"\\b\\b = \" + sum);"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int b = 1; b <= 6; b++) {\n            if (b == 6) {\n                System.out.println("Ball 6 - SIX!");\n            } else {\n                System.out.println("Ball " + b);\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Uses an if-else decision inside the loop to branch behavior.'
+      "syntaxReminder": "int sum = 0;\nfor (int i = 1; i <= num; i++) {\n    System.out.print(i + \" + \");\n    sum += i;\n}\nSystem.out.print(\"\\b\\b = \" + sum);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Print i + \" + \" inside loop and add to sum: sum += i;",
+        "End with \\b\\b = + sum"
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        int sum = 0;\n        for (int i = 1; i <= num; i++) {\n            System.out.print(i + \" + \");\n            sum += i;\n        }\n        System.out.print(\"\\b\\b= \" + sum);\n    }\n}",
+      "explanation": [
+        "Produces a formatted arithmetic equation with final computed sum."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 32,
-      stageId: 4,
-      isBoss: false,
-      title: 'Exam Pass Count',
-      scenario: 'A university exam paper has been graded. Marks for 8 students are stored in an array. A mark of 50 or higher is a PASS.',
-      task: 'Loop over marks: int[] marks = { 45, 67, 89, 32, 50, 91, 55, 38 }; Count how many students passed (>= 50) and print "Passed: " + passed.',
-      sampleOutput: `Passed: 5`,
-      expectedOutput: `Passed: 5`,
-      thinkFirst: [
-        '1. Counter: int passed = 0;',
-        '2. Loop index 0 to marks.length - 1: for (int i = 0; i < marks.length; i++)',
-        '3. If marks[i] >= 50, passed++;',
-        '4. Print "Passed: " + passed;'
+      "id": 27,
+      "stageId": 5,
+      "isBoss": false,
+      "title": "Divisible by 7 Counter",
+      "scenario": "How many integers between 1 and 100 are divisible by 7? Count them with a loop and print the total count.",
+      "task": "Using for (int i = 1; i <= 100; i++), check if (i % 7 == 0). If true, increment count++. Print \"Count: \" + count.",
+      "sampleOutput": "Count: 14",
+      "expectedOutput": "Count: 14",
+      "thinkFirst": [
+        "1. int count = 0;",
+        "2. for (int i = 1; i <= 100; i++) { if (i % 7 == 0) count++; }",
+        "3. print \"Count: \" + count;"
       ],
-      syntaxReminder: `int passed = 0;\nfor (int i = 0; i < marks.length; i++) {\n    if (marks[i] >= 50) passed++;\n}\nSystem.out.println("Passed: " + passed);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] marks = { 45, 67, 89, 32, 50, 91, 55, 38 };\n        // WRITE YOUR CODE HERE:\n        // Count how many marks are >= 50, print "Passed: 5"\n        \n    }\n}`,
-      hints: [
-        'Loop through array indices: for (int i = 0; i < marks.length; i++)',
-        'Check if (marks[i] >= 50) { passed++; }',
-        'Print result after loop.'
+      "syntaxReminder": "int count = 0;\nfor (int i = 1; i <= 100; i++) {\n    if (i % 7 == 0) count++;\n}\nSystem.out.println(\"Count: \" + count);",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        // Count numbers 1 to 100 divisible by 7\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Modulo operator: i % 7 == 0",
+        "Increment count: count++"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] marks = { 45, 67, 89, 32, 50, 91, 55, 38 };\n        int passed = 0;\n        for (int i = 0; i < marks.length; i++) {\n            if (marks[i] >= 50) {\n                passed++;\n            }\n        }\n        System.out.println("Passed: " + passed);\n    }\n}`,
-      explanation: [
-        'The marks >= 50 are 67, 89, 50, 91, 55 (total 5).'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        int count = 0;\n        for (int i = 1; i <= 100; i++) {\n            if (i % 7 == 0) count++;\n        }\n        System.out.println(\"Count: \" + count);\n    }\n}",
+      "explanation": [
+        "Counts all 14 multiples of 7 between 1 and 100."
       ],
-      xpReward: 45
+      "xpReward": 35
     },
-
     {
-      id: 33,
-      stageId: 4,
-      isBoss: false,
-      title: 'Classroom FizzBuzz Game',
-      scenario: 'Students sit in a circle playing FizzBuzz from 1 to 15. If a number is divisible by both 3 and 5, shout "FizzBuzz". If only by 3, shout "Fizz". If only by 5, shout "Buzz". Otherwise shout the number.',
-      task: 'Loop 1 to 15 with this exact FizzBuzz logic.',
-      sampleOutput: `1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz`,
-      expectedOutput: `1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz`,
-      thinkFirst: [
-        '1. Loop i from 1 to 15.',
-        '2. Check (i % 15 == 0) FIRST (or i % 3 == 0 && i % 5 == 0).',
-        '3. Else if (i % 3 == 0) -> "Fizz".',
-        '4. Else if (i % 5 == 0) -> "Buzz".',
-        '5. Else -> print i.'
+      "id": 28,
+      "stageId": 5,
+      "isBoss": false,
+      "title": "Factorial Equation (Ref: Q243-Q244)",
+      "scenario": "In class Q244, calculate N! and print the multiplication breakdown: \"5 * 4 * 3 * 2 * 1 = 120\". If N == 0, print \"0! : 1\".",
+      "task": "Read N. If N == 0 print \"0! : 1\". Else loop from N down to 1, print \"i * \", multiply fact *= i, and print \"\\b\\b = \" + fact.",
+      "sampleInput": "5",
+      "sampleOutput": "5 * 4 * 3 * 2 * 1 = 120",
+      "expectedOutput": "5 * 4 * 3 * 2 * 1 = 120",
+      "testCases": [
+        {
+          "input": "5",
+          "expectedOutput": "5 * 4 * 3 * 2 * 1 = 120"
+        },
+        {
+          "input": "0",
+          "expectedOutput": "0! : 1"
+        }
       ],
-      syntaxReminder: `if (i % 15 == 0) {\n    System.out.println("FizzBuzz");\n} else if (i % 3 == 0) {\n    System.out.println("Fizz");\n} else if (i % 5 == 0) {\n    System.out.println("Buzz");\n} else {\n    System.out.println(i);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Play FizzBuzz from 1 to 15\n        \n    }\n}`,
-      hints: [
-        'Always check the combined condition (15) first!',
-        'If you check 3 first, 15 will print Fizz instead of FizzBuzz.',
-        'Use if - else if - else ladder.'
+      "thinkFirst": [
+        "1. int fact = 1;",
+        "2. if (num == 0) print \"0! : 1\"",
+        "3. else loop from num down to 1: print i + \" * \", fact *= i",
+        "4. print \"\\b\\b = \" + fact;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 15; i++) {\n            if (i % 15 == 0) {\n                System.out.println("FizzBuzz");\n            } else if (i % 3 == 0) {\n                System.out.println("Fizz");\n            } else if (i % 5 == 0) {\n                System.out.println("Buzz");\n            } else {\n                System.out.println(i);\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Classic coding interview staple checking modulo logic and condition order.'
+      "syntaxReminder": "int fact = 1;\nif (num == 0) {\n    System.out.print(\"0! : 1\");\n} else {\n    for (int i = num; i > 0; i--) {\n        System.out.print(i + \" * \");\n        fact *= i;\n    }\n    System.out.print(\"\\b\\b = \" + fact);\n}",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Remember product accumulator starts at 1 (fact = 1), not 0!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        int fact = 1;\n        if (num == 0) {\n            System.out.print(\"0! : 1\");\n        } else {\n            for (int i = num; i > 0; i--) {\n                System.out.print(i + \" * \");\n                fact *= i;\n            }\n            System.out.print(\"\\b\\b= \" + fact);\n        }\n    }\n}",
+      "explanation": [
+        "Multiplication accumulator pattern computing factorial."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 34,
-      stageId: 4,
-      isBoss: false,
-      title: 'Top High Score Finder',
-      scenario: 'You are developing an arcade game leaderboard. Given 6 player scores in an array, find the highest score.',
-      task: 'Find the maximum value in: int[] scores = { 42, 88, 15, 99, 63, 77 }; Print "Largest: " + max.',
-      sampleOutput: `Largest: 99`,
-      expectedOutput: `Largest: 99`,
-      thinkFirst: [
-        '1. Start with first score as champion: int max = scores[0];',
-        '2. Loop through rest of array from index 1 to scores.length - 1;',
-        '3. If current score is higher: if (scores[i] > max) { max = scores[i]; }',
-        '4. Print "Largest: " + max;'
+      "id": 29,
+      "stageId": 5,
+      "isBoss": false,
+      "title": "Power of 2 Without Math.pow",
+      "scenario": "Calculate 2 to the power N (e.g. N = 4 -> 2^4 = 16) by multiplying 2 in a loop without using Math.pow.",
+      "task": "Read int n = input.nextInt(). Calculate 2^n using a loop and print \"Result: \" + result.",
+      "sampleInput": "4",
+      "sampleOutput": "Result: 16",
+      "expectedOutput": "Result: 16",
+      "testCases": [
+        {
+          "input": "4",
+          "expectedOutput": "Result: 16"
+        },
+        {
+          "input": "6",
+          "expectedOutput": "Result: 64"
+        }
       ],
-      syntaxReminder: `int max = scores[0];\nfor (int i = 1; i < scores.length; i++) {\n    if (scores[i] > max) max = scores[i];\n}\nSystem.out.println("Largest: " + max);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] scores = { 42, 88, 15, 99, 63, 77 };\n        // WRITE YOUR CODE HERE:\n        // Find largest score and print "Largest: 99"\n        \n    }\n}`,
-      hints: [
-        'Set int max = scores[0]; before the loop.',
-        'Loop through array and update max whenever you find a larger number.',
-        'Print outside the loop.'
+      "thinkFirst": [
+        "1. int result = 1;",
+        "2. for (int i = 1; i <= n; i++) result *= 2;",
+        "3. print \"Result: \" + result;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] scores = { 42, 88, 15, 99, 63, 77 };\n        int max = scores[0];\n        for (int i = 1; i < scores.length; i++) {\n            if (scores[i] > max) {\n                max = scores[i];\n            }\n        }\n        System.out.println("Largest: " + max);\n    }\n}`,
-      explanation: [
-        'Iterates through the array, comparing each item against the current max.'
+      "syntaxReminder": "int result = 1;\nfor (int i = 1; i <= n; i++) {\n    result *= 2;\n}\nSystem.out.println(\"Result: \" + result);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        // Compute 2^n without Math.pow\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Multiply result by 2 each round: result *= 2;",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int n = input.nextInt();\n        int result = 1;\n        for (int i = 1; i <= n; i++) {\n            result *= 2;\n        }\n        System.out.println(\"Result: \" + result);\n    }\n}",
+      "explanation": [
+        "Repeated multiplication is the foundation of integer exponentiation."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 35,
-      stageId: 4,
-      isBoss: false,
-      title: 'Weather Station Heat Warnings',
-      scenario: 'A meteorologist monitors daily maximum temperatures: int[] temps = { 32, 38, 29, 41, 34, 39 }; Any day exceeding 35 degrees requires a heat advisory alert.',
-      task: 'Loop through temps array. If temperature > 35, print "Heat Warning: " + temps[i].',
-      sampleOutput: `Heat Warning: 38\nHeat Warning: 41\nHeat Warning: 39`,
-      expectedOutput: `Heat Warning: 38\nHeat Warning: 41\nHeat Warning: 39`,
-      thinkFirst: [
-        '1. Loop i from 0 to temps.length - 1;',
-        '2. Check if (temps[i] > 35);',
-        '3. Print "Heat Warning: " + temps[i];'
+      "id": 30,
+      "stageId": 5,
+      "isBoss": true,
+      "title": "👑 Stage 5 Boss: Average of 1 to N",
+      "scenario": "Read integer N. Calculate the sum of 1 to N, and compute the floating-point average (double)avg = (double)sum / N.",
+      "task": "Read N (e.g. 10). Compute sum and average. Print \"Sum: \" + sum and \"Average: \" + (sum / (double)n).",
+      "sampleInput": "10",
+      "sampleOutput": "Sum: 55\nAverage: 5.5",
+      "expectedOutput": "Sum: 55\nAverage: 5.5",
+      "testCases": [
+        {
+          "input": "10",
+          "expectedOutput": "Sum: 55\nAverage: 5.5"
+        },
+        {
+          "input": "4",
+          "expectedOutput": "Sum: 10\nAverage: 2.5"
+        }
       ],
-      syntaxReminder: `for (int i = 0; i < temps.length; i++) {\n    if (temps[i] > 35) {\n        System.out.println("Heat Warning: " + temps[i]);\n    }\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] temps = { 32, 38, 29, 41, 34, 39 };\n        // WRITE YOUR CODE HERE:\n        // Print heat warning for temps > 35\n        \n    }\n}`,
-      hints: [
-        'Array indices start at 0, condition i < temps.length',
-        'Only print when condition temps[i] > 35 is true.'
+      "thinkFirst": [
+        "1. int sum = 0;",
+        "2. for (int i = 1; i <= n; i++) sum += i;",
+        "3. double avg = (double)sum / n;",
+        "4. print Sum and Average."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] temps = { 32, 38, 29, 41, 34, 39 };\n        for (int i = 0; i < temps.length; i++) {\n            if (temps[i] > 35) {\n                System.out.println("Heat Warning: " + temps[i]);\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Filters 38, 41, and 39 which trigger the warning condition.'
+      "syntaxReminder": "int sum = 0;\nfor (int i = 1; i <= n; i++) sum += i;\ndouble avg = (double)sum / n;\nSystem.out.println(\"Sum: \" + sum);\nSystem.out.println(\"Average: \" + avg);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Cast to double: (double)sum / n to avoid integer truncation (e.g. 5.5 instead of 5.0)!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int n = input.nextInt();\n        int sum = 0;\n        for (int i = 1; i <= n; i++) {\n            sum += i;\n        }\n        double avg = (double)sum / n;\n        System.out.println(\"Sum: \" + sum);\n        System.out.println(\"Average: \" + avg);\n    }\n}",
+      "explanation": [
+        "Combining integer accumulation with double type casting for precision."
+      ],
+      "xpReward": 45
     },
-
     {
-      id: 36,
-      stageId: 4,
-      isBoss: false,
-      title: 'Store Inventory Restock Alert',
-      scenario: 'A warehouse manager checks inventory stock levels: int[] stock = { 15, 4, 25, 8, 30 }; Any product with fewer than 10 units must trigger a restock notice with its index.',
-      task: 'Loop over stock. If stock[i] < 10, print "Restock item index: " + i.',
-      sampleOutput: `Restock item index: 1\nRestock item index: 3`,
-      expectedOutput: `Restock item index: 1\nRestock item index: 3`,
-      thinkFirst: [
-        '1. Loop i from 0 to stock.length - 1;',
-        '2. If stock[i] < 10, print "Restock item index: " + i;'
+      "id": 31,
+      "stageId": 6,
+      "isBoss": false,
+      "title": "Read 10 Integers Sum (Ref: Q245-Q246)",
+      "scenario": "In class Q246, read 10 integers from Scanner inside a for-loop and accumulate their total.",
+      "task": "Using for (int i = 0; i < 10; i++), read int num = input.nextInt(), add to total, and print \"Total : \" + total.",
+      "sampleInput": "10 20 30 40 50 60 70 80 90 100",
+      "sampleOutput": "Total : 550",
+      "expectedOutput": "Total : 550",
+      "testCases": [
+        {
+          "input": "10 20 30 40 50 60 70 80 90 100",
+          "expectedOutput": "Total : 550"
+        }
       ],
-      syntaxReminder: `for (int i = 0; i < stock.length; i++) {\n    if (stock[i] < 10) {\n        System.out.println("Restock item index: " + i);\n    }\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] stock = { 15, 4, 25, 8, 30 };\n        // WRITE YOUR CODE HERE:\n        // Print restock alert for stock < 10\n        \n    }\n}`,
-      hints: [
-        'Print the index i, not the quantity!',
-        'Items at index 1 (qty 4) and index 3 (qty 8) trigger alerts.'
+      "thinkFirst": [
+        "1. int total = 0;",
+        "2. for (int i = 0; i < 10; i++) { int num = input.nextInt(); total += num; }",
+        "3. print \"Total : \" + total;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] stock = { 15, 4, 25, 8, 30 };\n        for (int i = 0; i < stock.length; i++) {\n            if (stock[i] < 10) {\n                System.out.println("Restock item index: " + i);\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Identifies indices of inventory items requiring reordering.'
+      "syntaxReminder": "int total = 0;\nfor (int i = 0; i < 10; i++) {\n    int num = input.nextInt();\n    total += num;\n}\nSystem.out.println(\"Total : \" + total);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        // Read 10 numbers in loop and print total\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Put input.nextInt() INSIDE the loop so it reads 10 times!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int total = 0;\n        for (int i = 0; i < 10; i++) {\n            int num = input.nextInt();\n            total += num;\n        }\n        System.out.println(\"Total : \" + total);\n    }\n}",
+      "explanation": [
+        "Calls input.nextInt() 10 times in sequence to process each value."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 37,
-      stageId: 4,
-      isBoss: false,
-      title: 'Bank Overdraft Penalty Count',
-      scenario: 'An auditor reviews transactions: int[] tx = { 500, -200, 1500, -850, -120 }; Negative amounts are withdrawals/overdrafts. Count how many negative transactions occurred.',
-      task: 'Count how many numbers in tx are strictly negative (< 0). Print "Negative Count: " + count.',
-      sampleOutput: `Negative Count: 3`,
-      expectedOutput: `Negative Count: 3`,
-      thinkFirst: [
-        '1. int count = 0;',
-        '2. Loop array: if (tx[i] < 0) count++;',
-        '3. Print "Negative Count: " + count;'
+      "id": 32,
+      "stageId": 6,
+      "isBoss": false,
+      "title": "Prompt Counter Inside Loop (Ref: Q247)",
+      "scenario": "In class Q247, before reading each number, show a prompt displaying the round number: \"Input number 1 : \", \"Input number 2 : \"... then print \"Total : \" + total.",
+      "task": "For 5 iterations, print \"Input number \" + (i+1) + \" : \", read input.nextInt(), add to total, then print \"Total : \" + total.",
+      "sampleInput": "10 20 30 40 50",
+      "sampleOutput": "Input number 1 : Input number 2 : Input number 3 : Input number 4 : Input number 5 : Total : 150",
+      "expectedOutput": "Input number 1 : Input number 2 : Input number 3 : Input number 4 : Input number 5 : Total : 150",
+      "testCases": [
+        {
+          "input": "10 20 30 40 50",
+          "expectedOutput": "Input number 1 : Input number 2 : Input number 3 : Input number 4 : Input number 5 : Total : 150"
+        }
       ],
-      syntaxReminder: `int count = 0;\nfor (int i = 0; i < tx.length; i++) {\n    if (tx[i] < 0) count++;\n}\nSystem.out.println("Negative Count: " + count);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] tx = { 500, -200, 1500, -850, -120 };\n        // WRITE YOUR CODE HERE:\n        // Count negative values, print "Negative Count: 3"\n        \n    }\n}`,
-      hints: [
-        'Check if (tx[i] < 0)',
-        'Values -200, -850, -120 are negative (total 3).'
+      "thinkFirst": [
+        "1. int total = 0;",
+        "2. for (int i = 0; i < 5; i++) {",
+        "       System.out.print(\"Input number \" + (i+1) + \" : \");",
+        "       int num = input.nextInt();",
+        "       total += num;",
+        "   }",
+        "3. print \"Total : \" + total;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] tx = { 500, -200, 1500, -850, -120 };\n        int count = 0;\n        for (int i = 0; i < tx.length; i++) {\n            if (tx[i] < 0) {\n                count++;\n            }\n        }\n        System.out.println("Negative Count: " + count);\n    }\n}`,
-      explanation: [
-        'Counts transactions where amount is below zero.'
+      "syntaxReminder": "int total = 0;\nfor (int i = 0; i < 5; i++) {\n    System.out.print(\"Input number \" + (i + 1) + \" : \");\n    int num = input.nextInt();\n    total += num;\n}\nSystem.out.println(\"Total : \" + total);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Use (i + 1) in parentheses so it adds 1 before string concatenation!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int total = 0;\n        for (int i = 0; i < 5; i++) {\n            System.out.print(\"Input number \" + (i + 1) + \" : \");\n            int num = input.nextInt();\n            total += num;\n        }\n        System.out.println(\"Total : \" + total);\n    }\n}",
+      "explanation": [
+        "Dynamic prompt formatting inside input loops."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 38,
-      stageId: 4,
-      isBoss: false,
-      title: 'Student Absence Count',
-      scenario: 'A 7-day attendance log marks 1 for present and 0 for absent: int[] days = { 1, 1, 0, 1, 0, 1, 1 }; Count the student\'s absences.',
-      task: 'Count how many days have value 0 in days array. Print "Absences: " + count.',
-      sampleOutput: `Absences: 2`,
-      expectedOutput: `Absences: 2`,
-      thinkFirst: [
-        '1. int count = 0;',
-        '2. Loop: if (days[i] == 0) count++;',
-        '3. Print "Absences: " + count;'
+      "id": 33,
+      "stageId": 6,
+      "isBoss": false,
+      "title": "Exam Marks: Max, Min and Total (Ref: Q248-Q250)",
+      "scenario": "In class Q249, Niroth sir showed how to find Maximum, Minimum, and Total across 5 student marks by initializing max and min from the first mark.",
+      "task": "Read first mark to initialize total, max, and min. Loop for remaining 4 marks, updating max, min, and total. Print Maximum, Minimum, and Total.",
+      "sampleInput": "75 88 52 94 63",
+      "sampleOutput": "Maximum : 94\nMinimum : 52\nTotal : 372",
+      "expectedOutput": "Maximum : 94\nMinimum : 52\nTotal : 372",
+      "testCases": [
+        {
+          "input": "75 88 52 94 63",
+          "expectedOutput": "Maximum : 94\nMinimum : 52\nTotal : 372"
+        }
       ],
-      syntaxReminder: `int count = 0;\nfor (int i = 0; i < days.length; i++) {\n    if (days[i] == 0) count++;\n}\nSystem.out.println("Absences: " + count);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] days = { 1, 1, 0, 1, 0, 1, 1 };\n        // WRITE YOUR CODE HERE:\n        // Count zeros, print "Absences: 2"\n        \n    }\n}`,
-      hints: [
-        'Check if days[i] == 0',
-        'Increment count'
+      "thinkFirst": [
+        "1. int first = input.nextInt();",
+        "2. int total = first, max = first, min = first;",
+        "3. for (int i = 1; i < 5; i++) { int n = input.nextInt(); total += n; if (n > max) max = n; if (n < min) min = n; }",
+        "4. print Maximum, Minimum, Total."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] days = { 1, 1, 0, 1, 0, 1, 1 };\n        int count = 0;\n        for (int i = 0; i < days.length; i++) {\n            if (days[i] == 0) {\n                count++;\n            }\n        }\n        System.out.println("Absences: " + count);\n    }\n}`,
-      explanation: [
-        'Identifies the 2 absence days.'
+      "syntaxReminder": "int num = input.nextInt();\nint total = num, max = num, min = num;\nfor (int i = 1; i < 5; i++) {\n    num = input.nextInt();\n    total += num;\n    if (num > max) max = num;\n    if (num < min) min = num;\n}\nSystem.out.println(\"Maximum : \" + max);\nSystem.out.println(\"Minimum : \" + min);\nSystem.out.println(\"Total : \" + total);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Initialize max and min with the first input value!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        int total = num, max = num, min = num;\n        for (int i = 1; i < 5; i++) {\n            num = input.nextInt();\n            total += num;\n            if (num > max) max = num;\n            if (num < min) min = num;\n        }\n        System.out.println(\"Maximum : \" + max);\n        System.out.println(\"Minimum : \" + min);\n        System.out.println(\"Total : \" + total);\n    }\n}",
+      "explanation": [
+        "The gold standard algorithm for finding extrema from streaming input."
+      ],
+      "xpReward": 40
     },
-
     {
-      id: 39,
-      stageId: 4,
-      isBoss: false,
-      title: 'Target ID Search',
-      scenario: 'A database query checks employee IDs: int[] ids = { 101, 204, 305, 404, 508 }; Locate the index position of employee ID 404.',
-      task: 'Loop through ids. If ids[i] == 404, print "Found at index: " + i and break.',
-      sampleOutput: `Found at index: 3`,
-      expectedOutput: `Found at index: 3`,
-      thinkFirst: [
-        '1. Loop i from 0 to ids.length - 1;',
-        '2. If ids[i] == 404, print "Found at index: " + i and break;'
+      "id": 34,
+      "stageId": 6,
+      "isBoss": false,
+      "title": "Kargills Supermarket Bill & Most Expensive Item",
+      "scenario": "You buy 5 items at a supermarket in Kandy. Read each item price, accumulate the bill total, and find the most expensive item.",
+      "task": "Read 5 prices. Print \"Bill Total: Rs. \" + total and \"Most Expensive: Rs. \" + max.",
+      "sampleInput": "120 450 80 950 300",
+      "sampleOutput": "Bill Total: Rs. 1900\nMost Expensive: Rs. 950",
+      "expectedOutput": "Bill Total: Rs. 1900\nMost Expensive: Rs. 950",
+      "testCases": [
+        {
+          "input": "120 450 80 950 300",
+          "expectedOutput": "Bill Total: Rs. 1900\nMost Expensive: Rs. 950"
+        }
       ],
-      syntaxReminder: `for (int i = 0; i < ids.length; i++) {\n    if (ids[i] == 404) {\n        System.out.println("Found at index: " + i);\n        break;\n    }\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int[] ids = { 101, 204, 305, 404, 508 };\n        // WRITE YOUR CODE HERE:\n        // Find index of 404, print "Found at index: 3"\n        \n    }\n}`,
-      hints: [
-        'Check if (ids[i] == 404)',
-        'Print index i and optionally break'
+      "thinkFirst": [
+        "1. int total = 0, max = 0;",
+        "2. Loop 5 times: read price, total += price, if (price > max) max = price;",
+        "3. Print Bill Total and Most Expensive."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int[] ids = { 101, 204, 305, 404, 508 };\n        for (int i = 0; i < ids.length; i++) {\n            if (ids[i] == 404) {\n                System.out.println("Found at index: " + i);\n                break;\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Linear search algorithm locating the element at index 3.'
+      "syntaxReminder": "int total = 0, max = 0;\nfor (int i = 0; i < 5; i++) {\n    int price = input.nextInt();\n    total += price;\n    if (price > max) max = price;\n}\nSystem.out.println(\"Bill Total: Rs. \" + total);\nSystem.out.println(\"Most Expensive: Rs. \" + max);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Keep track of both total and highest price.",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 40
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int total = 0, max = 0;\n        for (int i = 0; i < 5; i++) {\n            int price = input.nextInt();\n            total += price;\n            if (price > max) max = price;\n        }\n        System.out.println(\"Bill Total: Rs. \" + total);\n        System.out.println(\"Most Expensive: Rs. \" + max);\n    }\n}",
+      "explanation": [
+        "Tracking running totals alongside extrema."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 40,
-      stageId: 4,
-      isBoss: true,
-      title: '👑 Stage 4 Boss: Vowel Detective',
-      scenario: 'A linguist wants to count how many vowels (A, E, I, O, U) appear in a country name: "INDONESIA".',
-      task: 'Loop through characters of String name = "INDONESIA"; Count vowels (A, E, I, O, U) and print "Vowels: " + count.',
-      sampleOutput: `Vowels: 5`,
-      expectedOutput: `Vowels: 5`,
-      thinkFirst: [
-        '1. String name = "INDONESIA"; int count = 0;',
-        '2. Loop i from 0 to name.length() - 1;',
-        '3. Get char: char c = name.charAt(i);',
-        '4. If c == \'A\' || c == \'E\' || c == \'I\' || c == \'O\' || c == \'U\', count++;',
-        '5. Print "Vowels: " + count;'
+      "id": 35,
+      "stageId": 6,
+      "isBoss": true,
+      "title": "👑 Stage 6 Boss: Cricket Batting Scores (Fifties Count)",
+      "scenario": "In an 8-match tournament, a Sri Lankan batsman scores 8 innings. Count how many times the batsman scored 50 or more (fifties).",
+      "task": "Read 8 scores. If score >= 50, increment fifties++. Print \"Fifties Scored: \" + fifties.",
+      "sampleInput": "45 82 12 56 61 30 102 49",
+      "sampleOutput": "Fifties Scored: 4",
+      "expectedOutput": "Fifties Scored: 4",
+      "testCases": [
+        {
+          "input": "45 82 12 56 61 30 102 49",
+          "expectedOutput": "Fifties Scored: 4"
+        }
       ],
-      syntaxReminder: `int count = 0;\nfor (int i = 0; i < name.length(); i++) {\n    char c = name.charAt(i);\n    if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {\n        count++;\n    }\n}\nSystem.out.println("Vowels: " + count);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        String name = "INDONESIA";\n        // STAGE 4 BOSS CHALLENGE:\n        // Count vowels (A,E,I,O,U) and print "Vowels: 5"\n        \n    }\n}`,
-      hints: [
-        'Use name.length() to get length of string.',
-        'Use name.charAt(i) to extract individual letters.',
-        'Check each vowel with the || (OR) operator.'
+      "thinkFirst": [
+        "1. int fifties = 0;",
+        "2. for (int i = 0; i < 8; i++) { int s = input.nextInt(); if (s >= 50) fifties++; }",
+        "3. print \"Fifties Scored: \" + fifties;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        String name = "INDONESIA";\n        int count = 0;\n        for (int i = 0; i < name.length(); i++) {\n            char c = name.charAt(i);\n            if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {\n                count++;\n            }\n        }\n        System.out.println("Vowels: " + count);\n    }\n}`,
-      explanation: [
-        'I, O, E, I, A are the 5 vowels in INDONESIA.',
-        'Correctly inspects each character by index.'
+      "syntaxReminder": "int fifties = 0;\nfor (int i = 0; i < 8; i++) {\n    int score = input.nextInt();\n    if (score >= 50) fifties++;\n}\nSystem.out.println(\"Fifties Scored: \" + fifties);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Filter condition: score >= 50",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 55
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int fifties = 0;\n        for (int i = 0; i < 8; i++) {\n            int score = input.nextInt();\n            if (score >= 50) fifties++;\n        }\n        System.out.println(\"Fifties Scored: \" + fifties);\n    }\n}",
+      "explanation": [
+        "Filter counter combining conditional testing with iterative input."
+      ],
+      "xpReward": 45
     },
-
-    // ------------------------------------------------------------------------
-    // STAGE 5: PATTERNS & TABLES (Challenges 41 to 50)
-    // ------------------------------------------------------------------------
     {
-      id: 41,
-      stageId: 5,
-      isBoss: false,
-      title: 'Exam Times Table (Table of 7)',
-      scenario: 'A student preparing for mathematics exams needs a flashcard printed with the complete multiplication table of 7 from 1 to 10.',
-      task: 'Print the multiplication table of 7 in the format: "7 x " + i + " = " + (7 * i).',
-      sampleOutput: `7 x 1 = 7\n7 x 2 = 14\n...\n7 x 10 = 70`,
-      expectedOutput: Array.from({ length: 10 }, (_, i) => `7 x ${i + 1} = ${(i + 1) * 7}`).join('\n'),
-      thinkFirst: [
-        '1. Loop multiplier i from 1 to 10.',
-        '2. Inside: print "7 x " + i + " = " + (7 * i);'
+      "id": 36,
+      "stageId": 7,
+      "isBoss": false,
+      "title": "Cricket Over: SIX on Ball 6!",
+      "scenario": "In an exciting T20 over at R. Premadasa Stadium, print balls 1 to 6. On ball 6, the crowd roars \"SIX!\".",
+      "task": "Loop i from 1 to 6. Print \"Ball \" + i. If i == 6, print \"SIX!\".",
+      "sampleOutput": "Ball 1\nBall 2\nBall 3\nBall 4\nBall 5\nBall 6\nSIX!",
+      "expectedOutput": "Ball 1\nBall 2\nBall 3\nBall 4\nBall 5\nBall 6\nSIX!",
+      "thinkFirst": [
+        "1. for (int i = 1; i <= 6; i++) {",
+        "       System.out.println(\"Ball \" + i);",
+        "       if (i == 6) System.out.println(\"SIX!\");",
+        "   }"
       ],
-      syntaxReminder: `for (int i = 1; i <= 10; i++) {\n    System.out.println("7 x " + i + " = " + (7 * i));\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print multiplication table of 7 from 1 to 10\n        \n    }\n}`,
-      hints: [
-        'Loop 1 to 10: for (int i = 1; i <= 10; i++)',
-        'Print format: System.out.println("7 x " + i + " = " + (7 * i));'
+      "syntaxReminder": "for (int i = 1; i <= 6; i++) {\n    System.out.println(\"Ball \" + i);\n    if (i == 6) System.out.println(\"SIX!\");\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Use if (i == 6) inside the loop.",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 10; i++) {\n            System.out.println("7 x " + i + " = " + (7 * i));\n        }\n    }\n}`,
-      explanation: [
-        'Evaluates (7 * i) each round and prints formatted equations.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 6; i++) {\n            System.out.println(\"Ball \" + i);\n            if (i == 6) System.out.println(\"SIX!\");\n        }\n    }\n}",
+      "explanation": [
+        "Branching logic inside a loop executing special actions on specific iterations."
       ],
-      xpReward: 40
+      "xpReward": 35
     },
-
     {
-      id: 42,
-      stageId: 5,
-      isBoss: false,
-      title: 'Staircase Star Pyramid',
-      scenario: 'You are designing an ASCII game menu that prints a 5-step staircase of stars using nested loops.',
-      task: 'Print 5 rows of stars: Row 1 has 1 star, Row 2 has 2 stars, ..., Row 5 has 5 stars.',
-      sampleOutput: `*\n**\n***\n****\n*****`,
-      expectedOutput: `*\n**\n***\n****\n*****`,
-      thinkFirst: [
-        '1. Outer loop controls rows: for (int r = 1; r <= 5; r++)',
-        '2. Inner loop controls stars in that row: for (int c = 1; c <= r; c++)',
-        '3. Inside inner loop: System.out.print("*"); (NOT println!)',
-        '4. After inner loop: System.out.println(); (move to next row)'
+      "id": 37,
+      "stageId": 7,
+      "isBoss": false,
+      "title": "School Game: FizzBuzz (1 to 15)",
+      "scenario": "A popular counting classroom game. For numbers 1 to 15: if divisible by both 3 and 5, print \"FizzBuzz\". If divisible by 3, print \"Fizz\". If divisible by 5, print \"Buzz\". Else print the number.",
+      "task": "Implement FizzBuzz for 1 to 15.",
+      "sampleOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+      "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+      "thinkFirst": [
+        "1. for (int i = 1; i <= 15; i++)",
+        "2. Check (i % 15 == 0) first -> FizzBuzz",
+        "3. else if (i % 3 == 0) -> Fizz",
+        "4. else if (i % 5 == 0) -> Buzz",
+        "5. else -> i"
       ],
-      syntaxReminder: `for (int r = 1; r <= 5; r++) {\n    for (int c = 1; c <= r; c++) {\n        System.out.print("*");\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print 5 rows star stairs (* to *****)\n        \n    }\n}`,
-      hints: [
-        'Use nested loops: outer for rows (1 to 5), inner for cols (1 to r).',
-        'Use System.out.print("*") inside inner loop.',
-        'Use System.out.println() after inner loop.'
+      "syntaxReminder": "for (int i = 1; i <= 15; i++) {\n    if (i % 15 == 0) System.out.println(\"FizzBuzz\");\n    else if (i % 3 == 0) System.out.println(\"Fizz\");\n    else if (i % 5 == 0) System.out.println(\"Buzz\");\n    else System.out.println(i);\n}",
+      "starterCode": "class Example {\n    public static void main(String args[]) {\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Always check the combined condition (i % 15 == 0) first!",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 1; r <= 5; r++) {\n            for (int c = 1; c <= r; c++) {\n                System.out.print("*");\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Outer loop runs 5 times for rows.',
-        'Inner loop prints r stars, followed by a newline.'
+      "modelSolution": "class Example {\n    public static void main(String args[]) {\n        for (int i = 1; i <= 15; i++) {\n            if (i % 15 == 0) System.out.println(\"FizzBuzz\");\n            else if (i % 3 == 0) System.out.println(\"Fizz\");\n            else if (i % 5 == 0) System.out.println(\"Buzz\");\n            else System.out.println(i);\n        }\n    }\n}",
+      "explanation": [
+        "The most famous programming interview challenge testing conditional precedence."
       ],
-      xpReward: 45
+      "xpReward": 35
     },
-
     {
-      id: 43,
-      stageId: 5,
-      isBoss: false,
-      title: 'Inverted Star Stairs',
-      scenario: 'An architect drafts a reverse pyramid beam structure starting with 4 stars on row 1, down to 1 star on row 4.',
-      task: 'Print 4 rows: Row 1 is "****", Row 2 is "***", Row 3 is "**", Row 4 is "*".',
-      sampleOutput: `****\n***\n**\n*`,
-      expectedOutput: `****\n***\n**\n*`,
-      thinkFirst: [
-        '1. Outer loop r starts at 4 down to 1: r--;',
-        '2. Inner loop c from 1 to r: print "*";',
-        '3. Newline after inner loop.'
+      "id": 38,
+      "stageId": 7,
+      "isBoss": false,
+      "title": "Odd Numbers Between Bounds",
+      "scenario": "Read lower and upper bound (e.g. 10 and 20). Print all ODD numbers between them on separate lines.",
+      "task": "Read lower and upper. Loop from lower to upper; if (i % 2 != 0) print i.",
+      "sampleInput": "10 20",
+      "sampleOutput": "11\n13\n15\n17\n19",
+      "expectedOutput": "11\n13\n15\n17\n19",
+      "testCases": [
+        {
+          "input": "10 20",
+          "expectedOutput": "11\n13\n15\n17\n19"
+        }
       ],
-      syntaxReminder: `for (int r = 4; r >= 1; r--) {\n    for (int c = 1; c <= r; c++) {\n        System.out.print("*");\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print inverted star stairs from 4 stars down to 1\n        \n    }\n}`,
-      hints: [
-        'Outer loop counts down: for (int r = 4; r >= 1; r--)',
-        'Inner loop runs up to r: for (int c = 1; c <= r; c++)'
+      "thinkFirst": [
+        "1. for (int i = lower; i <= upper; i++) { if (i % 2 != 0) print i; }"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 4; r >= 1; r--) {\n            for (int c = 1; c <= r; c++) {\n                System.out.print("*");\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Outer countdown loop creates the inverted staircase structure.'
+      "syntaxReminder": "for (int i = lower; i <= upper; i++) {\n    if (i % 2 != 0) System.out.println(i);\n}",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Odd check: i % 2 != 0",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int lower = input.nextInt();\n        int upper = input.nextInt();\n        for (int i = lower; i <= upper; i++) {\n            if (i % 2 != 0) System.out.println(i);\n        }\n    }\n}",
+      "explanation": [
+        "Filtering odd numbers using modulo test inside bound-constrained loop."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 44,
-      stageId: 5,
-      isBoss: false,
-      title: 'Counting Number Triangle',
-      scenario: 'An architect needs a 4-level numeric layout printed where each row repeats numbers from 1 up to the row number.',
-      task: 'Print 4 rows: Row 1 is "1", Row 2 is "12", Row 3 is "123", Row 4 is "1234".',
-      sampleOutput: `1\n12\n123\n1234`,
-      expectedOutput: `1\n12\n123\n1234`,
-      thinkFirst: [
-        '1. Outer loop r from 1 to 4.',
-        '2. Inner loop c from 1 to r.',
-        '3. Print c with System.out.print(c);',
-        '4. Print newline after inner loop.'
+      "id": 39,
+      "stageId": 7,
+      "isBoss": false,
+      "title": "Count Vowels in Name",
+      "scenario": "Read a name (e.g. \"Colombo\"). Loop through its characters using name.charAt(i) and count how many vowels (A, E, I, O, U, a, e, i, o, u) it contains.",
+      "task": "Read String name = input.next(). Count vowels and print \"Vowels: \" + count.",
+      "sampleInput": "Colombo",
+      "sampleOutput": "Vowels: 3",
+      "expectedOutput": "Vowels: 3",
+      "testCases": [
+        {
+          "input": "Colombo",
+          "expectedOutput": "Vowels: 3"
+        },
+        {
+          "input": "SriLanka",
+          "expectedOutput": "Vowels: 3"
+        }
       ],
-      syntaxReminder: `for (int r = 1; r <= 4; r++) {\n    for (int c = 1; c <= r; c++) {\n        System.out.print(c);\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print rows 1, 12, 123, 1234\n        \n    }\n}`,
-      hints: [
-        'Similar to stars, but print the inner loop variable c instead of "*"!',
-        'Outer loop goes up to 4.'
+      "thinkFirst": [
+        "1. String name = input.next();",
+        "2. int count = 0;",
+        "3. for (int i = 0; i < name.length(); i++) { char c = name.charAt(i); if (isVowel(c)) count++; }",
+        "4. print \"Vowels: \" + count;"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 1; r <= 4; r++) {\n            for (int c = 1; c <= r; c++) {\n                System.out.print(c);\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Printing the column index c in each row generates 1, 12, 123, 1234.'
+      "syntaxReminder": "int count = 0;\nfor (int i = 0; i < name.length(); i++) {\n    char c = Character.toLowerCase(name.charAt(i));\n    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') count++;\n}\nSystem.out.println(\"Vowels: \" + count);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Check charAt(i) against vowels",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        String name = input.next();\n        int count = 0;\n        for (int i = 0; i < name.length(); i++) {\n            char c = name.charAt(i);\n            if (c=='a'||c=='e'||c=='i'||c=='o'||c=='u'||c=='A'||c=='E'||c=='I'||c=='O'||c=='U') {\n                count++;\n            }\n        }\n        System.out.println(\"Vowels: \" + count);\n    }\n}",
+      "explanation": [
+        "Iterating over characters in a String using index and length."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 45,
-      stageId: 5,
-      isBoss: false,
-      title: 'Repeating Row Number Triangle',
-      scenario: 'A visual pattern repeats the row number itself across the columns (Row 1: 1, Row 2: 22, Row 3: 333, Row 4: 4444).',
-      task: 'Print 4 rows repeating row index r: 1, 22, 333, 4444.',
-      sampleOutput: `1\n22\n333\n4444`,
-      expectedOutput: `1\n22\n333\n4444`,
-      thinkFirst: [
-        '1. Outer loop r from 1 to 4;',
-        '2. Inner loop c from 1 to r: print r (the row number!);',
-        '3. Newline after inner loop.'
+      "id": 40,
+      "stageId": 7,
+      "isBoss": false,
+      "title": "Multiplication Table Generator",
+      "scenario": "Read a number N (e.g. 7). Print its multiplication table from 1 up to 10 in standard format: \"7 x 1 = 7\" ... \"7 x 10 = 70\".",
+      "task": "Read N. Print lines in format: num + \" x \" + i + \" = \" + (num * i) for i = 1 to 10.",
+      "sampleInput": "7",
+      "sampleOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+      "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+      "testCases": [
+        {
+          "input": "7",
+          "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70"
+        }
       ],
-      syntaxReminder: `for (int r = 1; r <= 4; r++) {\n    for (int c = 1; c <= r; c++) {\n        System.out.print(r);\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print 1, 22, 333, 4444\n        \n    }\n}`,
-      hints: [
-        'Print r instead of c!',
-        'On row 2, prints 2 twice; on row 3, prints 3 three times.'
+      "thinkFirst": [
+        "1. int num = input.nextInt();",
+        "2. for (int i = 1; i <= 10; i++) print num + \" x \" + i + \" = \" + (num * i);"
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 1; r <= 4; r++) {\n            for (int c = 1; c <= r; c++) {\n                System.out.print(r);\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Uses outer variable r in the inner print statement.'
+      "syntaxReminder": "for (int i = 1; i <= 10; i++) {\n    System.out.println(num + \" x \" + i + \" = \" + (num * i));\n}",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        \n    }\n}",
+      "hints": [
+        "Think carefully about the loop counter start and stop boundaries.",
+        "Format: num + \" x \" + i + \" = \" + (num * i)",
+        "Check the exact spelling and spacing in your System.out.println statement."
       ],
-      xpReward: 45
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int num = input.nextInt();\n        for (int i = 1; i <= 10; i++) {\n            System.out.println(num + \" x \" + i + \" = \" + (num * i));\n        }\n    }\n}",
+      "explanation": [
+        "Classic multiplication table generator."
+      ],
+      "xpReward": 35
     },
-
     {
-      id: 46,
-      stageId: 5,
-      isBoss: false,
-      title: 'Chess Board Row Pattern',
-      scenario: 'You are programming a chess game engine. The first row of the board alternates black and white squares: B W B W B W B W (8 squares total).',
-      task: 'Loop 8 times (1 to 8). If odd, print "B ". If even, print "W ". All on one single line.',
-      sampleOutput: `B W B W B W B W `,
-      expectedOutput: `B W B W B W B W`,
-      thinkFirst: [
-        '1. Loop i from 1 to 8.',
-        '2. If (i % 2 != 0) print "B " else print "W ".',
-        '3. Use System.out.print (no newline).'
+      "id": 41,
+      "stageId": 7,
+      "isBoss": true,
+      "title": "👑 ULTIMATE FOR LOOP BOSS: Mini ATM Statement",
+      "scenario": "You are programming an ATM mini-statement in Sri Lanka! The user has 10 bank transactions (positive numbers are deposits, negative numbers are withdrawals). Balance starts at Rs. 10000. For each transaction, print the running balance. At the end, print total deposits and total withdrawals.",
+      "task": "Initialize balance = 10000, totalDeposits = 0, totalWithdrawals = 0. For 10 transactions: read amount. Update balance += amount. If amount > 0 totalDeposits += amount; else totalWithdrawals += Math.abs(amount). Print \"Balance : Rs. \" + balance after each transaction. Finally print \"Total Deposits : Rs. \" + totalDeposits and \"Total Withdrawals : Rs. \" + totalWithdrawals.",
+      "sampleInput": "2000 -500 1000 -1500 5000 -2000 500 -100 200 -100",
+      "sampleOutput": "Balance : Rs. 12000\nBalance : Rs. 11500\nBalance : Rs. 12500\nBalance : Rs. 11000\nBalance : Rs. 16000\nBalance : Rs. 14000\nBalance : Rs. 14500\nBalance : Rs. 14400\nBalance : Rs. 14600\nBalance : Rs. 14500\nTotal Deposits : Rs. 8700\nTotal Withdrawals : Rs. 4200",
+      "expectedOutput": "Balance : Rs. 12000\nBalance : Rs. 11500\nBalance : Rs. 12500\nBalance : Rs. 11000\nBalance : Rs. 16000\nBalance : Rs. 14000\nBalance : Rs. 14500\nBalance : Rs. 14400\nBalance : Rs. 14600\nBalance : Rs. 14500\nTotal Deposits : Rs. 8700\nTotal Withdrawals : Rs. 4200",
+      "testCases": [
+        {
+          "input": "2000 -500 1000 -1500 5000 -2000 500 -100 200 -100",
+          "expectedOutput": "Balance : Rs. 12000\nBalance : Rs. 11500\nBalance : Rs. 12500\nBalance : Rs. 11000\nBalance : Rs. 16000\nBalance : Rs. 14000\nBalance : Rs. 14500\nBalance : Rs. 14400\nBalance : Rs. 14600\nBalance : Rs. 14500\nTotal Deposits : Rs. 8700\nTotal Withdrawals : Rs. 4200"
+        }
       ],
-      syntaxReminder: `for (int i = 1; i <= 8; i++) {\n    if (i % 2 != 0) {\n        System.out.print("B ");\n    } else {\n        System.out.print("W ");\n    }\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print alternating "B W B W B W B W"\n        \n    }\n}`,
-      hints: [
-        'Use System.out.print instead of println so they stay on one line.',
-        'Check odd/even using modulo: if (i % 2 != 0)'
+      "thinkFirst": [
+        "1. int balance = 10000, totalDeposits = 0, totalWithdrawals = 0;",
+        "2. for (int i = 0; i < 10; i++) {",
+        "       int txn = input.nextInt();",
+        "       balance += txn;",
+        "       if (txn > 0) totalDeposits += txn; else totalWithdrawals += (-txn);",
+        "       System.out.println(\"Balance : Rs. \" + balance);",
+        "   }",
+        "3. print Total Deposits and Total Withdrawals."
       ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 8; i++) {\n            if (i % 2 != 0) {\n                System.out.print("B ");\n            } else {\n                System.out.print("W ");\n            }\n        }\n    }\n}`,
-      explanation: [
-        'Alternates B and W across 8 tiles.'
+      "syntaxReminder": "int balance = 10000, deposits = 0, withdrawals = 0;\nfor (int i = 0; i < 10; i++) {\n    int txn = input.nextInt();\n    balance += txn;\n    if (txn > 0) deposits += txn;\n    else withdrawals += -txn;\n    System.out.println(\"Balance : Rs. \" + balance);\n}\nSystem.out.println(\"Total Deposits : Rs. \" + deposits);\nSystem.out.println(\"Total Withdrawals : Rs. \" + withdrawals);",
+      "starterCode": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        // WRITE YOUR CODE HERE:\n        // 10 transactions starting at balance 10000\n        \n    }\n}",
+      "hints": [
+        "Start by tracing what happens in the very first iteration.",
+        "Subtract negative withdrawals to make them positive: -txn or Math.abs(txn)",
+        "Print running balance after each of the 10 transactions"
       ],
-      xpReward: 45
-    },
-
-    {
-      id: 47,
-      stageId: 5,
-      isBoss: false,
-      title: 'Square Grid of Hashes (3x3)',
-      scenario: 'A retro terminal game creates a 3x3 solid brick block wall made of # characters.',
-      task: 'Print a 3x3 square of hashes: 3 rows, each containing "###".',
-      sampleOutput: `###\n###\n###`,
-      expectedOutput: `###\n###\n###`,
-      thinkFirst: [
-        '1. Outer loop r runs 3 times;',
-        '2. Inner loop c runs 3 times: print "#";',
-        '3. Newline after inner loop.'
+      "modelSolution": "import java.util.Scanner;\n\nclass Example {\n    public static void main(String args[]) {\n        Scanner input = new Scanner(System.in);\n        int balance = 10000;\n        int totalDeposits = 0;\n        int totalWithdrawals = 0;\n        for (int i = 0; i < 10; i++) {\n            int txn = input.nextInt();\n            balance += txn;\n            if (txn > 0) {\n                totalDeposits += txn;\n            } else {\n                totalWithdrawals += -txn;\n            }\n            System.out.println(\"Balance : Rs. \" + balance);\n        }\n        System.out.println(\"Total Deposits : Rs. \" + totalDeposits);\n        System.out.println(\"Total Withdrawals : Rs. \" + totalWithdrawals);\n    }\n}",
+      "explanation": [
+        "Comprehensive real-life banking simulator combining iteration, state accumulation, and conditional branching."
       ],
-      syntaxReminder: `for (int r = 1; r <= 3; r++) {\n    for (int c = 1; c <= 3; c++) {\n        System.out.print("#");\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print 3x3 grid of ###\n        \n    }\n}`,
-      hints: [
-        'Both outer and inner loops run from 1 to 3.',
-        'Use System.out.print("#") inside inner loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 1; r <= 3; r++) {\n            for (int c = 1; c <= 3; c++) {\n                System.out.print("#");\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Generates a 3x3 square matrix.'
-      ],
-      xpReward: 40
-    },
-
-    {
-      id: 48,
-      stageId: 5,
-      isBoss: false,
-      title: 'Mini 2x2 Multiplication Matrix',
-      scenario: 'Create a 2x2 coordinate table of products: Row 1 is "1 2", Row 2 is "2 4".',
-      task: 'Use nested loops for r = 1..2 and c = 1..2. Print (r * c) + (c < 2 ? " " : ""). Move to next line after row.',
-      sampleOutput: `1 2\n2 4`,
-      expectedOutput: `1 2\n2 4`,
-      thinkFirst: [
-        '1. r from 1 to 2;',
-        '2. c from 1 to 2: print (r * c) with space if c == 1;',
-        '3. Newline after each row.'
-      ],
-      syntaxReminder: `for (int r = 1; r <= 2; r++) {\n    for (int c = 1; c <= 2; c++) {\n        System.out.print((r * c) + (c < 2 ? " " : ""));\n    }\n    System.out.println();\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print 2x2 table: "1 2" then "2 4"\n        \n    }\n}`,
-      hints: [
-        'Product is r * c',
-        'Row 1: 1*1=1, 1*2=2. Row 2: 2*1=2, 2*2=4.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        for (int r = 1; r <= 2; r++) {\n            for (int c = 1; c <= 2; c++) {\n                System.out.print((r * c) + (c < 2 ? " " : ""));\n            }\n            System.out.println();\n        }\n    }\n}`,
-      explanation: [
-        'Demonstrates matrix cell product calculation.'
-      ],
-      xpReward: 45
-    },
-
-    {
-      id: 49,
-      stageId: 5,
-      isBoss: false,
-      title: 'String Character Index Inspector',
-      scenario: 'A text parser iterates over the word "CODE" and prints each character alongside its zero-based index.',
-      task: 'String text = "CODE"; Loop through indices 0 to text.length() - 1, printing "Index " + i + ": " + text.charAt(i).',
-      sampleOutput: `Index 0: C\nIndex 1: O\nIndex 2: D\nIndex 3: E`,
-      expectedOutput: `Index 0: C\nIndex 1: O\nIndex 2: D\nIndex 3: E`,
-      thinkFirst: [
-        '1. String text = "CODE";',
-        '2. Loop i from 0 to text.length() - 1;',
-        '3. Print "Index " + i + ": " + text.charAt(i);'
-      ],
-      syntaxReminder: `String text = "CODE";\nfor (int i = 0; i < text.length(); i++) {\n    System.out.println("Index " + i + ": " + text.charAt(i));\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        String text = "CODE";\n        // WRITE YOUR CODE HERE:\n        // Print index and character for "CODE"\n        \n    }\n}`,
-      hints: [
-        'Use text.charAt(i) to read character at index i.',
-        'Starts at 0 and stops before text.length().'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        String text = "CODE";\n        for (int i = 0; i < text.length(); i++) {\n            System.out.println("Index " + i + ": " + text.charAt(i));\n        }\n    }\n}`,
-      explanation: [
-        'Fundamental pattern for inspecting characters in strings.'
-      ],
-      xpReward: 40
-    },
-
-    {
-      id: 50,
-      stageId: 5,
-      isBoss: true,
-      title: '👑 Stage 5 Boss: Word Reversal Mirror',
-      scenario: 'You are writing an encryption tool that reverses words. Reverse the string "JAVA" by printing its letters from the last index down to the first.',
-      task: 'String word = "JAVA"; Loop backwards from index word.length() - 1 down to 0, printing each character with System.out.print so it spells "AVAJ".',
-      sampleOutput: `AVAJ`,
-      expectedOutput: `AVAJ`,
-      thinkFirst: [
-        '1. String word = "JAVA";',
-        '2. Start at last index: int i = word.length() - 1;',
-        '3. Run while i >= 0;',
-        '4. Decrement: i--;',
-        '5. Print: System.out.print(word.charAt(i));'
-      ],
-      syntaxReminder: `String word = "JAVA";\nfor (int i = word.length() - 1; i >= 0; i--) {\n    System.out.print(word.charAt(i));\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        String word = "JAVA";\n        // STAGE 5 BOSS CHALLENGE:\n        // Reverse "JAVA" to print "AVAJ"\n        \n    }\n}`,
-      hints: [
-        'Last index of string is word.length() - 1.',
-        'Condition: i >= 0;',
-        'Decrease counter: i--;',
-        'Print each char without newline using System.out.print.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        String word = "JAVA";\n        for (int i = word.length() - 1; i >= 0; i--) {\n            System.out.print(word.charAt(i));\n        }\n    }\n}`,
-      explanation: [
-        'Traverses the string from index 3 down to 0, reversing the letters to AVAJ.'
-      ],
-      xpReward: 55
-    },
-
-    // ------------------------------------------------------------------------
-    // STAGE 6: MINI PROBLEM SOLVING (Challenges 51 to 60)
-    // ------------------------------------------------------------------------
-    {
-      id: 51,
-      stageId: 6,
-      isBoss: false,
-      title: 'ATM PIN Permutations (Factorial of 5)',
-      scenario: 'A bank security officer needs to calculate how many unique orders 5 distinct security digits can be arranged in (5! = 5 * 4 * 3 * 2 * 1).',
-      task: 'Compute 5! using a loop with product accumulator starting at 1. Print "Factorial: " + fact.',
-      sampleOutput: `Factorial: 120`,
-      expectedOutput: `Factorial: 120`,
-      thinkFirst: [
-        '1. Product bucket MUST start at 1: int fact = 1;',
-        '2. Loop 1 to 5: for (int i = 1; i <= 5; i++)',
-        '3. Multiply: fact *= i; (or fact = fact * i;)',
-        '4. Print after loop: "Factorial: " + fact;'
-      ],
-      syntaxReminder: `int fact = 1;\nfor (int i = 1; i <= 5; i++) {\n    fact *= i;\n}\nSystem.out.println("Factorial: " + fact);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Compute 5! and print "Factorial: 120"\n        \n    }\n}`,
-      hints: [
-        'Never initialize factorial to 0, because 0 * anything = 0!',
-        'Start at 1, loop 1 to 5, multiply each i.',
-        'Print outside loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int fact = 1;\n        for (int i = 1; i <= 5; i++) {\n            fact *= i;\n        }\n        System.out.println("Factorial: " + fact);\n    }\n}`,
-      explanation: [
-        'Computes 1 * 2 * 3 * 4 * 5 = 120.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 52,
-      stageId: 6,
-      isBoss: false,
-      title: 'Memory Chip Capacity (Power of 2^10)',
-      scenario: 'A computer engineer is calculating byte sizes. Without using Math.pow(), calculate 2 to the power of 10 (1024 bytes in 1 KB).',
-      task: 'Start with result = 1. Loop 10 times, multiplying result by 2 each time. Print "Power: " + result.',
-      sampleOutput: `Power: 1024`,
-      expectedOutput: `Power: 1024`,
-      thinkFirst: [
-        '1. Bucket: int result = 1;',
-        '2. Loop 10 times: for (int i = 1; i <= 10; i++)',
-        '3. Multiply by 2: result *= 2;',
-        '4. Print: "Power: " + result;'
-      ],
-      syntaxReminder: `int result = 1;\nfor (int i = 1; i <= 10; i++) {\n    result *= 2;\n}\nSystem.out.println("Power: " + result);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Calculate 2^10 without Math.pow and print "Power: 1024"\n        \n    }\n}`,
-      hints: [
-        'Initialize result = 1;',
-        'Inside loop of 10 rounds: result = result * 2;',
-        'Print after loop finishes.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int result = 1;\n        for (int i = 1; i <= 10; i++) {\n            result *= 2;\n        }\n        System.out.println("Power: " + result);\n    }\n}`,
-      explanation: [
-        'Doubling 1 ten times produces 1024.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 53,
-      stageId: 6,
-      isBoss: false,
-      title: 'Powers of 3 Sequence',
-      scenario: 'A scientist studies exponential bacterial tripling. Starting at 1, compute 3^1, 3^2, 3^3, and 3^4 using a loop.',
-      task: 'Loop 4 times. In each step, multiply val by 3 and print val.',
-      sampleOutput: `3\n9\n27\n81`,
-      expectedOutput: `3\n9\n27\n81`,
-      thinkFirst: [
-        '1. int val = 1;',
-        '2. Loop: for (int i = 1; i <= 4; i++)',
-        '3. val *= 3;',
-        '4. Print val inside loop;'
-      ],
-      syntaxReminder: `int val = 1;\nfor (int i = 1; i <= 4; i++) {\n    val *= 3;\n    System.out.println(val);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print powers of 3: 3, 9, 27, 81\n        \n    }\n}`,
-      hints: [
-        'Multiply val by 3 inside loop: val *= 3;',
-        'Print each power inside loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int val = 1;\n        for (int i = 1; i <= 4; i++) {\n            val *= 3;\n            System.out.println(val);\n        }\n    }\n}`,
-      explanation: [
-        'Generates geometric progression with ratio 3.'
-      ],
-      xpReward: 45
-    },
-
-    {
-      id: 54,
-      stageId: 6,
-      isBoss: false,
-      title: 'City Population Projection',
-      scenario: 'A city planning commission projects that a town of 1000 residents will grow by 10% each year for 3 consecutive years.',
-      task: 'Start with int pop = 1000. Loop years 1 to 3. Each year add 10% (pop = pop + (pop * 10 / 100)) and print "Year " + year + ": " + pop.',
-      sampleOutput: `Year 1: 1100\nYear 2: 1210\nYear 3: 1331`,
-      expectedOutput: `Year 1: 1100\nYear 2: 1210\nYear 3: 1331`,
-      thinkFirst: [
-        '1. int pop = 1000;',
-        '2. Loop year from 1 to 3;',
-        '3. Increase pop: pop = pop + (pop * 10 / 100);',
-        '4. Print "Year " + year + ": " + pop inside loop;'
-      ],
-      syntaxReminder: `int pop = 1000;\nfor (int yr = 1; yr <= 3; yr++) {\n    pop = pop + (pop * 10 / 100);\n    System.out.println("Year " + yr + ": " + pop);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Project population from 1000 growing 10% for 3 years\n        \n    }\n}`,
-      hints: [
-        'Year 1: 1000 + 100 = 1100',
-        'Year 2: 1100 + 110 = 1210',
-        'Year 3: 1210 + 121 = 1331',
-        'Print each year inside the loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int pop = 1000;\n        for (int yr = 1; yr <= 3; yr++) {\n            pop = pop + (pop * 10 / 100);\n            System.out.println("Year " + yr + ": " + pop);\n        }\n    }\n}`,
-      explanation: [
-        'Compounding population growth step-by-step.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 55,
-      stageId: 6,
-      isBoss: false,
-      title: 'Bank Loan Yearly Balance',
-      scenario: 'You take out a Rs. 10,000 small business loan with a simple 500 flat yearly fee added to the balance each year for 3 years.',
-      task: 'Start with int balance = 10000. Loop 3 years. Add 500 each year and print "Year " + i + " Balance: Rs. " + balance.',
-      sampleOutput: `Year 1 Balance: Rs. 10500\nYear 2 Balance: Rs. 11000\nYear 3 Balance: Rs. 11500`,
-      expectedOutput: `Year 1 Balance: Rs. 10500\nYear 2 Balance: Rs. 11000\nYear 3 Balance: Rs. 11500`,
-      thinkFirst: [
-        '1. int balance = 10000;',
-        '2. Loop i from 1 to 3;',
-        '3. balance += 500;',
-        '4. Print "Year " + i + " Balance: Rs. " + balance;'
-      ],
-      syntaxReminder: `int balance = 10000;\nfor (int i = 1; i <= 3; i++) {\n    balance += 500;\n    System.out.println("Year " + i + " Balance: Rs. " + balance);\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Add 500 each year for 3 years, printing balance\n        \n    }\n}`,
-      hints: [
-        'Start balance at 10000.',
-        'Add 500 inside the loop: balance += 500;',
-        'Print line inside loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int balance = 10000;\n        for (int i = 1; i <= 3; i++) {\n            balance += 500;\n            System.out.println("Year " + i + " Balance: Rs. " + balance);\n        }\n    }\n}`,
-      explanation: [
-        'Increments balance by 500 each year and displays statement.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 56,
-      stageId: 6,
-      isBoss: false,
-      title: 'Fibonacci Sequence Starter',
-      scenario: 'Botanists observe Fibonacci sequences in sunflower spirals. Print the first 6 Fibonacci numbers (0 1 1 2 3 5) on a single line separated by spaces.',
-      task: 'Start with int a = 0, b = 1; Print "0 1"; Loop 4 more times: int next = a + b; Print " " + next; a = b; b = next; Print newline.',
-      sampleOutput: `0 1 1 2 3 5`,
-      expectedOutput: `0 1 1 2 3 5`,
-      thinkFirst: [
-        '1. int a = 0, b = 1;',
-        '2. System.out.print(a + " " + b);',
-        '3. Loop 4 times: int next = a + b; System.out.print(" " + next); a = b; b = next;'
-      ],
-      syntaxReminder: `int a = 0, b = 1;\nSystem.out.print(a + " " + b);\nfor (int i = 3; i <= 6; i++) {\n    int next = a + b;\n    System.out.print(" " + next);\n    a = b;\n    b = next;\n}`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Print first 6 Fibonacci numbers: "0 1 1 2 3 5"\n        \n    }\n}`,
-      hints: [
-        'Print first two terms (0 and 1) initially.',
-        'Each subsequent term is a + b.',
-        'Update a = b and b = next.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int a = 0, b = 1;\n        System.out.print(a + " " + b);\n        for (int i = 3; i <= 6; i++) {\n            int next = a + b;\n            System.out.print(" " + next);\n            a = b;\n            b = next;\n        }\n    }\n}`,
-      explanation: [
-        'Generates terms 0, 1, 1, 2, 3, 5.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 57,
-      stageId: 6,
-      isBoss: false,
-      title: 'Digit Counter of an Account Number',
-      scenario: 'A banking validator needs to count how many digits exist in an integer account ID 48259 using division.',
-      task: 'int num = 48259; Count digits using a for loop: for (; num > 0; num /= 10) count++; Print "Digits: " + count.',
-      sampleOutput: `Digits: 5`,
-      expectedOutput: `Digits: 5`,
-      thinkFirst: [
-        '1. int num = 48259; int count = 0;',
-        '2. Loop while num > 0, dividing by 10 each time: num /= 10;',
-        '3. Increment count++;',
-        '4. Print "Digits: " + count;'
-      ],
-      syntaxReminder: `int count = 0;\nfor (int n = 48259; n > 0; n /= 10) {\n    count++;\n}\nSystem.out.println("Digits: " + count);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int num = 48259;\n        // WRITE YOUR CODE HERE:\n        // Count digits using a for loop, print "Digits: 5"\n        \n    }\n}`,
-      hints: [
-        'Dividing an integer by 10 in Java strips off the last digit.',
-        'Count increments each time num drops a digit.',
-        'Print result.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int count = 0;\n        for (int n = 48259; n > 0; n /= 10) {\n            count++;\n        }\n        System.out.println("Digits: " + count);\n    }\n}`,
-      explanation: [
-        '48259 has 5 digits.'
-      ],
-      xpReward: 45
-    },
-
-    {
-      id: 58,
-      stageId: 6,
-      isBoss: false,
-      title: 'Palindrome Number Check',
-      scenario: 'A barcode scanner tests if the serial number 12321 reads identically backwards (symmetric palindrome).',
-      task: 'Reverse 12321 using a loop into rev. If rev == original, print "12321 is PALINDROME".',
-      sampleOutput: `12321 is PALINDROME`,
-      expectedOutput: `12321 is PALINDROME`,
-      thinkFirst: [
-        '1. int original = 12321; int rev = 0;',
-        '2. for (int t = original; t > 0; t /= 10) rev = rev * 10 + (t % 10);',
-        '3. if (original == rev) System.out.println(original + " is PALINDROME");'
-      ],
-      syntaxReminder: `int rev = 0;\nfor (int t = 12321; t > 0; t /= 10) {\n    rev = rev * 10 + (t % 10);\n}\nif (12321 == rev) System.out.println("12321 is PALINDROME");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int original = 12321;\n        // WRITE YOUR CODE HERE:\n        // Reverse original and print "12321 is PALINDROME"\n        \n    }\n}`,
-      hints: [
-        't % 10 extracts the last digit.',
-        'rev = rev * 10 + digit builds the reversed number.',
-        'Compare original with rev.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int original = 12321;\n        int rev = 0;\n        for (int t = original; t > 0; t /= 10) {\n            rev = rev * 10 + (t % 10);\n        }\n        if (original == rev) {\n            System.out.println(original + " is PALINDROME");\n        }\n    }\n}`,
-      explanation: [
-        '12321 reversed is 12321, confirming it is a palindrome.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 59,
-      stageId: 6,
-      isBoss: false,
-      title: 'Greatest Common Divisor (GCD of 48 & 18)',
-      scenario: 'A tile artisan finds the largest square tile size that fits evenly into a 48 cm by 18 cm wall section.',
-      task: 'Find the GCD of 48 and 18 using a loop. Print "GCD: " + gcd.',
-      sampleOutput: `GCD: 6`,
-      expectedOutput: `GCD: 6`,
-      thinkFirst: [
-        '1. int a = 48, b = 18; int gcd = 1;',
-        '2. Loop i from 1 up to min(a, b): if (a % i == 0 && b % i == 0) gcd = i;',
-        '3. Print "GCD: " + gcd;'
-      ],
-      syntaxReminder: `int gcd = 1;\nfor (int i = 1; i <= 18; i++) {\n    if (48 % i == 0 && 18 % i == 0) gcd = i;\n}\nSystem.out.println("GCD: " + gcd);`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        // WRITE YOUR CODE HERE:\n        // Find GCD of 48 and 18, print "GCD: 6"\n        \n    }\n}`,
-      hints: [
-        'Loop i from 1 to 18.',
-        'If i divides both 48 and 18 evenly, update gcd = i.',
-        'Print outside loop.'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int gcd = 1;\n        for (int i = 1; i <= 18; i++) {\n            if (48 % i == 0 && 18 % i == 0) {\n                gcd = i;\n            }\n        }\n        System.out.println("GCD: " + gcd);\n    }\n}`,
-      explanation: [
-        'Largest common divisor of 48 and 18 is 6.'
-      ],
-      xpReward: 50
-    },
-
-    {
-      id: 60,
-      stageId: 6,
-      isBoss: true,
-      title: '👑 Stage 6 ULTIMATE BOSS: Prime Number Sentinel',
-      scenario: 'A cryptographic vault tests if the secret key 29 is prime. A prime number has no divisors other than 1 and itself.',
-      task: 'int num = 29; boolean isPrime = true; Loop divisor i from 2 to num - 1. If (num % i == 0), set isPrime = false and break. After loop, if isPrime is true print "29 is PRIME".',
-      sampleOutput: `29 is PRIME`,
-      expectedOutput: `29 is PRIME`,
-      thinkFirst: [
-        '1. int num = 29; boolean isPrime = true;',
-        '2. Loop i from 2 up to num - 1: for (int i = 2; i < num; i++)',
-        '3. If divisible: if (num % i == 0) { isPrime = false; break; }',
-        '4. After loop: if (isPrime) System.out.println(num + " is PRIME");'
-      ],
-      syntaxReminder: `int num = 29;\nboolean isPrime = true;\nfor (int i = 2; i < num; i++) {\n    if (num % i == 0) {\n        isPrime = false;\n        break;\n    }\n}\nif (isPrime) System.out.println(num + " is PRIME");`,
-      starterCode: `public class Main {\n    public static void main(String[] args) {\n        int num = 29;\n        boolean isPrime = true;\n        // ULTIMATE BOSS CHALLENGE:\n        // Test if 29 is prime using a for loop, print "29 is PRIME"\n        \n    }\n}`,
-      hints: [
-        'Loop through possible divisors: for (int i = 2; i < num; i++)',
-        'If num % i == 0, then a divisor exists, so it is NOT prime.',
-        'At the end check if (isPrime) System.out.println(num + " is PRIME");'
-      ],
-      modelSolution: `public class Main {\n    public static void main(String[] args) {\n        int num = 29;\n        boolean isPrime = true;\n        for (int i = 2; i < num; i++) {\n            if (num % i == 0) {\n                isPrime = false;\n                break;\n            }\n        }\n        if (isPrime) {\n            System.out.println(num + " is PRIME");\n        }\n    }\n}`,
-      explanation: [
-        '29 is tested against all integers 2..28. None divide it evenly.',
-        'isPrime remains true, successfully printing "29 is PRIME".'
-      ],
-      xpReward: 70
+      "xpReward": 60
     }
   ]
 };

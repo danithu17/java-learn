@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Trophy, Calendar, Repeat, User, LayoutGrid, Zap } from 'lucide-react';
+import { Flame, Trophy, Calendar, Repeat, User, LayoutGrid, Zap, GitCompare, Target } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
 
 export function Navbar({ activeTab, onSelectTab }) {
@@ -92,6 +92,18 @@ export function Navbar({ activeTab, onSelectTab }) {
           </button>
 
           <button
+            onClick={() => onSelectTab('compare')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+              activeTab === 'compare'
+                ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 font-semibold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <GitCompare className="w-4 h-4" />
+            <span>Compare</span>
+          </button>
+
+          <button
             onClick={() => onSelectTab('review')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               activeTab === 'review'
@@ -100,9 +112,24 @@ export function Navbar({ activeTab, onSelectTab }) {
             }`}
           >
             <Repeat className="w-4 h-4" />
-            <span>Review Mode</span>
+            <span>Review</span>
             {state.completedChallenges.length > 0 && (
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            )}
+          </button>
+
+          <button
+            onClick={() => onSelectTab('weak-spots')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+              activeTab === 'weak-spots'
+                ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 font-semibold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Target className="w-4 h-4 text-rose-400" />
+            <span>Weak Spots</span>
+            {Object.keys(state.failedAttempts || {}).length > 0 && (
+              <span className="w-2 h-2 rounded-full bg-rose-400" />
             )}
           </button>
 
@@ -115,7 +142,7 @@ export function Navbar({ activeTab, onSelectTab }) {
             }`}
           >
             <User className="w-4 h-4" />
-            <span>Profile & Badges</span>
+            <span>Profile</span>
             {state.badges.length > 0 && (
               <span className="px-1.5 py-0.2 rounded-full bg-purple-500/30 text-purple-300 text-[10px] font-mono">
                 {state.badges.length}

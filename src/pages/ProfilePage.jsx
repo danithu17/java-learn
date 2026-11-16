@@ -10,7 +10,7 @@ export function ProfilePage() {
   const [importStatus, setImportStatus] = useState(null);
   const fileInputRef = useRef(null);
 
-  const totalPossibleChallenges = modules.reduce((acc, m) => acc + (m.totalChallenges || (m.challenges ? m.challenges.length : 0)), 0) || 95;
+  const totalPossibleChallenges = modules.filter(m => !m.locked).reduce((acc, m) => acc + (m.totalChallenges || (m.challenges ? m.challenges.length : 0)), 0) || 81;
 
   const handleExport = () => {
     exportProgressAsJson(state);

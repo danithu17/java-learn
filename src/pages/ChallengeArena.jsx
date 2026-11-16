@@ -10,33 +10,78 @@ import { SyntaxReminder } from '../components/SyntaxReminder.jsx';
 import { HintAccordion } from '../components/HintAccordion.jsx';
 import { ModelSolutionCard } from '../components/ModelSolutionCard.jsx';
 
-export function ChallengeArena({ module, onBackToLessons }) {
-  const { state, answerChallenge, recordHintUsed, isStageUnlocked } = useGame();
+export function ChallengeArena({ module, initialChallengeId = null, onBackToLessons }) {
+  const { state, answerChallenge, recordHintUsed, skipChallenge, isStageUnlocked } = useGame();
 
   const [activeStageId, setActiveStageId] = useState(1);
   const [currentChallengeId, setCurrentChallengeId] = useState(1);
   const [userCode, setUserCode] = useState('');
+  const [testInput, setTestInput] = useState('');
+  const [conceptLabInput, setConceptLabInput] = useState('');
   const [evalResult, setEvalResult] = useState(null);
+  const [showSkippedModal, setShowSkippedModal] = useState(false);
+
+  // If initialChallengeId is provided from Weak Spots or outside, jump to it
+  useEffect(() => {
+    if (initialChallengeId) {
+      const target = module.challenges.find(c => c.id === initialChallengeId);
+      if (target) {
+        setActiveStageId(target.stageId);
+        setCurrentChallengeId(target.id);
+      }
+    }
+  }, [initialChallengeId, module.challenges]);
 
   // Filter challenges for the active stage
   const stage = module.stages.find(s => s.id === activeStageId) || module.stages[0];
   const stageChallenges = module.challenges.filter(c => c.stageId === activeStageId);
   const challenge = module.challenges.find(c => c.id === currentChallengeId) || stageChallenges[0];
 
-  const isUnlocked = isStageUnlocked(activeStageId);
+  const isUnlocked = isStageUnlocked(activeStageId, module.stages);
   const isCompleted = state.completedChallenges.includes(challenge.id);
+  const isSkipped = state.skippedChallenges?.includes(challenge.id);
   const hintsRevealed = state.hintsUsed[challenge.id] || 0;
 
   // Load saved code draft or default starterCode when challenge changes
   useEffect(() => {
     const saved = state.savedCode[challenge.id];
     setUserCode(saved !== undefined ? saved : challenge.starterCode);
+    setTestInput(challenge.sampleInput || '');
+    setConceptLabInput('');
     setEvalResult(null);
+    setShowSkippedModal(false);
   }, [challenge.id]);
 
   const handleRunCode = () => {
+    if (challenge.type === 'concept-lab') {
+      const normUser = conceptLabInput.trim();
+      const normExp = (challenge.expectedOutput || challenge.labAnswer || '').trim();
+      if (normUser === normExp) {
+        setEvalResult({
+          passed: true,
+          earnedXP: challenge.xpReward,
+          userOutput: normUser,
+          expectedOutput: normExp,
+        });
+        answerChallenge(challenge, userCode || challenge.starterCode, 0);
+      } else {
+        setEvalResult({
+          passed: false,
+          error: `Prediction did not match! Expected: "${normExp}"`,
+          userOutput: normUser,
+          expectedOutput: normExp,
+        });
+      }
+      return;
+    }
+
     const res = answerChallenge(challenge, userCode, hintsRevealed);
     setEvalResult(res);
+  };
+
+  const handleSkipChallenge = () => {
+    skipChallenge(challenge.id);
+    setShowSkippedModal(true);
   };
 
   const handleResetCode = () => {
@@ -50,7 +95,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
       const nextChallenge = module.challenges.find(c => c.id === nextId);
       if (nextChallenge) {
         if (nextChallenge.stageId !== activeStageId) {
-          if (isStageUnlocked(nextChallenge.stageId)) {
+          if (isStageUnlocked(nextChallenge.stageId, module.stages)) {
             setActiveStageId(nextChallenge.stageId);
           }
         }
@@ -85,7 +130,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
           {module.stages.map((stg) => {
-            const unlocked = isStageUnlocked(stg.id);
+            const unlocked = isStageUnlocked(stg.id, module.stages);
             const isActive = stg.id === activeStageId;
             const completedCountInStage = module.challenges
               .filter(c => c.stageId === stg.id && state.completedChallenges.includes(c.id)).length;
@@ -259,24 +304,81 @@ export function ChallengeArena({ module, onBackToLessons }) {
             {/* 5. Syntax Reminder Box (For loop skeleton) */}
             <SyntaxReminder skeleton={challenge.syntaxReminder} defaultOpen={false} />
 
-            {/* 6. Code Editor */}
-            <div className="space-y-2">
-              <CodeEditor
-                code={userCode}
-                onChange={setUserCode}
-                onReset={handleResetCode}
-              />
-            </div>
+            {/* 6. Code Editor or Concept Lab Input */}
+            {challenge.type === 'concept-lab' ? (
+              <div className="p-6 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 space-y-4">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-indigo-400" />
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                    🧪 Concept Lab Experiment: Type Your Prediction
+                  </h4>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Inspect the code snippet below carefully. Do NOT write code — simply TYPE what the console output or error will be:
+                </p>
+                <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-indigo-200 overflow-x-auto whitespace-pre">
+                  {challenge.labCode || challenge.starterCode}
+                </pre>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-mono text-slate-400">
+                    Your Prediction (Type exact output / error):
+                  </label>
+                  <input
+                    type="text"
+                    value={conceptLabInput}
+                    onChange={(e) => setConceptLabInput(e.target.value)}
+                    placeholder="e.g. 0 1 2 3 or error or infinite loop"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-sm font-mono text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <CodeEditor
+                  code={userCode}
+                  onChange={setUserCode}
+                  onReset={handleResetCode}
+                />
+              </div>
+            )}
 
-            {/* 7. Run Button */}
-            <div>
+            {/* Test Inputs Box (for Scanner-driven challenges) */}
+            {challenge.sampleInput && challenge.type !== 'concept-lab' && (
+              <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-xs font-mono text-slate-400 block">
+                  ⌨️ Test Inputs (Console stdin for Scanner):
+                </span>
+                <input
+                  type="text"
+                  value={testInput}
+                  onChange={(e) => setTestInput(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 font-mono text-xs text-indigo-300 focus:outline-none focus:border-indigo-500"
+                  placeholder="e.g. 5"
+                />
+              </div>
+            )}
+
+            {/* 7. Run Button & Skip Option */}
+            <div className="flex flex-col sm:flex-row items-center gap-3">
               <button
                 type="button"
                 onClick={handleRunCode}
-                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+                className="flex-1 w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
               >
                 <Play className="w-4 h-4 fill-white" />
-                <span>Run Code & Verify Output</span>
+                <span>
+                  {challenge.type === 'concept-lab' ? 'Submit Lab Prediction' : 'Run Code & Verify Output'}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSkipChallenge}
+                className="w-full sm:w-auto py-4 px-5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-xs font-semibold flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
+                title="Unlock the next challenge and view the model solution (No XP)"
+              >
+                <Eye className="w-4 h-4" />
+                <span>Skip with Model Answer</span>
               </button>
             </div>
 
@@ -365,8 +467,8 @@ export function ChallengeArena({ module, onBackToLessons }) {
               onRevealHint={() => recordHintUsed(challenge.id)}
             />
 
-            {/* 10. Model Solution & Line-by-Line Breakdown (Shown after passing) */}
-            {isCompleted && (
+            {/* 10. Model Solution & Line-by-Line Breakdown (Shown after passing or skipping) */}
+            {(isCompleted || showSkippedModal) && (
               <ModelSolutionCard
                 solution={challenge.modelSolution}
                 explanation={challenge.explanation}

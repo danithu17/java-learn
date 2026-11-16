@@ -1,15 +1,32 @@
 import React from 'react';
-import { Play, Lock, CheckCircle2, Flame, Award, BookOpen, Sparkles, ArrowRight, Repeat, Crown } from 'lucide-react';
+import { Play, Lock, CheckCircle2, Flame, Award, BookOpen, Sparkles, ArrowRight, Repeat, RefreshCw, Zap, Grid, Sliders, Crown } from 'lucide-react';
 import { modules } from '../modules/index.js';
 import { useGame } from '../context/GameContext.jsx';
 
 export function HomePage({ onSelectModule, onStartReview }) {
   const { state, levelInfo } = useGame();
 
-  const forLoopMod = modules[0];
+  const liveModules = modules.filter(m => !m.locked);
+  const totalLiveChallenges = liveModules.reduce((sum, m) => sum + (m.challenges?.length || 0), 0);
   const completedCount = state.completedChallenges.length;
-  const totalCount = forLoopMod.totalChallenges || 60;
-  const percentComplete = Math.round((completedCount / totalCount) * 100);
+  const overallPercent = totalLiveChallenges > 0 ? Math.round((completedCount / totalLiveChallenges) * 100) : 0;
+
+  const getModuleIcon = (mod, isUnlocked) => {
+    if (!isUnlocked) return <Lock className="w-6 h-6" />;
+    switch (mod.id) {
+      case 'while-loop':
+        return <RefreshCw className="w-6 h-6" />;
+      case 'dowhile-loop':
+        return <Zap className="w-6 h-6" />;
+      case 'nested-loops':
+        return <Grid className="w-6 h-6" />;
+      case 'break-continue':
+        return <Sliders className="w-6 h-6" />;
+      case 'for-loop':
+      default:
+        return <Repeat className="w-6 h-6" />;
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -26,16 +43,16 @@ export function HomePage({ onSelectModule, onStartReview }) {
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Struggle with converting your thoughts into Java syntax? You're not alone! Practice 30 progressive scenarios (roll calls, highway milestones, piggy banks, ATM ciphers) with an in-browser Java simulator, plain English logic steps, and tiered hints.
+            Struggle with converting your thoughts into Java syntax? You're not alone! Practice 81 progressive scenarios across For, While, and Do-While loops (bus routes, cricket overs, piggy banks, digit manipulation, ATM ciphers) with an in-browser Java simulator, plain English logic steps, and tiered hints.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <button
-              onClick={() => onSelectModule(forLoopMod.id)}
+              onClick={() => onSelectModule('for-loop')}
               className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-sm shadow-lg shadow-indigo-500/30 flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
             >
               <Play className="w-4 h-4 fill-white" />
-              <span>{completedCount === 0 ? 'Start Stage 1 Scenarios' : 'Continue Scenarios'}</span>
+              <span>{completedCount === 0 ? 'Start For Loop Scenarios' : 'Continue Scenarios'}</span>
             </button>
 
             {completedCount > 0 && (
@@ -61,15 +78,15 @@ export function HomePage({ onSelectModule, onStartReview }) {
             <span className="text-base font-bold font-mono text-indigo-300">{state.xp} XP</span>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <span className="text-xs text-slate-400 block mb-0.5">Combo Streak</span>
-            <span className="text-base font-bold font-mono text-amber-400 flex items-center gap-1">
-              <Flame className="w-4 h-4 fill-amber-400" /> {state.streak}
+            <span className="text-xs text-slate-400 block mb-0.5">Scenarios Solved</span>
+            <span className="text-base font-bold font-mono text-emerald-400">
+              {completedCount} / {totalLiveChallenges} ({overallPercent}%)
             </span>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <span className="text-xs text-slate-400 block mb-0.5">Badges Unlocked</span>
-            <span className="text-base font-bold font-mono text-purple-300 flex items-center gap-1">
-              <Award className="w-4 h-4" /> {state.badges.length}/8
+            <span className="text-xs text-slate-400 block mb-0.5">Daily Streak</span>
+            <span className="text-base font-bold font-mono text-amber-400 flex items-center gap-1">
+              <Flame className="w-4 h-4 fill-amber-400" /> {state.streak} Days
             </span>
           </div>
         </div>
@@ -87,6 +104,10 @@ export function HomePage({ onSelectModule, onStartReview }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((mod) => {
             const isUnlocked = !mod.locked;
+            const modChallenges = mod.challenges || [];
+            const modCompleted = modChallenges.filter(c => state.completedChallenges.includes(c.id)).length;
+            const modTotal = mod.totalChallenges || modChallenges.length;
+            const modPercent = modTotal > 0 ? Math.round((modCompleted / modTotal) * 100) : 0;
 
             return (
               <div
@@ -107,7 +128,7 @@ export function HomePage({ onSelectModule, onStartReview }) {
                           : 'bg-slate-800 text-slate-500'
                       }`}
                     >
-                      {isUnlocked ? <Repeat className="w-6 h-6" /> : <Lock className="w-6 h-6" />}
+                      {getModuleIcon(mod, isUnlocked)}
                     </div>
 
                     <span
@@ -134,19 +155,19 @@ export function HomePage({ onSelectModule, onStartReview }) {
                     <div className="flex items-center justify-between text-xs text-slate-400">
                       <span>Progress</span>
                       <span className="font-mono text-indigo-400 font-bold">
-                        {completedCount} / {totalCount} ({percentComplete}%)
+                        {modCompleted} / {modTotal} ({modPercent}%)
                       </span>
                     </div>
                     <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 rounded-full transition-all duration-500"
-                        style={{ width: `${percentComplete}%` }}
+                        style={{ width: `${modPercent}%` }}
                       />
                     </div>
                     <div className="pt-2 flex items-center justify-between text-xs font-medium text-indigo-400 group-hover:text-indigo-300">
                       <span className="flex items-center gap-1.5">
                         <Crown className="w-3.5 h-3.5 text-amber-400" />
-                        6 Stages • 60 Scenarios
+                        {mod.stages ? `${mod.stages.length} Stages • ${modTotal} Scenarios` : `${modTotal} Scenarios`}
                       </span>
                       <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </div>

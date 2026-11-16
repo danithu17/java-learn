@@ -6,14 +6,18 @@ import { HomePage } from './pages/HomePage.jsx';
 import { ModulePage } from './pages/ModulePage.jsx';
 import { ReviewMode } from './pages/ReviewMode.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
+import { ComparePage } from './pages/ComparePage.jsx';
+import { WeakSpotsPage } from './pages/WeakSpotsPage.jsx';
 
 function AppContent() {
-  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'module' | 'review' | 'profile'
+  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'module' | 'compare' | 'review' | 'weak-spots' | 'profile'
   const [selectedModuleId, setSelectedModuleId] = useState('for-loop');
+  const [initialChallengeId, setInitialChallengeId] = useState(null);
   const { levelUpModal, closeLevelUpModal } = useGame();
 
-  const handleSelectModule = (moduleId) => {
+  const handleSelectModule = (moduleId, challengeId = null) => {
     setSelectedModuleId(moduleId);
+    setInitialChallengeId(challengeId);
     setActiveTab('module');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -40,13 +44,26 @@ function AppContent() {
         {activeTab === 'module' && (
           <ModulePage
             moduleId={selectedModuleId}
+            initialChallengeId={initialChallengeId}
             onBack={() => handleSelectTab('home')}
+          />
+        )}
+
+        {activeTab === 'compare' && (
+          <ComparePage
+            onGoToModule={handleSelectModule}
           />
         )}
 
         {activeTab === 'review' && (
           <ReviewMode
             onGoToChallenges={() => handleSelectModule('for-loop')}
+          />
+        )}
+
+        {activeTab === 'weak-spots' && (
+          <WeakSpotsPage
+            onOpenChallenge={(item) => handleSelectModule(item.moduleId || 'for-loop', item.id)}
           />
         )}
 

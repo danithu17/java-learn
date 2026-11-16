@@ -5,7 +5,7 @@ import { LessonViewer } from './LessonViewer.jsx';
 import { ChallengeArena } from './ChallengeArena.jsx';
 import { useGame } from '../context/GameContext.jsx';
 
-export function ModulePage({ moduleId, onBack }) {
+export function ModulePage({ moduleId, initialChallengeId = null, onBack }) {
   const [subTab, setSubTab] = useState('challenges'); // default to 'challenges'
   const { state } = useGame();
 
@@ -25,7 +25,7 @@ export function ModulePage({ moduleId, onBack }) {
     );
   }
 
-  const completedInModule = state.completedChallenges.length;
+  const completedInModule = module.challenges.filter(c => state.completedChallenges.includes(c.id)).length;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
@@ -89,6 +89,7 @@ export function ModulePage({ moduleId, onBack }) {
       ) : (
         <ChallengeArena
           module={module}
+          initialChallengeId={initialChallengeId}
           onBackToLessons={() => setSubTab('lessons')}
         />
       )}

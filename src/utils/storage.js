@@ -1,8 +1,9 @@
 // Canonical persistent key that stays permanent across all future updates
-const CANONICAL_STORAGE_KEY = 'java_loops_arena_persistent_master';
+const CANONICAL_STORAGE_KEY = 'javaLoops_v1';
 
 // Historical keys across previous versions to auto-merge and preserve all users' progress
 const HISTORICAL_STORAGE_KEYS = [
+  'javaLoops_v1',
   'java_loops_arena_persistent_master',
   'java_loops_arena_real_scenarios_v4',
   'java_loops_arena_real_scenarios_v3',
@@ -61,7 +62,9 @@ export function getDefaultState() {
     dailyStreak: 1,
     lastActiveDate: today,
     completedChallenges: [], // array of challenge IDs
+    skippedChallenges: [], // array of challenge IDs skipped with model answer
     hintsUsed: {}, // { [challengeId]: count }
+    failedAttempts: {}, // { [challengeId]: count }
     savedCode: {}, // { [challengeId]: codeString }
     badges: [],
     reviewsCompleted: 0,
@@ -144,6 +147,20 @@ export function loadGameState() {
         if (data.hintsUsed && typeof data.hintsUsed === 'object') {
           merged.hintsUsed = { ...data.hintsUsed, ...merged.hintsUsed };
         }
+
+        // Merge failed attempts records
+        if (data.failedAttempts && typeof data.failedAttempts === 'object') {
+          merged.failedAttempts = { ...data.failedAttempts, ...merged.failedAttempts };
+        }
+
+        // Merge skipped challenges
+        if (Array.isArray(data.skippedChallenges)) {
+          for (const id of data.skippedChallenges) {
+            if (!merged.skippedChallenges.includes(id)) {
+              merged.skippedChallenges.push(id);
+            }
+          }
+        }
       } catch (innerErr) {
         // Skip unparseable single items
       }
@@ -218,10 +235,10 @@ export function importProgressFromJson(jsonString, currentState) {
  * Stage N (N > 1) checks that all challenges in Stage N-1 are passed.
  */
 export function isStageUnlocked(stageId, completedChallenges = [], stagesList = []) {
-  if (stageId === 1) return true;
-
   if (stagesList && stagesList.length > 0) {
-    const prevStage = stagesList.find(s => s.id === stageId - 1);
+    const stageIndex = stagesList.findIndex(s => s.id === stageId);
+    if (stageIndex <= 0) return true; // First stage is always unlocked
+    const prevStage = stagesList[stageIndex - 1];
     if (prevStage) {
       for (let id = prevStage.minChallengeId; id <= prevStage.maxChallengeId; id++) {
         if (!completedChallenges.includes(id)) {
@@ -232,6 +249,7 @@ export function isStageUnlocked(stageId, completedChallenges = [], stagesList = 
     }
   }
 
+  if (stageId === 1) return true;
   // Fallback: 10 per stage
   const previousStageMax = (stageId - 1) * 10;
   const previousStageMin = previousStageMax - 9;

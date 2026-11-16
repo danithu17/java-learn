@@ -82,11 +82,22 @@ export function GameProvider({ children }) {
 
     // 2. Run in-browser Java simulation (validating loop type for for, while, or do-while)
     const loopRequirement = challenge.loopType || (challenge.id >= 200 ? 'do-while' : (challenge.id >= 100 ? 'while' : 'for'));
-    const execution = runJavaCode(userCode, loopRequirement);
+    const execution = runJavaCode(userCode, loopRequirement, challenge.testCases, challenge.sampleInput || '');
+
+    const recordFailure = () => {
+      sounds.playFailure();
+      setState(prev => ({
+        ...prev,
+        streak: 0,
+        failedAttempts: {
+          ...prev.failedAttempts,
+          [challenge.id]: (prev.failedAttempts?.[challenge.id] || 0) + 1
+        }
+      }));
+    };
 
     if (!execution.success || execution.isCompileError) {
-      sounds.playFailure();
-      setState(prev => ({ ...prev, streak: 0 }));
+      recordFailure();
       return {
         passed: false,
         isCompileError: true,
@@ -98,8 +109,7 @@ export function GameProvider({ children }) {
     }
 
     if (!execution.loopMatched) {
-      sounds.playFailure();
-      setState(prev => ({ ...prev, streak: 0 }));
+      recordFailure();
       return {
         passed: false,
         isCompileError: true,
@@ -114,8 +124,7 @@ export function GameProvider({ children }) {
     const normExpected = normalizeOutput(challenge.expectedOutput);
 
     if (normActual !== normExpected) {
-      sounds.playFailure();
-      setState(prev => ({ ...prev, streak: 0 }));
+      recordFailure();
 
       let customError = 'Output does not match expected output yet. Compare line-by-line below.';
 
@@ -239,6 +248,21 @@ export function GameProvider({ children }) {
     });
   };
 
+  const skipChallenge = (challengeId) => {
+    setState(prev => {
+      const alreadyCompleted = prev.completedChallenges.includes(challengeId);
+      const newCompleted = alreadyCompleted ? prev.completedChallenges : [...prev.completedChallenges, challengeId];
+      const newSkipped = prev.skippedChallenges?.includes(challengeId) ? prev.skippedChallenges : [...(prev.skippedChallenges || []), challengeId];
+      const updated = {
+        ...prev,
+        completedChallenges: newCompleted,
+        skippedChallenges: newSkipped,
+      };
+      saveGameState(updated);
+      return updated;
+    });
+  };
+
   const resetProgress = () => {
     const fresh = {
       xp: 0,
@@ -281,6 +305,7 @@ export function GameProvider({ children }) {
         recordReviewCompleted,
         resetProgress,
         updateFullState,
+        skipChallenge,
         isStageUnlocked: (stageId, stagesList) => isStageUnlocked(stageId, state.completedChallenges, stagesList),
       }}
     >
