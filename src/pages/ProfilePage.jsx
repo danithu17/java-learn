@@ -75,7 +75,7 @@ export function ProfilePage() {
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono">
-            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ 30</span>
+            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ 60</span>
           </p>
         </div>
 

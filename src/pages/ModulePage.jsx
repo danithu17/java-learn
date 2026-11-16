@@ -45,7 +45,7 @@ export function ModulePage({ moduleId, onBack }) {
                 {module.title}
               </h1>
               <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">
-                {completedInModule}/30 Scenarios Solved
+                {completedInModule}/{module.challenges.length} Scenarios Solved
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5">{module.description}</p>

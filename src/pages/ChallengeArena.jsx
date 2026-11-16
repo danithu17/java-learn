@@ -45,7 +45,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
   };
 
   const handleNextChallenge = () => {
-    if (currentChallengeId < 30) {
+    if (currentChallengeId < module.challenges.length) {
       const nextId = currentChallengeId + 1;
       const nextChallenge = module.challenges.find(c => c.id === nextId);
       if (nextChallenge) {
@@ -115,10 +115,10 @@ export function ChallengeArena({ module, onBackToLessons }) {
                   </span>
                   {!unlocked ? (
                     <Lock className="w-3 h-3 text-slate-600" />
-                  ) : completedCountInStage === 5 ? (
+                  ) : completedCountInStage === 10 ? (
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
-                    <span className="text-[10px] font-mono text-indigo-400">{completedCountInStage}/5</span>
+                    <span className="text-[10px] font-mono text-indigo-400">{completedCountInStage}/10</span>
                   )}
                 </div>
                 <div className="text-xs font-bold truncate">
@@ -138,7 +138,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
           </div>
           <h3 className="text-xl font-bold text-white">Stage {activeStageId} is Locked!</h3>
           <p className="text-sm text-slate-400 max-w-md mx-auto">
-            You must complete all 5 challenges in Stage {activeStageId - 1} first to unlock this stage.
+            You must complete all 10 challenges in Stage {activeStageId - 1} first to unlock this stage.
           </p>
           <button
             onClick={() => {
@@ -188,7 +188,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
             </div>
 
             <span className="text-xs font-mono text-slate-400 hidden md:block">
-              Challenge {challenge.id} of 30
+              Challenge {challenge.id} of {module.challenges.length}
             </span>
           </div>
 
@@ -361,7 +361,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
               </button>
 
               <button
-                disabled={currentChallengeId === 30}
+                disabled={currentChallengeId === module.challenges.length}
                 onClick={handleNextChallenge}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-30 text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-indigo-500/20"
               >

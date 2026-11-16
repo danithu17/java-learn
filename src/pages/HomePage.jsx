@@ -8,7 +8,7 @@ export function HomePage({ onSelectModule, onStartReview }) {
 
   const forLoopMod = modules[0];
   const completedCount = state.completedChallenges.length;
-  const totalCount = forLoopMod.totalChallenges || 30;
+  const totalCount = forLoopMod.totalChallenges || 60;
   const percentComplete = Math.round((completedCount / totalCount) * 100);
 
   return (
@@ -146,7 +146,7 @@ export function HomePage({ onSelectModule, onStartReview }) {
                     <div className="pt-2 flex items-center justify-between text-xs font-medium text-indigo-400 group-hover:text-indigo-300">
                       <span className="flex items-center gap-1.5">
                         <Crown className="w-3.5 h-3.5 text-amber-400" />
-                        6 Stages • 30 Scenarios
+                        6 Stages • 60 Scenarios
                       </span>
                       <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </div>

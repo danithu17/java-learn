@@ -51,11 +51,21 @@ export function GameProvider({ children }) {
     if (newState.completedChallenges.length >= 1) addBadge('first_loop');
     if (newState.streak >= 3) addBadge('streak_3');
 
-    // Stage Clear Badges (Each stage has 5 challenges)
-    if ([1, 2, 3, 4, 5].every(id => newState.completedChallenges.includes(id))) addBadge('stage_1_clear');
-    if ([11, 12, 13, 14, 15].every(id => newState.completedChallenges.includes(id))) addBadge('stage_3_clear');
-    if ([21, 22, 23, 24, 25].every(id => newState.completedChallenges.includes(id))) addBadge('stage_5_clear');
-    if (newState.completedChallenges.length >= 30) addBadge('loop_master');
+    // Stage Clear Badges (10 challenges per stage)
+    const checkRange = (start, end) => {
+      for (let i = start; i <= end; i++) {
+        if (!newState.completedChallenges.includes(i)) return false;
+      }
+      return true;
+    };
+
+    if (checkRange(1, 10)) addBadge('stage_1_clear');
+    if (checkRange(11, 20)) addBadge('stage_2_clear');
+    if (checkRange(21, 30)) addBadge('stage_3_clear');
+    if (checkRange(31, 40)) addBadge('stage_4_clear');
+    if (checkRange(41, 50)) addBadge('stage_5_clear');
+    if (checkRange(51, 60)) addBadge('stage_6_clear');
+    if (newState.completedChallenges.length >= 60) addBadge('loop_master');
     if (newState.reviewsCompleted >= 3) addBadge('memory_pro');
 
     return newBadges;
