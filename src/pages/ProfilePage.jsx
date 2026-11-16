@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, Award, Flame, Calendar, CheckCircle2, RotateCcw, Sparkles, Crown, Zap, Brain, Repeat } from 'lucide-react';
+import { Trophy, Award, Flame, Calendar, CheckCircle2, RotateCcw, Sparkles, Crown, Zap, Brain, Repeat, Swords } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
 import { BADGES_CONFIG, LEVELS } from '../utils/storage.js';
 
@@ -42,15 +42,15 @@ export function ProfilePage() {
               {levelInfo.name}
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Java Loops Training Progress
+              Real-Life Java Loops Arena Progress
             </p>
           </div>
         </div>
 
         {/* Level Progression Bar */}
-        <div className="w-full md:w-72 space-y-2 p-4 rounded-xl bg-slate-950/60 border border-slate-800">
+        <div className="w-full md:w-72 space-y-2 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-slate-400">Next Level:</span>
+            <span className="text-slate-400">Next Rank:</span>
             <span className="font-mono text-slate-200 font-semibold">
               {levelInfo.nextLevel ? `${levelInfo.nextLevel.name} (${levelInfo.nextLevel.minXP} XP)` : 'Max Level!'}
             </span>
@@ -71,17 +71,17 @@ export function ProfilePage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-medium">Challenges Solved</span>
+            <span className="text-xs font-medium">Scenarios Solved</span>
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono">
-            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ 25</span>
+            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ 30</span>
           </p>
         </div>
 
         <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-medium">Current Streak</span>
+            <span className="text-xs font-medium">Combo Streak</span>
             <Flame className="w-4 h-4 text-amber-400" />
           </div>
           <p className="text-2xl font-extrabold text-amber-400 font-mono">
@@ -114,8 +114,8 @@ export function ProfilePage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-white">Achievement Badges</h2>
-            <p className="text-xs text-slate-400">Unlock trophies as you conquer Java loops</p>
+            <h2 className="text-xl font-bold text-white">Trophies & Badges</h2>
+            <p className="text-xs text-slate-400">Unlock trophies as you conquer scenarios and stages</p>
           </div>
           <span className="text-xs font-mono font-semibold text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full border border-purple-500/30">
             {state.badges.length} / {BADGES_CONFIG.length} Unlocked
@@ -168,7 +168,7 @@ export function ProfilePage() {
 
       {/* Ranks & Thresholds Table */}
       <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
-        <h3 className="text-base font-bold text-white">Rank Progression Hierarchy</h3>
+        <h3 className="text-base font-bold text-white">Rank Hierarchy</h3>
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs font-mono">
           {LEVELS.map((lvl) => {
             const isCurrent = lvl.level === levelInfo.level;
@@ -195,7 +195,7 @@ export function ProfilePage() {
         <div>
           <h4 className="text-sm font-bold text-rose-300">Reset Local Progress</h4>
           <p className="text-xs text-slate-400 mt-0.5">
-            Clear XP, streak, badges, and completed challenges from localStorage to start completely fresh.
+            Clear XP, streak, badges, and saved code from localStorage to restart from Stage 1.
           </p>
         </div>
 

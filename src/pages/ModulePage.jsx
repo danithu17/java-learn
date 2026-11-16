@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { BookOpen, Swords, ArrowLeft, Trophy } from 'lucide-react';
+import { BookOpen, Swords, ArrowLeft, Trophy, Crown } from 'lucide-react';
 import { getModuleById } from '../modules/index.js';
 import { LessonViewer } from './LessonViewer.jsx';
 import { ChallengeArena } from './ChallengeArena.jsx';
 import { useGame } from '../context/GameContext.jsx';
 
 export function ModulePage({ moduleId, onBack }) {
-  const [subTab, setSubTab] = useState('lessons'); // 'lessons' | 'challenges'
+  const [subTab, setSubTab] = useState('challenges'); // default to 'challenges'
   const { state } = useGame();
 
   const module = getModuleById(moduleId);
@@ -44,8 +44,8 @@ export function ModulePage({ moduleId, onBack }) {
               <h1 className="text-xl sm:text-2xl font-bold text-white">
                 {module.title}
               </h1>
-              <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-xs font-mono font-semibold">
-                {completedInModule}/25 Solved
+              <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">
+                {completedInModule}/30 Scenarios Solved
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5">{module.description}</p>
@@ -55,18 +55,6 @@ export function ModulePage({ moduleId, onBack }) {
         {/* Tab switch buttons */}
         <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 self-start sm:self-auto">
           <button
-            onClick={() => setSubTab('lessons')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-              subTab === 'lessons'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Lessons ({module.lessons.length})</span>
-          </button>
-
-          <button
             onClick={() => setSubTab('challenges')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
               subTab === 'challenges'
@@ -75,7 +63,19 @@ export function ModulePage({ moduleId, onBack }) {
             }`}
           >
             <Swords className="w-3.5 h-3.5" />
-            <span>Challenges ({module.challenges.length})</span>
+            <span>Scenarios ({module.challenges.length})</span>
+          </button>
+
+          <button
+            onClick={() => setSubTab('lessons')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+              subTab === 'lessons'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Learn Concepts ({module.lessons.length})</span>
           </button>
         </div>
       </div>

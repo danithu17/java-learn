@@ -1,13 +1,12 @@
-# 🎮 Java Loops Arena
+# 🎮 Java Loops Arena (Real-Life Scenario Edition)
 
-A complete, beginner-friendly gamified practice platform built with **React + Vite + Tailwind CSS** to help you turn loop logic into Java code and build muscle memory through repetition.
+A complete, beginner-friendly gamified practice platform built with **React + Vite + Tailwind CSS** designed specifically to help you turn logic thoughts into Java code by solving **real-life scenarios**.
 
 ---
 
 ## 🚀 Quick Start Guide
 
 ### 1. Install Dependencies
-Open PowerShell or your terminal in this directory and run:
 ```bash
 npm install
 ```
@@ -16,111 +15,92 @@ npm install
 ```bash
 npm run dev
 ```
-Open your browser at the displayed local URL (usually **`http://localhost:5173`**).
+Open your browser at:
+👉 **`http://localhost:3000`** *(configured in `vite.config.js`)*
 
 ---
 
-## 📂 Project Architecture
+## 🎯 How It Works: Writing Real Code (No Quizzes!)
 
-```
-├── index.html                   # Entry HTML with modern dark theme fonts
-├── package.json                 # Project dependencies & scripts
-├── vite.config.js               # Vite bundler configuration
-├── tailwind.config.js           # Tailwind CSS styling system
-├── src/
-│   ├── main.jsx                 # React root renderer
-│   ├── App.jsx                  # Main application router & modal manager
-│   ├── index.css                # Global styles & custom scrollbars
-│   ├── context/
-│   │   └── GameContext.jsx      # Gamification engine (XP, streaks, badges, sound triggers)
-│   ├── modules/                 # ⭐ DATA-DRIVEN MODULE SYSTEM
-│   │   ├── index.js             # Module registry (add new modules with 1 line!)
-│   │   └── forLoop.js           # For Loop Module (6 lessons + 25 interactive challenges)
-│   ├── components/
-│   │   ├── Navbar.jsx           # Top bar: XP progress bar, level badge, streak flames
-│   │   ├── CodeBlock.jsx        # Java code syntax highlighter with copy button
-│   │   ├── ThinkFirstBox.jsx    # Plain English logic steps box (trains logic-to-code)
-│   │   ├── SyntaxReminder.jsx   # Collapsible loop skeleton reminder box
-│   │   ├── HintAccordion.jsx    # 3-tier hints with XP reduction indicator
-│   │   ├── LevelUpModal.jsx     # Celebratory rank-up modal with confetti
-│   │   └── QuestionCard.jsx     # Handles the 6 question types
-│   ├── pages/
-│   │   ├── HomePage.jsx         # Modules dashboard & player stats overview
-│   │   ├── ModulePage.jsx       # Subtab switcher (Lessons vs. Challenges)
-│   │   ├── LessonViewer.jsx     # Interactive stepper, visual anatomy & explanations
-│   │   ├── ChallengeArena.jsx   # 25-challenge practice arena with number picker
-│   │   ├── ReviewMode.jsx       # Memory training quiz from passed challenges
-│   │   └── ProfilePage.jsx      # Badges showcase, player rank, stats & reset
-│   └── utils/
-│       ├── audio.js             # Web Audio API sound synthesizer (100% offline)
-│       └── storage.js           # localStorage persistence helpers & levels
-├── Main.java                    # Bonus: Standalone Java console engine
-└── Challenges.java              # Bonus: Standalone Java practice file
-```
+- **No multiple choice, no fill-in-the-blank, no drag-and-drop.**
+- Every single challenge is a **real-life scenario story** (classroom roll calls, rocket launches, highway toll stops, piggy banks, grocery cashier bills, ATM PIN ciphers).
+- You write the Java code directly in the code editor box on the page.
+- The **In-Browser Java Simulator** tests your loop code safely in real-time, captures `System.out.println` and `System.out.print`, checks loop syntax, and compares your console output with the expected output!
+- If it matches: **PASS!** Earn XP, maintain streak combos, unlock the next scenario, and view the **Model Java Solution** with a line-by-line explanation!
 
 ---
 
-## 🧩 Adding New Modules (Plug-and-Play)
+## 🏆 6 Progressive Stages & 30 Scenarios
 
-The app is completely data-driven. To add a new loop module (e.g. `whileLoop.js`):
+### Stage 1: Basic Counting
+1. **Classroom Roll Call**: Call student numbers 1 to 20
+2. **Rocket Launch Countdown**: Count backwards 10 to 1, then "Liftoff!"
+3. **Fence Painting**: Announce planks 1 to 8 being painted
+4. **City Bus Stops**: Announce stops 1 to 15 on Route 42
+5. **👑 Stage 1 Boss: Birthday Candles**: Place 7 candles on cake, then print "Happy Birthday!"
 
-1. Create `src/modules/whileLoop.js`:
-   ```javascript
-   export const whileLoopModule = {
-     id: 'while-loop',
-     title: 'While Loop Mastery',
-     icon: 'RefreshCw',
-     badge: 'Unlocked',
-     description: 'Master condition-driven loops!',
-     lessons: [ /* array of lesson objects */ ],
-     challenges: [ /* array of challenge objects */ ]
-   };
-   ```
-2. Open `src/modules/index.js` and add **one line** to import and register it:
-   ```javascript
-   import { whileLoopModule } from './whileLoop.js';
+### Stage 2: Skipping & Steps
+6. **Even House Numbers**: Deliver mail to even houses 2, 4, 6 ... 30 (`i += 2`)
+7. **Express Highway Milestones**: Announce mile markers 5, 10, 15 ... 50 km (`i += 5`)
+8. **Odd Concert Tickets**: Raffle odd numbers 1, 3, 5 ... 21
+9. **Countdown by 3s**: Fitness intervals 30, 27, 24 ... 3 (`sec -= 3`)
+10. **👑 Stage 2 Boss: Snooze Alarm Clock**: Chime every 15 mins (0, 15, 30, 45, 60), then "Wake up!"
 
-   export const modules = [
-     forLoopModule,
-     whileLoopModule, // <-- Added here!
-     // ...
-   ];
-   ```
-The home page, progress trackers, and challenge arena will automatically recognize and render it!
+### Stage 3: Accumulating Totals
+11. **Daily Piggy Bank Savings**: Save Rs. 10 each day for 30 days (total Rs. 300)
+12. **Marks Total (Gauss Sum)**: Sum numbers 1 to 100 (Sum: 5050)
+13. **Cashier Running Bill**: Print running total after each of 4 items at Rs. 120 each
+14. **Lucky Sevens Counter**: Count how many numbers in 1..100 are divisible by 7 (Count: 14)
+15. **👑 Stage 3 Boss: Grade Average Calculator**: Sum 1 to 10, divide by 10.0, print "Average: 5.5"
+
+### Stage 4: Loops with Decisions (for + if)
+16. **Cricket Over Thriller**: Print balls 1 to 5, and "Ball 6 - SIX!" on ball 6
+17. **Exam Pass Count**: Count students scoring >= 50 in a marks array (Passed: 5)
+18. **Classroom FizzBuzz Game**: Loop 1 to 15 with 3/5/both FizzBuzz checks
+19. **Top High Score Finder**: Find the maximum score in an array
+20. **👑 Stage 4 Boss: Vowel Detective**: Count vowels in String "INDONESIA" (Vowels: 5)
+
+### Stage 5: Patterns & Tables
+21. **Exam Times Table**: Multiplication table of 7 from 1 to 10
+22. **Staircase Star Pyramid**: 5 rows of stars (`*` to `*****`)
+23. **Counting Number Triangle**: Rows 1, 12, 123, 1234
+24. **Chess Board Row Pattern**: Alternating "B W B W B W B W" (8 squares)
+25. **👑 Stage 5 Boss: Word Reversal Mirror**: Reverse "JAVA" backwards to "AVAJ"
+
+### Stage 6: Mini Problem Solving
+26. **ATM PIN Permutations**: Factorial of 5 (5! = 120)
+27. **Memory Chip Capacity**: Compute 2^10 without Math.pow (Power: 1024)
+28. **City Population Projection**: 1000 residents growing 10% each year for 3 years
+29. **Bank Loan Yearly Balance**: Rs. 10000 loan with Rs. 500 annual charge for 3 years
+30. **👑 Stage 6 ULTIMATE BOSS: Prime Number Sentinel**: Loop 2 to 28 to test if 29 is prime!
 
 ---
 
-## 🎯 6 Challenge Question Types Included
+## 🧠 Learning Features for Beginners
 
-1. **Predict the output** (Multiple Choice)
-2. **Fill in the blank** (Code snippet completion)
-3. **Arrange the lines** (Drag / click to put scrambled code lines in correct order)
-4. **Find the bug** (Identify off-by-one errors, infinite loops, and misplaced semicolons)
-5. **Trace table** (Step-by-step table filling the values of `i` or `sum` each round)
-6. **Write it yourself** (Full code typing with key syntax verification & model answers)
+1. **"Think First" Box**: Step-by-step logic in plain English before coding.
+2. **"Syntax Reminder" Skeleton**: Collapsible loop skeleton template.
+3. **In-Browser Java Simulator**: Real output execution with infinite loop safeguards.
+4. **3-Tier Hint Accordion**: Progressive hints (Idea ➔ Key Line ➔ Structure).
+5. **Model Solution & Breakdown**: Compare your code with teacher's solution after passing.
+6. **Review Mode**: Rewrite past scenarios completely from scratch without peeking.
+7. **Stage Unlocking**: Each stage unlocks only after clearing the previous stage's 5 scenarios.
 
 ---
 
-## 🏆 Gamification & XP System
+## 🏆 XP & Gamification
 
 - **XP Progression**:
-  - Level 1: **Rookie** (0 - 149 XP)
-  - Level 2: **Learner** (150 - 349 XP)
-  - Level 3: **Coder** (350 - 599 XP)
-  - Level 4: **Loop Warrior** (600 - 899 XP)
-  - Level 5: **Loop Master** (900+ XP)
-- **Streak & Combo Bonus**: Consecutive correct answers grant bonus XP.
-- **Hints System**: 3 progressive hints per challenge (using hints deducts 5 XP).
-- **Sound Effects**: Offline synthesized Web Audio chimes for level-ups, combos, and passes.
-- **Confetti**: Celebratory full-screen confetti on leveling up.
-- **Review Mode**: Randomly quizzes you on solved challenges to cement long-term muscle memory.
-- **Persistence**: Automatically saved to your browser's `localStorage`.
-
----
-
-## ☕ Bonus: Java Console Game
-You can also run the console game anytime directly in your terminal:
-```bash
-javac Main.java Challenges.java
-java Main
-```
+  - Level 1: **Rookie** (0 - 249 XP)
+  - Level 2: **Learner** (250 - 549 XP)
+  - Level 3: **Coder** (550 - 899 XP)
+  - Level 4: **Loop Warrior** (900 - 1299 XP)
+  - Level 5: **Loop Master** (1300+ XP)
+- **Bonuses**:
+  - Pure Logic Bonus (+10 XP for passing with 0 hints)
+  - Combo Streak Bonus (+5 to +10 XP for consecutive passes)
+  - Boss Challenge XP (+45 to +70 XP)
+- **Audio & Visual**:
+  - Offline Web Audio synthesizers for level-ups and passes
+  - Full-screen confetti on rank-ups
+- **Persistence**: Code drafts, XP, streaks, and trophies automatically save in `localStorage`.

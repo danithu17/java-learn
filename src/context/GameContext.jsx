@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { loadGameState, saveGameState, getLevelInfo, BADGES_CONFIG } from '../utils/storage.js';
+import { loadGameState, saveGameState, getLevelInfo, isStageUnlocked } from '../utils/storage.js';
 import { sounds } from '../utils/audio.js';
+import { runJavaCode, normalizeOutput } from '../utils/javaRunner.js';
 
 const GameContext = createContext(null);
 
@@ -9,7 +10,7 @@ export function GameProvider({ children }) {
   const [state, setState] = useState(() => loadGameState());
   const [levelUpModal, setLevelUpModal] = useState({ isOpen: false, level: 1, name: '' });
 
-  // Sync to localStorage whenever state changes
+  // Sync state changes to localStorage
   useEffect(() => {
     saveGameState(state);
   }, [state]);
@@ -34,8 +35,8 @@ export function GameProvider({ children }) {
   const triggerConfetti = () => {
     try {
       confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 120,
+        spread: 80,
         origin: { y: 0.6 }
       });
     } catch (e) {}
@@ -44,41 +45,78 @@ export function GameProvider({ children }) {
   const checkBadges = (newState) => {
     const newBadges = [...newState.badges];
     const addBadge = (id) => {
-      if (!newBadges.includes(id)) {
-        newBadges.push(id);
-      }
+      if (!newBadges.includes(id)) newBadges.push(id);
     };
 
     if (newState.completedChallenges.length >= 1) addBadge('first_loop');
-    if (newState.completedChallenges.length >= 10) addBadge('ten_correct');
-    if (newState.completedChallenges.length >= 20) addBadge('twenty_correct');
-    if (newState.completedChallenges.length >= 25) addBadge('loop_master');
     if (newState.streak >= 3) addBadge('streak_3');
-    if (newState.streak >= 5) addBadge('streak_5');
+
+    // Stage Clear Badges (Each stage has 5 challenges)
+    if ([1, 2, 3, 4, 5].every(id => newState.completedChallenges.includes(id))) addBadge('stage_1_clear');
+    if ([11, 12, 13, 14, 15].every(id => newState.completedChallenges.includes(id))) addBadge('stage_3_clear');
+    if ([21, 22, 23, 24, 25].every(id => newState.completedChallenges.includes(id))) addBadge('stage_5_clear');
+    if (newState.completedChallenges.length >= 30) addBadge('loop_master');
     if (newState.reviewsCompleted >= 3) addBadge('memory_pro');
 
     return newBadges;
   };
 
-  const answerChallenge = (challenge, isCorrect, hintsCount) => {
-    if (!isCorrect) {
+  const answerChallenge = (challenge, userCode, hintsCount = 0) => {
+    // 1. Save user code draft
+    setState(prev => ({
+      ...prev,
+      savedCode: { ...prev.savedCode, [challenge.id]: userCode }
+    }));
+
+    // 2. Run in-browser Java simulation
+    const execution = runJavaCode(userCode);
+
+    if (!execution.success) {
       sounds.playFailure();
-      setState(prev => ({
-        ...prev,
-        streak: 0,
-      }));
-      return { passed: false, earnedXP: 0, streakBonus: 0 };
+      setState(prev => ({ ...prev, streak: 0 }));
+      return {
+        passed: false,
+        error: execution.error || 'Code compilation or execution error.',
+        userOutput: execution.output || '',
+        expectedOutput: challenge.expectedOutput,
+      };
     }
 
-    // Correct Answer!
+    if (!execution.hasForLoop) {
+      sounds.playFailure();
+      setState(prev => ({ ...prev, streak: 0 }));
+      return {
+        passed: false,
+        error: 'Missing for-loop! The goal of this arena is to write a Java for-loop.',
+        userOutput: execution.output || '',
+        expectedOutput: challenge.expectedOutput,
+      };
+    }
+
+    const normActual = normalizeOutput(execution.output);
+    const normExpected = normalizeOutput(challenge.expectedOutput);
+
+    if (normActual !== normExpected) {
+      sounds.playFailure();
+      setState(prev => ({ ...prev, streak: 0 }));
+      return {
+        passed: false,
+        error: 'Output does not match expected output yet. Compare line-by-line below.',
+        userOutput: normActual,
+        expectedOutput: normExpected,
+      };
+    }
+
+    // 3. PASS! Output matches expected!
     const isFirstTime = !state.completedChallenges.includes(challenge.id);
     const newStreak = state.streak + 1;
     const streakBonus = newStreak >= 3 ? 10 : (newStreak === 2 ? 5 : 0);
+    const noHintBonus = hintsCount === 0 ? 10 : 0;
 
     const baseReward = challenge.xpReward || 30;
-    const hintPenalty = (hintsCount || 0) * 5;
+    const hintPenalty = hintsCount * 5;
     const challengeXP = Math.max(10, baseReward - hintPenalty);
-    const earnedXP = isFirstTime ? (challengeXP + streakBonus) : 5; // Repeat gives 5 XP review bonus
+    const earnedXP = isFirstTime ? (challengeXP + streakBonus + noHintBonus) : 10; // Repeat gives 10 review XP
 
     const oldLevel = getLevelInfo(state.xp).level;
     const newTotalXP = state.xp + earnedXP;
@@ -94,20 +132,17 @@ export function GameProvider({ children }) {
       streak: newStreak,
       bestStreak: Math.max(state.bestStreak, newStreak),
       completedChallenges: newCompleted,
-      badges: checkBadges({
-        ...state,
-        completedChallenges: newCompleted,
-        streak: newStreak,
-      }),
+      savedCode: { ...state.savedCode, [challenge.id]: userCode },
     };
 
     if (hintsCount === 0 && !updatedState.badges.includes('no_hints')) {
       updatedState.badges.push('no_hints');
     }
+    updatedState.badges = checkBadges(updatedState);
 
     setState(updatedState);
 
-    // Audio & Visual celebratory triggers
+    // Audio & celebratory visual triggers
     if (newLevelInfo.level > oldLevel) {
       sounds.playLevelUp();
       triggerConfetti();
@@ -126,9 +161,19 @@ export function GameProvider({ children }) {
       passed: true,
       earnedXP,
       streakBonus,
+      noHintBonus,
+      userOutput: normActual,
+      expectedOutput: normExpected,
       newStreak,
       isFirstTime,
     };
+  };
+
+  const saveDraftCode = (challengeId, code) => {
+    setState(prev => ({
+      ...prev,
+      savedCode: { ...prev.savedCode, [challengeId]: code }
+    }));
   };
 
   const recordHintUsed = (challengeId) => {
@@ -151,7 +196,7 @@ export function GameProvider({ children }) {
       const updated = {
         ...prev,
         reviewsCompleted: newReviews,
-        xp: prev.xp + 15, // Bonus XP for review
+        xp: prev.xp + 25, // Bonus XP for full review rewrite
       };
       updated.badges = checkBadges(updated);
       return updated;
@@ -167,6 +212,7 @@ export function GameProvider({ children }) {
       lastActiveDate: new Date().toISOString().split('T')[0],
       completedChallenges: [],
       hintsUsed: {},
+      savedCode: {},
       badges: [],
       reviewsCompleted: 0,
       lastLevel: 1,
@@ -189,9 +235,11 @@ export function GameProvider({ children }) {
         levelUpModal,
         closeLevelUpModal,
         answerChallenge,
+        saveDraftCode,
         recordHintUsed,
         recordReviewCompleted,
         resetProgress,
+        isStageUnlocked: (stageId) => isStageUnlocked(stageId, state.completedChallenges),
       }}
     >
       {children}
