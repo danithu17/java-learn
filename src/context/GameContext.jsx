@@ -84,12 +84,14 @@ export function GameProvider({ children }) {
     const loopRequirement = challenge.loopType || (challenge.id >= 200 ? 'do-while' : (challenge.id >= 100 ? 'while' : 'for'));
     const execution = runJavaCode(userCode, loopRequirement);
 
-    if (!execution.success) {
+    if (!execution.success || execution.isCompileError) {
       sounds.playFailure();
       setState(prev => ({ ...prev, streak: 0 }));
       return {
         passed: false,
-        error: execution.error || 'Code compilation or execution error.',
+        isCompileError: true,
+        error: execution.error || 'Java compilation error.',
+        compilerOutput: execution.compilerOutput || execution.error,
         userOutput: execution.output || '',
         expectedOutput: challenge.expectedOutput,
       };
@@ -100,7 +102,9 @@ export function GameProvider({ children }) {
       setState(prev => ({ ...prev, streak: 0 }));
       return {
         passed: false,
+        isCompileError: true,
         error: execution.error,
+        compilerOutput: execution.compilerOutput || execution.error,
         userOutput: execution.output || '',
         expectedOutput: challenge.expectedOutput,
       };
@@ -112,9 +116,28 @@ export function GameProvider({ children }) {
     if (normActual !== normExpected) {
       sounds.playFailure();
       setState(prev => ({ ...prev, streak: 0 }));
+
+      let customError = 'Output does not match expected output yet. Compare line-by-line below.';
+
+      // Check empty output due to backward condition logic (e.g. i >= 20 while counting up)
+      if (!normActual) {
+        const countUpWithGTE = userCode.match(/for\s*\(\s*int\s+([a-zA-Z_]\w*)\s*=\s*(\d+)\s*;\s*\1\s*>=\s*(\d+)\s*;\s*\1\s*(\+\+|\+=\s*\d+)\)/);
+        const countDownWithLTE = userCode.match(/for\s*\(\s*int\s+([a-zA-Z_]\w*)\s*=\s*(\d+)\s*;\s*\1\s*<=\s*(\d+)\s*;\s*\1\s*(--|-=\s*\d+)\)/);
+
+        if (countUpWithGTE && Number(countUpWithGTE[2]) < Number(countUpWithGTE[3])) {
+          customError = `⚠️ Loop did not execute: Your condition '${countUpWithGTE[1]} >= ${countUpWithGTE[3]}' was false on round 1 (because ${countUpWithGTE[2]} is not >= ${countUpWithGTE[3]}). To count upwards, did you mean '${countUpWithGTE[1]} <= ${countUpWithGTE[3]}'?`;
+        } else if (countDownWithLTE && Number(countDownWithLTE[2]) > Number(countDownWithLTE[3])) {
+          customError = `⚠️ Loop did not execute: Your condition '${countDownWithLTE[1]} <= ${countDownWithLTE[3]}' was false on round 1 (because ${countDownWithLTE[2]} is not <= ${countDownWithLTE[3]}). To count downwards, did you mean '${countDownWithLTE[1]} >= ${countDownWithLTE[3]}'?`;
+        } else {
+          customError = '⚠️ Output was empty! Your loop condition was false from the start or System.out.println was not called.';
+        }
+      } else if (normActual.replace(/\s+/g, '') === normExpected.replace(/\s+/g, '')) {
+        customError = '⚠️ Spacing mismatch: All characters and numbers match, but check spaces (e.g. "Student " with a space instead of "Student").';
+      }
+
       return {
         passed: false,
-        error: 'Output does not match expected output yet. Compare line-by-line below.',
+        error: customError,
         userOutput: normActual,
         expectedOutput: normExpected,
       };
@@ -234,6 +257,11 @@ export function GameProvider({ children }) {
     saveGameState(fresh);
   };
 
+  const updateFullState = (newState) => {
+    setState(newState);
+    saveGameState(newState);
+  };
+
   const closeLevelUpModal = () => {
     setLevelUpModal(prev => ({ ...prev, isOpen: false }));
   };
@@ -252,6 +280,7 @@ export function GameProvider({ children }) {
         recordHintUsed,
         recordReviewCompleted,
         resetProgress,
+        updateFullState,
         isStageUnlocked: (stageId, stagesList) => isStageUnlocked(stageId, state.completedChallenges, stagesList),
       }}
     >

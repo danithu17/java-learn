@@ -280,7 +280,7 @@ export function ChallengeArena({ module, onBackToLessons }) {
               </button>
             </div>
 
-            {/* 8. Execution Result & Comparison Diff */}
+            {/* 8. Execution Result & Comparison Diff / Compiler Diagnostics */}
             {evalResult && (
               <div
                 className={`p-6 rounded-2xl border space-y-4 animate-fadeIn ${
@@ -289,15 +289,19 @@ export function ChallengeArena({ module, onBackToLessons }) {
                     : 'bg-rose-950/30 border-rose-500/40 text-rose-300'
                 }`}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-start gap-3">
                   {evalResult.passed ? (
-                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+                    <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
                   ) : (
-                    <XCircle className="w-6 h-6 text-rose-400" />
+                    <XCircle className="w-6 h-6 text-rose-400 flex-shrink-0 mt-0.5" />
                   )}
-                  <div>
+                  <div className="space-y-1">
                     <h4 className="text-base font-bold">
-                      {evalResult.passed ? 'PASS! Scenario Solved! 🎉' : 'FAIL - Output Did Not Match'}
+                      {evalResult.passed
+                        ? 'PASS! Scenario Solved! 🎉'
+                        : evalResult.isCompileError
+                        ? 'Java Compilation Error (javac)'
+                        : 'FAIL - Output Did Not Match'}
                     </h4>
                     {evalResult.passed ? (
                       <p className="text-xs text-slate-300">
@@ -306,31 +310,51 @@ export function ChallengeArena({ module, onBackToLessons }) {
                         {evalResult.streakBonus > 0 && `(🔥 Streak Bonus +${evalResult.streakBonus} XP!)`}
                       </p>
                     ) : (
-                      <p className="text-xs text-rose-200">{evalResult.error}</p>
+                      <p className="text-xs text-rose-200 leading-relaxed font-sans">{evalResult.error}</p>
                     )}
                   </div>
                 </div>
 
-                {/* Diff Viewer (Expected vs Your Output) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs pt-2">
-                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                    <span className="text-slate-500 block mb-1">Expected Output:</span>
-                    <pre className="text-emerald-400 whitespace-pre overflow-x-auto max-h-48">
-                      {evalResult.expectedOutput || '(Empty)'}
+                {/* Compiler Terminal Display if Compilation Error */}
+                {evalResult.isCompileError ? (
+                  <div className="rounded-xl bg-slate-950 border border-rose-500/30 overflow-hidden font-mono text-xs mt-3">
+                    <div className="px-4 py-2 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                        <span className="text-[11px] text-slate-400 ml-2 font-mono">javac Main.java</span>
+                      </div>
+                      <span className="text-[10px] text-rose-400 uppercase font-bold tracking-wider">
+                        Compiler Output
+                      </span>
+                    </div>
+                    <pre className="p-4 text-rose-300 whitespace-pre overflow-x-auto leading-relaxed">
+                      {evalResult.compilerOutput || evalResult.error}
                     </pre>
                   </div>
+                ) : (
+                  /* Diff Viewer (Expected vs Your Output) for Runtime Mismatches */
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs pt-2">
+                    <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                      <span className="text-slate-500 block mb-1">Expected Output:</span>
+                      <pre className="text-emerald-400 whitespace-pre overflow-x-auto max-h-48">
+                        {evalResult.expectedOutput || '(Empty)'}
+                      </pre>
+                    </div>
 
-                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                    <span className="text-slate-500 block mb-1">Your Console Output:</span>
-                    <pre
-                      className={`whitespace-pre overflow-x-auto max-h-48 ${
-                        evalResult.passed ? 'text-emerald-400' : 'text-rose-400'
-                      }`}
-                    >
-                      {evalResult.userOutput || '(Nothing printed. Did you use System.out.println?)'}
-                    </pre>
+                    <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                      <span className="text-slate-500 block mb-1">Your Console Output:</span>
+                      <pre
+                        className={`whitespace-pre overflow-x-auto max-h-48 ${
+                          evalResult.passed ? 'text-emerald-400' : 'text-rose-400'
+                        }`}
+                      >
+                        {evalResult.userOutput || '(Nothing printed. Did you use System.out.println?)'}
+                      </pre>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
 

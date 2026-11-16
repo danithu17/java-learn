@@ -1,4 +1,17 @@
-const STORAGE_KEY = 'java_loops_arena_real_scenarios_v4';
+// Canonical persistent key that stays permanent across all future updates
+const CANONICAL_STORAGE_KEY = 'java_loops_arena_persistent_master';
+
+// Historical keys across previous versions to auto-merge and preserve all users' progress
+const HISTORICAL_STORAGE_KEYS = [
+  'java_loops_arena_persistent_master',
+  'java_loops_arena_real_scenarios_v4',
+  'java_loops_arena_real_scenarios_v3',
+  'java_loops_arena_real_scenarios_v2',
+  'java_loops_arena_real_scenarios_v1',
+  'java_loops_arena_v1',
+  'java_loops_progress',
+  'java_arena_state',
+];
 
 export const LEVELS = [
   { level: 1, name: 'Rookie', minXP: 0, maxXP: 399, color: 'text-emerald-400', badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
@@ -56,24 +69,147 @@ export function getDefaultState() {
   };
 }
 
+/**
+ * Loads game state with automatic backwards-compatibility.
+ * Checks all historical localStorage keys and dynamically merges any past completed
+ * progress, XP, streaks, and saved code so users never lose their data on updates.
+ */
 export function loadGameState() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return getDefaultState();
-    const parsed = JSON.parse(raw);
-    return {
-      ...getDefaultState(),
-      ...parsed,
-    };
+    const merged = getDefaultState();
+    const candidateKeys = new Set(HISTORICAL_STORAGE_KEYS);
+
+    // Dynamically check any key in localStorage matching our app patterns
+    if (typeof localStorage !== 'undefined') {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.includes('java_loop') || key.includes('loops_arena') || key.includes('java_arena'))) {
+          candidateKeys.add(key);
+        }
+      }
+    }
+
+    for (const key of candidateKeys) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const data = JSON.parse(raw);
+        if (!data || typeof data !== 'object') continue;
+
+        // Merge completed challenges without duplicates
+        if (Array.isArray(data.completedChallenges)) {
+          for (const id of data.completedChallenges) {
+            if (!merged.completedChallenges.includes(id)) {
+              merged.completedChallenges.push(id);
+            }
+          }
+        }
+
+        // Keep highest XP achieved
+        if (typeof data.xp === 'number' && data.xp > merged.xp) {
+          merged.xp = data.xp;
+        }
+
+        // Keep highest streaks
+        if (typeof data.bestStreak === 'number' && data.bestStreak > merged.bestStreak) {
+          merged.bestStreak = data.bestStreak;
+        }
+        if (typeof data.streak === 'number' && data.streak > merged.streak) {
+          merged.streak = data.streak;
+        }
+        if (typeof data.dailyStreak === 'number' && data.dailyStreak > merged.dailyStreak) {
+          merged.dailyStreak = data.dailyStreak;
+        }
+
+        // Keep highest review counter
+        if (typeof data.reviewsCompleted === 'number' && data.reviewsCompleted > merged.reviewsCompleted) {
+          merged.reviewsCompleted = data.reviewsCompleted;
+        }
+
+        // Merge badges
+        if (Array.isArray(data.badges)) {
+          for (const b of data.badges) {
+            if (!merged.badges.includes(b)) {
+              merged.badges.push(b);
+            }
+          }
+        }
+
+        // Merge saved code snippets
+        if (data.savedCode && typeof data.savedCode === 'object') {
+          merged.savedCode = { ...data.savedCode, ...merged.savedCode };
+        }
+
+        // Merge hint usage records
+        if (data.hintsUsed && typeof data.hintsUsed === 'object') {
+          merged.hintsUsed = { ...data.hintsUsed, ...merged.hintsUsed };
+        }
+      } catch (innerErr) {
+        // Skip unparseable single items
+      }
+    }
+
+    return merged;
   } catch (e) {
     return getDefaultState();
   }
 }
 
+/**
+ * Saves game state across both canonical permanent key and legacy keys
+ * so that any tab, historical build, or future update maintains state safely.
+ */
 export function saveGameState(state) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    const serialized = JSON.stringify(state);
+    localStorage.setItem(CANONICAL_STORAGE_KEY, serialized);
+    // Mirror to v4 & v3 to ensure backwards-compatibility
+    localStorage.setItem('java_loops_arena_real_scenarios_v4', serialized);
+    localStorage.setItem('java_loops_arena_real_scenarios_v3', serialized);
   } catch (e) {}
+}
+
+/**
+ * Exports player progress as a JSON download for backup across devices.
+ */
+export function exportProgressAsJson(state) {
+  try {
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(state, null, 2));
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute('href', dataStr);
+    dlAnchor.setAttribute('download', `java_loops_progress_backup_${new Date().toISOString().split('T')[0]}.json`);
+    dlAnchor.click();
+    dlAnchor.remove();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Imports player progress from uploaded JSON string and merges with current state.
+ */
+export function importProgressFromJson(jsonString, currentState) {
+  try {
+    const imported = JSON.parse(jsonString);
+    if (!imported || typeof imported !== 'object') throw new Error('Invalid backup file');
+
+    const merged = {
+      ...currentState,
+      ...imported,
+      xp: Math.max(currentState.xp || 0, imported.xp || 0),
+      bestStreak: Math.max(currentState.bestStreak || 0, imported.bestStreak || 0),
+      completedChallenges: Array.from(new Set([...(currentState.completedChallenges || []), ...(imported.completedChallenges || [])])),
+      badges: Array.from(new Set([...(currentState.badges || []), ...(imported.badges || [])])),
+      savedCode: { ...(currentState.savedCode || {}), ...(imported.savedCode || {}) },
+      hintsUsed: { ...(currentState.hintsUsed || {}), ...(imported.hintsUsed || {}) },
+    };
+
+    saveGameState(merged);
+    return { success: true, mergedState: merged };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
 }
 
 /**

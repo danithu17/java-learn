@@ -1,11 +1,41 @@
-import React, { useState } from 'react';
-import { Trophy, Award, Flame, Calendar, CheckCircle2, RotateCcw, Sparkles, Crown, Zap, Brain, Repeat, Swords } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Trophy, Award, Flame, Calendar, CheckCircle2, RotateCcw, Sparkles, Crown, Zap, Brain, Repeat, Swords, Download, Upload } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
-import { BADGES_CONFIG, LEVELS } from '../utils/storage.js';
+import { BADGES_CONFIG, LEVELS, exportProgressAsJson, importProgressFromJson } from '../utils/storage.js';
+import { modules } from '../modules/index.js';
 
 export function ProfilePage() {
-  const { state, levelInfo, resetProgress } = useGame();
+  const { state, levelInfo, resetProgress, updateFullState } = useGame();
   const [showConfirmReset, setShowConfirmReset] = useState(false);
+  const [importStatus, setImportStatus] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const totalPossibleChallenges = modules.reduce((acc, m) => acc + (m.totalChallenges || (m.challenges ? m.challenges.length : 0)), 0) || 95;
+
+  const handleExport = () => {
+    exportProgressAsJson(state);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result;
+      if (typeof content === 'string') {
+        const res = importProgressFromJson(content, state);
+        if (res.success && res.mergedState) {
+          updateFullState(res.mergedState);
+          setImportStatus({ success: true, message: 'Progress successfully restored & merged! 🎉' });
+        } else {
+          setImportStatus({ success: false, message: res.error || 'Failed to read backup file.' });
+        }
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
 
   const getBadgeIcon = (iconName) => {
     switch (iconName) {
@@ -75,7 +105,7 @@ export function ProfilePage() {
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
           <p className="text-2xl font-extrabold text-white font-mono">
-            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ 60</span>
+            {state.completedChallenges.length} <span className="text-xs text-slate-500 font-normal">/ {totalPossibleChallenges}</span>
           </p>
         </div>
 
@@ -187,6 +217,51 @@ export function ProfilePage() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Backup & Restore Progress (Multi-Device & Version Safety) */}
+      <div className="p-6 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h4 className="text-sm font-bold text-indigo-300">Save & Backup Your Progress</h4>
+            <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-mono font-semibold">
+              Auto-Saved in Browser
+            </span>
+          </div>
+          <p className="text-xs text-slate-400 mt-1 max-w-xl">
+            Your progress automatically merges across all updates. You can also download a JSON backup or restore it onto another browser or computer anytime.
+          </p>
+          {importStatus && (
+            <p className={`text-xs mt-2 font-semibold ${importStatus.success ? 'text-emerald-400' : 'text-rose-400'}`}>
+              {importStatus.message}
+            </p>
+          )}
+        </div>
+
+        <div className="flex items-center gap-3 self-start sm:self-auto flex-shrink-0">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept=".json,application/json"
+            className="hidden"
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors shadow-sm"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            <span>Restore Backup</span>
+          </button>
+
+          <button
+            onClick={handleExport}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-500/20 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Backup</span>
+          </button>
         </div>
       </div>
 
