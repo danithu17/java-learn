@@ -1,4 +1,6 @@
 import { forLoopModule } from './forLoop.js';
+import { whileLoopModule } from './whileLoop.js';
+import { doWhileLoopModule } from './doWhileLoop.js';
 
 /**
  * ============================================================================
@@ -10,32 +12,12 @@ import { forLoopModule } from './forLoop.js';
  * ============================================================================
  */
 export const modules = [
-  // 1. Unlocked & fully playable
+  // 1. Unlocked & fully playable modules
   forLoopModule,
+  whileLoopModule,
+  doWhileLoopModule,
 
   // 2. Future expansion modules (Locked placeholders)
-  {
-    id: 'while-loop',
-    title: 'While Loop Mastery',
-    icon: 'RefreshCw',
-    description: 'Condition-driven loops! Perfect for reading until a sentinel, reversing numbers, and digit counting.',
-    badge: 'Coming Soon',
-    locked: true,
-    totalChallenges: 20,
-    lessons: [],
-    challenges: []
-  },
-  {
-    id: 'do-while',
-    title: 'Do-While Loop',
-    icon: 'RotateCw',
-    description: 'The guaranteed execution loop! Runs at least once before checking the condition. Ideal for menu prompts.',
-    badge: 'Coming Soon',
-    locked: true,
-    totalChallenges: 15,
-    lessons: [],
-    challenges: []
-  },
   {
     id: 'nested-loops',
     title: 'Nested Loops & 2D Patterns',

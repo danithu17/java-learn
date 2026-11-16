@@ -1,19 +1,20 @@
 /**
  * ============================================================================
- * IN-BROWSER JAVA LOOP SIMULATOR & CHECKER
+ * IN-BROWSER JAVA LOOP SIMULATOR & CHECKER (Supports For, While, & Do-While)
  * ============================================================================
  * Transpiles common Java loop code into sandboxed JavaScript execution.
  * Captures System.out.println & System.out.print, supports loops, arrays,
- * strings, conditionals, and includes infinite loop protection.
+ * strings, conditionals, and includes infinite loop protection for all loop types.
  * ============================================================================
  */
 
-export function runJavaCode(rawJavaCode) {
+export function runJavaCode(rawJavaCode, expectedLoopType = null) {
   const result = {
     success: false,
     output: '',
     error: null,
-    hasForLoop: false,
+    hasLoop: false,
+    loopMatched: true,
   };
 
   if (!rawJavaCode || !rawJavaCode.trim()) {
@@ -21,18 +22,49 @@ export function runJavaCode(rawJavaCode) {
     return result;
   }
 
-  // Check if student wrote a for loop
+  // Detect loop types present in user code
   const hasFor = /\bfor\s*\([^;]+;[^;]+;[^)]+\)/.test(rawJavaCode);
-  result.hasForLoop = hasFor;
+  const hasDoWhile = /\bdo\s*\{[\s\S]*?\}\s*while\s*\([^)]+\)\s*;/.test(rawJavaCode);
+  // Plain while loop (not the while part of a do-while)
+  const hasWhile = /\bwhile\s*\([^)]+\)\s*\{/.test(rawJavaCode);
+
+  result.hasLoop = hasFor || hasWhile || hasDoWhile;
+
+  if (expectedLoopType === 'for' && !hasFor) {
+    result.loopMatched = false;
+    result.error = 'Missing for-loop! This challenge requires you to write a Java for loop.';
+    return result;
+  }
+
+  if (expectedLoopType === 'while' && !hasWhile) {
+    result.loopMatched = false;
+    result.error = 'Missing while-loop! This challenge requires you to write a Java while (condition) { ... } loop.';
+    return result;
+  }
+
+  if (expectedLoopType === 'do-while' && !hasDoWhile) {
+    result.loopMatched = false;
+    result.error = 'Missing do-while loop! This challenge requires you to write a Java do { ... } while (condition); loop.';
+    return result;
+  }
 
   try {
     // 1. Extract the main code body or loop code
     let codeToRun = rawJavaCode;
 
-    // If student included class Main / main method, extract the body
-    const mainMethodMatch = codeToRun.match(/public\s+static\s+void\s+main\s*\([^)]*\)\s*\{([\s\S]*)\}\s*\}?\s*$/);
-    if (mainMethodMatch && mainMethodMatch[1]) {
-      codeToRun = mainMethodMatch[1];
+    // If student included class Main / main method, safely extract the body inside main
+    const mainHeaderMatch = codeToRun.match(/public\s+static\s+void\s+main\s*\([^)]*\)\s*\{/);
+    if (mainHeaderMatch) {
+      const startIndex = mainHeaderMatch.index + mainHeaderMatch[0].length;
+      codeToRun = codeToRun.slice(startIndex);
+      const lastBrace = codeToRun.lastIndexOf('}');
+      if (lastBrace !== -1) {
+        codeToRun = codeToRun.slice(0, lastBrace);
+        const secondLastBrace = codeToRun.lastIndexOf('}');
+        if (secondLastBrace !== -1) {
+          codeToRun = codeToRun.slice(0, secondLastBrace);
+        }
+      }
     }
 
     // 2. Transpile Java constructs to JavaScript
@@ -51,7 +83,6 @@ export function runJavaCode(rawJavaCode) {
     jsCode = jsCode.replace(/\.length\(\)/g, '.length');
 
     // Handle System.out.println & System.out.print
-    // We map them to internal simulator functions
     jsCode = jsCode.replace(/System\.out\.println\s*\((.*?)\);/g, (match, content) => {
       return `__println(${content.trim() === '' ? '""' : content});`;
     });
@@ -59,12 +90,25 @@ export function runJavaCode(rawJavaCode) {
       return `__print(${content});`;
     });
 
-    // 3. Infinite loop guard injection
-    // Inject counter inside every for loop
+    // 3. Infinite loop guards injection for FOR, WHILE, and DO-WHILE
     let loopGuardCounter = 0;
+
+    // Guard for-loops
     jsCode = jsCode.replace(/\bfor\s*\(([^;]+);([^;]+);([^)]+)\)\s*\{/g, (match, init, cond, update) => {
       const guardId = `__loopGuard_${loopGuardCounter++}`;
       return `let ${guardId} = 0; for (${init}; ${cond}; ${update}) { if (++${guardId} > 5000) throw new Error("Infinite loop detected! (Loop exceeded 5000 iterations)");`;
+    });
+
+    // Guard while-loops
+    jsCode = jsCode.replace(/\bwhile\s*\(([^)]+)\)\s*\{/g, (match, cond) => {
+      const guardId = `__loopGuard_${loopGuardCounter++}`;
+      return `let ${guardId} = 0; while (${cond}) { if (++${guardId} > 5000) throw new Error("Infinite loop detected! (Loop exceeded 5000 iterations)");`;
+    });
+
+    // Guard do-while loops
+    jsCode = jsCode.replace(/\bdo\s*\{/g, () => {
+      const guardId = `__loopGuard_${loopGuardCounter++}`;
+      return `let ${guardId} = 0; do { if (++${guardId} > 5000) throw new Error("Infinite loop detected! (Loop exceeded 5000 iterations)");`;
     });
 
     // 4. Sandbox execution environment

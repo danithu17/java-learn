@@ -65,6 +65,8 @@ export function GameProvider({ children }) {
     if (checkRange(31, 40)) addBadge('stage_4_clear');
     if (checkRange(41, 50)) addBadge('stage_5_clear');
     if (checkRange(51, 60)) addBadge('stage_6_clear');
+    if (checkRange(101, 120)) addBadge('while_master');
+    if (checkRange(201, 215)) addBadge('dowhile_master');
     if (newState.completedChallenges.length >= 60) addBadge('loop_master');
     if (newState.reviewsCompleted >= 3) addBadge('memory_pro');
 
@@ -78,8 +80,9 @@ export function GameProvider({ children }) {
       savedCode: { ...prev.savedCode, [challenge.id]: userCode }
     }));
 
-    // 2. Run in-browser Java simulation
-    const execution = runJavaCode(userCode);
+    // 2. Run in-browser Java simulation (validating loop type for for, while, or do-while)
+    const loopRequirement = challenge.loopType || (challenge.id >= 200 ? 'do-while' : (challenge.id >= 100 ? 'while' : 'for'));
+    const execution = runJavaCode(userCode, loopRequirement);
 
     if (!execution.success) {
       sounds.playFailure();
@@ -92,12 +95,12 @@ export function GameProvider({ children }) {
       };
     }
 
-    if (!execution.hasForLoop) {
+    if (!execution.loopMatched) {
       sounds.playFailure();
       setState(prev => ({ ...prev, streak: 0 }));
       return {
         passed: false,
-        error: 'Missing for-loop! The goal of this arena is to write a Java for-loop.',
+        error: execution.error,
         userOutput: execution.output || '',
         expectedOutput: challenge.expectedOutput,
       };
@@ -249,7 +252,7 @@ export function GameProvider({ children }) {
         recordHintUsed,
         recordReviewCompleted,
         resetProgress,
-        isStageUnlocked: (stageId) => isStageUnlocked(stageId, state.completedChallenges),
+        isStageUnlocked: (stageId, stagesList) => isStageUnlocked(stageId, state.completedChallenges, stagesList),
       }}
     >
       {children}
